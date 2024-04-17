@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=touchstone_manager
+POSTGRES_USER=KCfbdMBiAvbaEPEUFfBbGnoLeiuLJqau
+POSTGRES_PASSWORD=t2nMCRYdwmUy0Ck31aJTPai78IwrNmxq8EVr1VPbnk2JuuUbkgj8m9atbsmeEI0H
