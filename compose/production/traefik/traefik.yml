@@ -28,7 +28,7 @@ certificatesResolvers:
 http:
   routers:
     web-secure-router:
-      rule: 'Host(`heintoedt.de`) || Host(`www.heintoedt.de`)'
+      rule: 'Host(`touchstone.heintoedt.de`)'
       entryPoints:
         - web-secure
       middlewares:
@@ -39,7 +39,7 @@ http:
         certResolver: letsencrypt
 
     web-media-router:
-      rule: '(Host(`heintoedt.de`) || Host(`www.heintoedt.de`)) && PathPrefix(`/media/`)'
+      rule: '(Host(`touchstone.heintoedt.de`)) && PathPrefix(`/media/`)'
       entryPoints:
         - web-secure
       middlewares:
