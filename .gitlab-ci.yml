@@ -26,8 +26,6 @@ pytest:
   image: docker:25.0
   tags:
     - docker
-  services:
-    - docker:dind
   before_script:
     - docker compose -f local.yml build
     - docker compose -f docs.yml build
