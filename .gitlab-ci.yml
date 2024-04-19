@@ -7,6 +7,9 @@ variables:
   POSTGRES_PASSWORD: ''
   POSTGRES_DB: 'test_touchstone_manager'
   POSTGRES_HOST_AUTH_METHOD: trust
+  DOCKER_TLS_CERTDIR: "/certs"  # Enable TLS, mandatory in newer DinD versions
+  DOCKER_HOST: "tcp://docker:2375"
+
 
 precommit:
   stage: lint
@@ -20,6 +23,10 @@ precommit:
     - pip install -q pre-commit
   script:
     - pre-commit run --show-diff-on-failure --color=always --all-files
+
+services:
+  - name: docker:dind
+    alias: docker
 
 pytest:
   stage: test
