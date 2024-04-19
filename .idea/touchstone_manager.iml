@@ -13,9 +13,9 @@
     </facet>
   </component>
   <component name="NewModuleRootManager">
-    
+
     <content url="file://$MODULE_DIR$" />
-    
+
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PackageRequirementsSettings">
@@ -23,6 +23,9 @@
   </component>
    <component name="PyDocumentationSettings">
     <option name="renderExternalDocumentation" value="true" />
+
+
+
   </component>
   <component name="ReSTService">
     <option name="workdir" value="$MODULE_DIR$/docs" />
