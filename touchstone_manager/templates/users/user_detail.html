@@ -3,22 +3,14 @@
 {% load static %}
 
 {% block title %}
-  User:
-
-  {{ object.name }}
-
-
+  User: {{
+  object.name }}
 {% endblock title %}
 {% block content %}
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2>
-
-
-          {{ object.name }}
-
-        </h2>
+        <h2>{{ object.name }}</h2>
       </div>
     </div>
     {% if object == request.user %}
@@ -29,9 +21,7 @@
           <a class="btn btn-primary"
              href="{% url 'account_email' %}"
              role="button">E-Mail</a>
-          <a class="btn btn-primary"
-             href="{% url 'mfa_index' %}"
-             role="button">MFA</a>
+          <a class="btn btn-primary" href="{% url 'mfa_index' %}" role="button">MFA</a>
           <!-- Your Stuff: Custom user template urls -->
         </div>
       </div>
