@@ -7,8 +7,6 @@ variables:
   POSTGRES_PASSWORD: ''
   POSTGRES_DB: 'test_touchstone_manager'
   POSTGRES_HOST_AUTH_METHOD: trust
-  DOCKER_TLS_CERTDIR: "/certs"  # Enable TLS, mandatory in newer DinD versions
-  DOCKER_HOST: "tcp://docker:2375"
 
 
 precommit:
