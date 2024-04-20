@@ -4,6 +4,7 @@
 from pathlib import Path
 
 import environ
+from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # touchstone_manager/
@@ -27,12 +28,13 @@ TIME_ZONE = "Europe/Berlin"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = "en-us"
 # https://docs.djangoproject.com/en/dev/ref/settings/#languages
-# from django.utils.translation import gettext_lazy as _
-# LANGUAGES = [
-#     ('en', _('English')),
-#     ('fr-fr', _('French')),
-#     ('pt-br', _('Portuguese')),
-# ]
+
+LANGUAGES = [
+    ("en", _("English")),
+    ("de-de", _("German")),
+    #     ('fr-fr', _('French')),
+    #     ('pt-br', _('Portuguese')),
+]
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
@@ -313,7 +315,6 @@ ACCOUNT_FORMS = {"signup": "touchstone_manager.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "touchstone_manager.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "touchstone_manager.users.forms.UserSocialSignupForm"}
-
 
 # django-webpack-loader
 # ------------------------------------------------------------------------------

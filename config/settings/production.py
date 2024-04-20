@@ -1,5 +1,4 @@
 # ruff: noqa: E501
-from .base import *  # noqa: F403
 from .base import DATABASES
 from .base import INSTALLED_APPS
 from .base import env
@@ -98,7 +97,6 @@ INSTALLED_APPS += ["anymail"]
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 ANYMAIL = {}
 
-
 # LOGGING
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#logging
@@ -142,7 +140,6 @@ LOGGING = {
         },
     },
 }
-
 
 # Your stuff...
 # ------------------------------------------------------------------------------
