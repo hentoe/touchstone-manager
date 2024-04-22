@@ -85,7 +85,8 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "touchstone_manager.users",
-    # Your stuff: custom apps go here
+    "touchstone_manager.utils",
+    "touchstone_manager.aero",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

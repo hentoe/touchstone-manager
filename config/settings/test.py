@@ -3,6 +3,7 @@ With these settings, tests run faster.
 """
 
 from .base import *  # noqa: F403
+from .base import INSTALLED_APPS
 from .base import TEMPLATES
 from .base import env
 
@@ -39,3 +40,6 @@ MEDIA_URL = "http://media.testserver"
 WEBPACK_LOADER["DEFAULT"]["LOADER_CLASS"] = "webpack_loader.loaders.FakeWebpackLoader"  # noqa: F405
 # Your stuff...
 # ------------------------------------------------------------------------------
+INSTALLED_APPS += [
+    "touchstone_manager.utils.tests",
+]
