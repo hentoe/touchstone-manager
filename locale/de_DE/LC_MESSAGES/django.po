@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-20 10:37+0200\n"
+"POT-Creation-Date: 2024-04-23 15:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,16 +17,88 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: config/settings/base.py:32
+#: config/settings/base.py:33
 msgid "English"
 msgstr "Englisch"
 
-#: config/settings/base.py:33
+#: config/settings/base.py:34
 msgid "German"
 msgstr "Deutsch"
 
+#: touchstone_manager/aero/apps.py:8
+msgid "Aero"
+msgstr ""
+
+#: touchstone_manager/aero/models.py:10
+#, fuzzy
+#| msgid "Name of User"
+msgid "Name of Material"
+msgstr "Name des Benutzers"
+
+#: touchstone_manager/aero/models.py:11
+msgid "Abbreviated name of Material"
+msgstr ""
+
+#: touchstone_manager/aero/models.py:12
+msgid "Description"
+msgstr ""
+
+#: touchstone_manager/aero/models.py:21
+#, fuzzy
+#| msgid "Name of User"
+msgid "Name of Sample"
+msgstr "Name des Benutzers"
+
+#: touchstone_manager/aero/models.py:22
+msgid "Number of Sample"
+msgstr "Probennummer"
+
+#: touchstone_manager/aero/models.py:26
+msgid "Material"
+msgstr "Werkstoff"
+
+#: touchstone_manager/aero/models.py:28
+msgid "Thickness in mm"
+msgstr "Dicke in mm"
+
+#: touchstone_manager/aero/models.py:29
+msgid "Weight in mg"
+msgstr "Gewicht in mg"
+
+#: touchstone_manager/aero/models.py:31
+msgid "Number of infiltrations with Nanomaterial"
+msgstr "Anzahl der Infiltrationen mit Nanomaterial"
+
+#: touchstone_manager/aero/models.py:45
+msgid "Device under Test"
+msgstr "Messobjekt"
+
+#: touchstone_manager/aero/models.py:47
+msgid "Measurement date"
+msgstr "Datum der Messung"
+
+#: touchstone_manager/aero/models.py:48
+msgid "Mean S21 over frequency range"
+msgstr "Durchschnittlicher S21 im Frequenzbereich"
+
+#: touchstone_manager/templates/aero/material_detail.html:9
+msgid "Material Details"
+msgstr "Materialdetails"
+
+#: touchstone_manager/templates/aero/material_list.html:6
+msgid "Materials"
+msgstr "Werkstoffe"
+
+#: touchstone_manager/templates/aero/material_list.html:9
+msgid "List of Materials"
+msgstr "Liste der Werkstoffe"
+
+#: touchstone_manager/templates/aero/material_list.html:30
+msgid "No objects in list."
+msgstr "Keine Objekte in der Liste"
+
 #: touchstone_manager/templates/allauth/layouts/entrance.html:13
-#: touchstone_manager/templates/base.html:75
+#: touchstone_manager/templates/base.html:80
 msgid "Sign In"
 msgstr "Anmelden"
 
@@ -35,10 +107,14 @@ msgid "My Profile"
 msgstr "Mein Profil"
 
 #: touchstone_manager/templates/base.html:64
+msgid "Admin"
+msgstr "Admin"
+
+#: touchstone_manager/templates/base.html:69
 msgid "Sign Out"
 msgstr "Abmelden"
 
-#: touchstone_manager/templates/base.html:70
+#: touchstone_manager/templates/base.html:75
 msgid "Sign Up"
 msgstr "Registrieren"
 
@@ -52,7 +128,7 @@ msgstr "Berechtigungen"
 
 #: touchstone_manager/users/admin.py:36
 msgid "Important dates"
-msgstr "Wichtigen Daten"
+msgstr "Wichtige Daten"
 
 #: touchstone_manager/users/apps.py:9
 msgid "Users"
@@ -69,7 +145,7 @@ msgstr "Name des Benutzers"
 
 #: touchstone_manager/users/models.py:23
 msgid "email address"
-msgstr "Email Adresse"
+msgstr "Email-Adresse"
 
 #: touchstone_manager/users/tests/test_views.py:72
 #: touchstone_manager/users/views.py:24
