@@ -1,9 +1,10 @@
 import pytest
 from django.utils import timezone
 
-from touchstone_manager.aero.models import Material
-from touchstone_manager.aero.models import MaterialSample
 from touchstone_manager.aero.models import Measurement
+from touchstone_manager.aero.tests.factories import MaterialFactory
+from touchstone_manager.aero.tests.factories import MaterialSampleFactory
+from touchstone_manager.aero.tests.factories import MeasurementFactory
 
 # Constants
 EXPECTED_SAMPLE_NUMBER = 30
@@ -16,7 +17,7 @@ EXPECTED_MEAN_S21 = -3.4
 @pytest.mark.django_db()
 def test_create_material():
     """Test creation of Material object."""
-    material = Material.objects.create(
+    material = MaterialFactory.create(
         name="Graphene",
         short_name="eG",
         description="exfoliated Graphene",
@@ -29,7 +30,7 @@ def test_create_material():
 @pytest.mark.django_db()
 def test_material_str():
     """Test Material object str representation."""
-    material = Material.objects.create(
+    material = MaterialFactory.create(
         name="Graphene",
         short_name="Gr",
         description="A single layer of carbon atoms.",
@@ -40,8 +41,8 @@ def test_material_str():
 @pytest.mark.django_db()
 def test_create_material_sample():
     """Test creation of MaterialSample object."""
-    material = Material.objects.create(name="Iron", short_name="FE")
-    sample = MaterialSample.objects.create(
+    material = MaterialFactory.create()
+    sample = MaterialSampleFactory.create(
         name="030_FE_aero_4i_5mm_43k4mg",
         sample_number=EXPECTED_SAMPLE_NUMBER,
         material=material,
@@ -60,14 +61,8 @@ def test_create_material_sample():
 @pytest.mark.django_db()
 def test_create_material_sample_str():
     """Test MaterialSample object str representation."""
-    material = Material.objects.create(name="Iron", short_name="FE")
-    sample = MaterialSample.objects.create(
+    sample = MaterialSampleFactory.create(
         name="030_FE_aero_4i_5mm_43k4mg",
-        sample_number=EXPECTED_SAMPLE_NUMBER,
-        material=material,
-        thickness=EXPECTED_THICKNESS,
-        weight=EXPECTED_WEIGHT,
-        infiltrations=EXPECTED_INFILTRATIONS,
     )
     assert str(sample) == "030_FE_aero_4i_5mm_43k4mg"
 
@@ -75,15 +70,7 @@ def test_create_material_sample_str():
 @pytest.mark.django_db()
 def test_create_measurement():
     """Test creation of Measurement object."""
-    material = Material.objects.create(name="Fiber Glass", short_name="FG")
-    sample = MaterialSample.objects.create(
-        name="023_FG_1mm_100mg",
-        sample_number=1,
-        material=material,
-        thickness=1.0,
-        weight=100.0,
-        infiltrations=0,
-    )
+    sample = MaterialSampleFactory.create()
     measurement = Measurement.objects.create(
         aero_material=sample,
         measurement_date=timezone.now().date(),
@@ -95,19 +82,10 @@ def test_create_measurement():
 
 @pytest.mark.django_db()
 def test_measurement_str():
-    material = Material.objects.create(name="Fiber Glass", short_name="FG")
-    sample = MaterialSample.objects.create(
-        name="023_FG_1mm_100mg",
-        sample_number=1,
-        material=material,
-        thickness=1.0,
-        weight=100.0,
-        infiltrations=0,
-    )
+    sample = MaterialSampleFactory()
     measurement_date = timezone.now().date()
-    measurement = Measurement.objects.create(
-        aero_material=sample,
+    measurement = MeasurementFactory.create(
         measurement_date=measurement_date,
-        mean_s21=-10.5,
+        aero_material=sample,
     )
     assert str(measurement) == f"{sample} on {measurement_date}"

@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.test import RequestFactory
 from django.urls import reverse
 
+from touchstone_manager.aero.tests.factories import MaterialFactory
 from touchstone_manager.aero.views import material_list_view
 from touchstone_manager.users.models import User
 
@@ -15,12 +16,15 @@ pytestmark = pytest.mark.django_db
 
 class TestMaterialListView:
     def test_authenticated(self, user: User, rf: RequestFactory):
+        total_material_num = 10
+        MaterialFactory.create_batch(total_material_num)
         url = reverse("aero:materials")
         request = rf.get(url)
         request.user = user
         response = material_list_view(request)
 
         assert response.status_code == HTTPStatus.OK
+        assert len(response.context_data["object_list"]) == total_material_num
 
     def test_not_authenticated(self, user: User, rf: RequestFactory):
         url = reverse("aero:materials")
