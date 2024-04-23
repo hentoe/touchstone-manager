@@ -10,6 +10,7 @@ from django.urls import reverse
 from touchstone_manager.aero.tests.factories import MaterialFactory
 from touchstone_manager.aero.views import material_list_view
 from touchstone_manager.users.models import User
+from touchstone_manager.users.tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -31,6 +32,29 @@ class TestMaterialListView:
         request = rf.get(url)
         request.user = AnonymousUser()
         response = material_list_view(request)
+        login_url = reverse(settings.LOGIN_URL)
+
+        assert isinstance(response, HttpResponseRedirect)
+        assert response.status_code == HTTPStatus.FOUND
+        assert response.url == f"{login_url}?next={url}"
+
+
+class TestMaterialDetailView:
+    def test_authenticated(self, user: User, rf: RequestFactory):
+        material = MaterialFactory.create()
+        url = reverse("aero:material-detail")
+        request = rf.get(url)
+        request.user = UserFactory()
+        response = material_list_view(request, pk=material.pk)
+
+        assert response.status == HTTPStatus.OK
+
+    def test_not_authenticated(self, user: User, rf: RequestFactory):
+        material = MaterialFactory.create()
+        url = reverse("aero:material-detail")
+        request = rf.get(url)
+        request.user = AnonymousUser()
+        response = material_list_view(request, pk=material.pk)
         login_url = reverse(settings.LOGIN_URL)
 
         assert isinstance(response, HttpResponseRedirect)
