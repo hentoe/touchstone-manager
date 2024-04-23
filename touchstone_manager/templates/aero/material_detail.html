@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+  {{ object }}
+{% endblock title %}
+{% block content %}
+  <h1>{% trans "Material Details" %}</h1>
+  <p>{{ object.name }}</p>
+  <p>{{ object.short_name }}</p>
+  <hr />
+  <p>{{ object.description }}</p>
+{% endblock content %}

@@ -42,16 +42,15 @@ class TestMaterialListView:
 class TestMaterialDetailView:
     def test_authenticated(self, user: User, rf: RequestFactory):
         material = MaterialFactory.create()
-        url = reverse("aero:material-detail")
-        request = rf.get(url)
+        request = rf.get("/fake-url/")
         request.user = UserFactory()
         response = material_list_view(request, pk=material.pk)
 
-        assert response.status == HTTPStatus.OK
+        assert response.status_code == HTTPStatus.OK
 
     def test_not_authenticated(self, user: User, rf: RequestFactory):
         material = MaterialFactory.create()
-        url = reverse("aero:material-detail")
+        url = reverse("aero:material-detail", kwargs={"pk": material.pk})
         request = rf.get(url)
         request.user = AnonymousUser()
         response = material_list_view(request, pk=material.pk)
