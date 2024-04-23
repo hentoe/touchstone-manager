@@ -1,6 +1,6 @@
 # Translations for the Touchstone Manager project
 # Copyright (C) 2024 Hendrik Tödter
-# Hendrik Tödter <heintoedt@gmail.com>, 2024.
+# Hendrik Tödter <hendrik.toedter@tu-dresden.de>, 2024.
 #
 #, fuzzy
 msgid ""
