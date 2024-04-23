@@ -4,6 +4,7 @@ from django.views.generic import ListView
 
 from .models import Material
 from .models import MaterialSample
+from .models import Measurement
 
 
 class MaterialDetailView(LoginRequiredMixin, DetailView):
@@ -40,3 +41,21 @@ class MaterialSampleListView(LoginRequiredMixin, ListView):
 
 
 material_sample_list_view = MaterialSampleListView.as_view()
+
+
+class MeasurementListView(LoginRequiredMixin, ListView):
+    """List all Measurements"""
+
+    model = Measurement
+
+
+measurement_list_view = MeasurementListView.as_view()
+
+
+class MeasurementDetailView(LoginRequiredMixin, DetailView):
+    """Show Measurement Details"""
+
+    model = Measurement
+
+
+measurement_detail_view = MeasurementDetailView.as_view()
