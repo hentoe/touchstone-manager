@@ -27,6 +27,13 @@ class MaterialSample(TimeStampedModel):
     )
     thickness = models.FloatField(_("Thickness in mm"))
     weight = models.FloatField(_("Weight in mg"))
+    infiltrations = models.IntegerField(
+        _("Number of infiltrations with Nanomaterial"),
+        default=0,
+    )
+
+    def __str__(self):
+        return self.name
 
 
 class Measurement(TimeStampedModel):
@@ -39,3 +46,6 @@ class Measurement(TimeStampedModel):
     )
     measurement_date = models.DateField(_("Measurement date"))
     mean_s21 = models.FloatField(_("Mean S21 over frequency range"))
+
+    def __str__(self):
+        return f"{self.aero_material} on {self.measurement_date}"
