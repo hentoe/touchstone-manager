@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+  {% trans "Materials" %}
+{% endblock title %}
+{% block content %}
+  <h1>{% trans "List of Material Samples" %}</h1>
+  {% if object_list %}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{% trans "Name" %}</th>
+          <th scope="col">{% trans "Material" %}</th>
+          <th scope="col">{% trans "Thickness" %}</th>
+          <th scope="col">{% trans "Number of Infiltrations" %}</th>
+          <th scope="col">{% trans "Weight" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for obj in object_list %}
+          <tr>
+            <th>{{ obj.id }}</th>
+            <td>{{ obj.name }}</td>
+            <td>{{ obj.material.name }}</td>
+            <td>{{ obj.thickness }} mm</td>
+            <td>{{ obj.infiltrations }}</td>
+            <td>{{ obj.weight }} mg</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>{% trans "No objects in list." %}</p>
+  {% endif %}
+{% endblock content %}

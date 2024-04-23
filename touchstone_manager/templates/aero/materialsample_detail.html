@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+  {{ object }}
+{% endblock title %}
+{% block content %}
+  <div>
+    <h1>{% trans "Material Sample Details" %}</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Key</th>
+          <th scope="col">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{% trans "Name" %}</td>
+          <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+          <td>{% trans "Sample Number" %}</td>
+          <td>{{ object.sample_number }}</td>
+        </tr>
+        <tr>
+          <td>{% trans "Material" %}</td>
+          <td>{{ object.material.name }}</td>
+        </tr>
+        <tr>
+          <td>{% trans "Thickness" %}</td>
+          <td>{{ object.thickness }} mm</td>
+        </tr>
+        <tr>
+          <td>{% trans "Infiltrations" %}</td>
+          <td>{{ object.infiltrations }}</td>
+        </tr>
+        <tr>
+          <td>{% trans "Weight" %}</td>
+          <td>{{ object.weight }} mg</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h2>Files</h2>
+    {% if object.measurement_set %}
+      <ul>
+        {% for measurement in object.measurement_set.all %}
+          <li>
+            <a href={{ measurement.get_absolute_url }}>{{ measurement.measurement_date }}</a>
+            <a href="{{ measurement.get_absolute_url }}">{{ measurement.aero_material }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>There are no measurement files.</p>
+    {% endif %}
+  </div>
+{% endblock content %}

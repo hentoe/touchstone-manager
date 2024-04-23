@@ -11,7 +11,10 @@ class Material(TimeStampedModel):
     """Model for Materials, e.g. Graphene"""
 
     name = models.CharField(_("Name of Material"), max_length=100)
-    short_name = models.CharField(_("Abbreviated name of Material"), max_length=30)
+    short_name = models.CharField(
+        _("Abbreviated name of Material"),
+        max_length=30,
+    )
     description = models.TextField(_("Description"), blank=True)
 
     def __str__(self):
