@@ -5,6 +5,8 @@ Manage and view Touchstone Files and Corresponding Test Objects.
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![pipeline status](https://gitlab.mn.tu-dresden.de/s3420145/touchstone-manager/badges/main/pipeline.svg)](https://gitlab.mn.tu-dresden.de/s3420145/touchstone-manager/commits/main)
+[![coverage report](https://gitlab.mn.tu-dresden.de/s3420145/touchstone-manager/badges/main/coverage.svg)](https://gitlab.mn.tu-dresden.de/s3420145/touchstone-manager/commits/main)
+
 
 License: MIT
 
