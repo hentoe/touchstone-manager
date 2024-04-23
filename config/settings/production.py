@@ -1,4 +1,5 @@
 # ruff: noqa: E501
+# noinspection PyUnresolvedReferences
 from .base import *  # noqa: F403
 from .base import DATABASES
 from .base import INSTALLED_APPS
@@ -105,7 +106,6 @@ EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-
 
 # LOGGING
 # ------------------------------------------------------------------------------
