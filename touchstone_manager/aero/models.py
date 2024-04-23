@@ -1,7 +1,10 @@
+from django.core.files.storage import FileSystemStorage
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from touchstone_manager.utils.models import TimeStampedModel
+
+fs = FileSystemStorage(location="/media/uploads")
 
 
 class Material(TimeStampedModel):
@@ -45,6 +48,11 @@ class Measurement(TimeStampedModel):
         verbose_name=_("Device under Test"),
     )
     measurement_date = models.DateField(_("Measurement date"))
+    measurement_file = models.FileField(
+        upload_to="measurements/",
+        storage=fs,
+        blank=True,
+    )
     mean_s21 = models.FloatField(_("Mean S21 over frequency range"))
 
     def __str__(self):
