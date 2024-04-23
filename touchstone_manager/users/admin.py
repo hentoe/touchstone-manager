@@ -38,6 +38,7 @@ class UserAdmin(auth_admin.UserAdmin):
     list_display = ["email", "name", "is_superuser"]
     search_fields = ["name"]
     ordering = ["id"]
+    readonly_fields = ["last_login", "date_joined"]
     add_fieldsets = (
         (
             None,
