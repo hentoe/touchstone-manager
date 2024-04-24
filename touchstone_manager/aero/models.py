@@ -10,6 +10,10 @@ fs = FileSystemStorage(location="/media/uploads")
 class Material(TimeStampedModel):
     """Model for Materials, e.g. Graphene"""
 
+    class Meta:
+        verbose_name = _("material")
+        verbose_name_plural = _("materials")
+
     name = models.CharField(_("Name of Material"), max_length=100)
     short_name = models.CharField(
         _("Abbreviated name of Material"),
@@ -23,6 +27,10 @@ class Material(TimeStampedModel):
 
 class MaterialSample(TimeStampedModel):
     """Material specimen for making measurements."""
+
+    class Meta:
+        verbose_name = _("material sample")
+        verbose_name_plural = _("material samples")
 
     name = models.CharField(_("Name of Sample"), max_length=255)
     sample_number = models.IntegerField(_("Number of Sample"), unique=True)
@@ -44,6 +52,10 @@ class MaterialSample(TimeStampedModel):
 
 class Measurement(TimeStampedModel):
     """Measurement performed on AeroMaterials."""
+
+    class Meta:
+        verbose_name = _("measurement")
+        verbose_name_plural = _("measurements")
 
     aero_material = models.ForeignKey(
         MaterialSample,

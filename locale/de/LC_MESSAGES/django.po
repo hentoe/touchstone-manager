@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-24 10:30+0200\n"
+"POT-Creation-Date: 2024-04-24 10:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hendrik Tödter <hendrik.toedter@tu-dresden.de>\n"
 "Language-Team: Deutsch <LL@li.org>\n"
@@ -29,53 +29,80 @@ msgstr "Deutsch"
 msgid "Aero"
 msgstr "Aero"
 
-#: touchstone_manager/aero/models.py:13
+#: touchstone_manager/aero/models.py:14
+#| msgid "Material"
+msgid "material"
+msgstr "Werkstoff"
+
+#: touchstone_manager/aero/models.py:15
+#| msgid "Materials"
+msgid "materials"
+msgstr "Werkstoffe"
+
+#: touchstone_manager/aero/models.py:17
 msgid "Name of Material"
 msgstr "Werkstoffbezeichnung"
 
-#: touchstone_manager/aero/models.py:15
+#: touchstone_manager/aero/models.py:19
 msgid "Abbreviated name of Material"
 msgstr "Abgekürzte Bezeichnung"
 
-#: touchstone_manager/aero/models.py:18
+#: touchstone_manager/aero/models.py:22
 msgid "Description"
 msgstr "Beschreibung"
 
-#: touchstone_manager/aero/models.py:27
+#: touchstone_manager/aero/models.py:32
+msgid "material sample"
+msgstr "Probe"
+
+#: touchstone_manager/aero/models.py:33
+msgid "material samples"
+msgstr "Proben"
+
+#: touchstone_manager/aero/models.py:35
 msgid "Name of Sample"
 msgstr "Probenname"
 
-#: touchstone_manager/aero/models.py:28
+#: touchstone_manager/aero/models.py:36
 msgid "Number of Sample"
 msgstr "Probennummer"
 
-#: touchstone_manager/aero/models.py:32
+#: touchstone_manager/aero/models.py:40
 #: touchstone_manager/templates/aero/materialsample_detail.html:28
 #: touchstone_manager/templates/aero/materialsample_list.html:16
 msgid "Material"
 msgstr "Werkstoff"
 
-#: touchstone_manager/aero/models.py:34
+#: touchstone_manager/aero/models.py:42
 msgid "Thickness in mm"
 msgstr "Dicke in mm"
 
-#: touchstone_manager/aero/models.py:35
+#: touchstone_manager/aero/models.py:43
 msgid "Weight in mg"
 msgstr "Gewicht in mg"
 
-#: touchstone_manager/aero/models.py:37
+#: touchstone_manager/aero/models.py:45
 msgid "Number of infiltrations with Nanomaterial"
 msgstr "Anzahl der Infiltrationen mit Nanomaterial"
 
-#: touchstone_manager/aero/models.py:51
+#: touchstone_manager/aero/models.py:57
+msgid "measurement"
+msgstr "Messung"
+
+#: touchstone_manager/aero/models.py:58
+#| msgid "Measurements"
+msgid "measurements"
+msgstr "Messungen"
+
+#: touchstone_manager/aero/models.py:63
 msgid "Device under Test"
 msgstr "Messobjekt"
 
-#: touchstone_manager/aero/models.py:53
+#: touchstone_manager/aero/models.py:65
 msgid "Measurement date"
 msgstr "Datum der Messung"
 
-#: touchstone_manager/aero/models.py:59
+#: touchstone_manager/aero/models.py:71
 msgid "Mean S21 over frequency range"
 msgstr "Durchschnittlicher S21 im Frequenzbereich"
 
