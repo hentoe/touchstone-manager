@@ -1,10 +1,27 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
 from django.views.generic import ListView
+from django.views.generic import TemplateView
 
 from .models import Material
 from .models import MaterialSample
 from .models import Measurement
+
+
+class HomeView(TemplateView):
+    def get_template_names(self):
+        if self.request.user.is_authenticated:
+            return ["pages/home.html"]
+
+        return ["pages/landing.html"]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context["materials"] = Material.objects.all().count()
+            context["samples"] = MaterialSample.objects.all().count()
+            context["measurements"] = Measurement.objects.all().count()
+        return context
 
 
 class MaterialDetailView(LoginRequiredMixin, DetailView):

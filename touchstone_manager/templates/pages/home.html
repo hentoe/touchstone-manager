@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="fw-bolder">Summary</h1>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Model</th>
+          <th scope="col">Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{% trans "Materials" %}</td>
+          <td>{{ materials }}</td>
+        </tr>
+        <tr>
+          <td>{% trans "Samples" %}</td>
+          <td>{{ samples }}</td>
+        </tr>
+        <tr>
+          <td>{% trans "Measurements" %}</td>
+          <td>{{ measurements }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
