@@ -17,6 +17,7 @@
           <th scope="col">{% trans "Thickness" %}</th>
           <th scope="col">{% trans "Number of Infiltrations" %}</th>
           <th scope="col">{% trans "Weight" %}</th>
+          <th scope="col">{% trans "# Measurements" %}</th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,7 @@
             <td>{{ obj.thickness }} mm</td>
             <td>{{ obj.infiltrations }}</td>
             <td>{{ obj.weight }} mg</td>
+            <td>{{ obj.measurement_set.all.count }}</td>
           </tr>
         {% endfor %}
       </tbody>
