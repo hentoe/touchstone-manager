@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+  {{ object }}
+{% endblock title %}
+{% block content %}
+  <div>
+    <h1>{% trans "Measurement Details" %}</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Key</th>
+          <th scope="col">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{% trans "Name of sample" %}</td>
+          <td>{{ object.aero_material.name }}</td>
+        </tr>
+        <tr>
+          <td>{% trans "Sample Number" %}</td>
+          <td>{{ object.aero_material.sample_number }}</td>
+        </tr>
+        <tr>
+          <td>{% trans "Material" %}</td>
+          <td>{{ object.aero_material.material.name }}</td>
+        </tr>
+        <tr>
+          <td>{% trans "Thickness" %}</td>
+          <td>{{ object.aero_material.thickness }} mm</td>
+        </tr>
+        <tr>
+          <td>{% trans "Infiltrations" %}</td>
+          <td>{{ object.aero_material.infiltrations }}</td>
+        </tr>
+        <tr>
+          <td>{% trans "Weight" %}</td>
+          <td>{{ object.aero_material.weight }} mg</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
