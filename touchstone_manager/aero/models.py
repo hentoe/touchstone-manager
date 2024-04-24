@@ -1,5 +1,6 @@
 from django.core.files.storage import FileSystemStorage
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from touchstone_manager.utils.models import TimeStampedModel
@@ -23,6 +24,10 @@ class Material(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        """Returns the URL to access a particular material instance."""
+        return reverse("aero:material-detail", args=[str(self.id)])
 
 
 class MaterialSample(TimeStampedModel):
@@ -49,6 +54,10 @@ class MaterialSample(TimeStampedModel):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        """Returns the URL to access a particular sample instance."""
+        return reverse("aero:sample-detail", args=[str(self.id)])
+
 
 class Measurement(TimeStampedModel):
     """Measurement performed on AeroMaterials."""
@@ -72,3 +81,7 @@ class Measurement(TimeStampedModel):
 
     def __str__(self):
         return f"{self.aero_material} on {self.measurement_date}"
+
+    def get_absolute_url(self):
+        """Returns the URL to access a particular measurement instance."""
+        return reverse("aero:measurement-detail", args=[str(self.id)])
