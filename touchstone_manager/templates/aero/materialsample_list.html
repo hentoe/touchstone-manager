@@ -24,8 +24,12 @@
         {% for obj in object_list %}
           <tr>
             <th>{{ obj.id }}</th>
-            <td>{{ obj.name }}</td>
-            <td>{{ obj.material.name }}</td>
+            <td>
+              <a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
+            </td>
+            <td>
+              <a href="{{ obj.material.get_absolute_url }}">{{ obj.material.name }}</a>
+            </td>
             <td>{{ obj.thickness }} mm</td>
             <td>{{ obj.infiltrations }}</td>
             <td>{{ obj.weight }} mg</td>
