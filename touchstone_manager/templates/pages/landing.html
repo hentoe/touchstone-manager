@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block body %}
+  <div class="container">
+    <div class="d-flex justify-content-center align-items-center vh-100">
+      <div class="text-center">
+        <h1 class="text-white display-1 fw-bolder">Touchstone Manager</h1>
+        <p class="text-white-50 display-6 mb-0">{% trans "Organize your touchstone files" %}</p>
+        {% if ACCOUNT_ALLOW_REGISTRATION %}
+          <a class="btn btn-outline-light my-5" href="{% url "account_signup" %}">{% translate "Sign Up" %}</a>
+        {% endif %}
+        <a class="btn btn-outline-light my-5" href="{% url "account_login" %}">{% translate "Sign In" %}</a>
+      </div>
+    </div>
+  </div>
+  <style>
+    body {
+      background-image: url('https://images.unsplash.com/photo-1581091878330-f5cf2a3b1564?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-repeat: no-repeat;
+    }
+  </style>
+{% endblock body %}

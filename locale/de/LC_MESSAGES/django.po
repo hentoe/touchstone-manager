@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-24 12:54+0200\n"
+"POT-Creation-Date: 2024-04-24 15:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hendrik Tödter <hendrik.toedter@tu-dresden.de>\n"
 "Language-Team: Deutsch <LL@li.org>\n"
@@ -174,7 +174,6 @@ msgid "Measurement Details"
 msgstr "Details der Messung"
 
 #: touchstone_manager/templates/aero/measurement_detail.html:20
-#| msgid "Name of Sample"
 msgid "Name of sample"
 msgstr "Probenname"
 
@@ -183,7 +182,6 @@ msgid "List of Measurements"
 msgstr "Liste der Messungen"
 
 #: touchstone_manager/templates/aero/measurement_list.html:15
-#| msgid "Sample Number"
 msgid "Sample number"
 msgstr "Probennummer"
 
@@ -197,6 +195,7 @@ msgstr "Datei"
 
 #: touchstone_manager/templates/allauth/layouts/entrance.html:13
 #: touchstone_manager/templates/base.html:80
+#: touchstone_manager/templates/pages/home.html:17
 msgid "Sign In"
 msgstr "Anmelden"
 
@@ -219,6 +218,10 @@ msgstr "Abmelden"
 #: touchstone_manager/templates/base.html:75
 msgid "Sign Up"
 msgstr "Registrieren"
+
+#: touchstone_manager/templates/pages/home.html:16
+msgid "Organize your touchstone files"
+msgstr ""
 
 #: touchstone_manager/users/admin.py:23
 msgid "Personal info"
