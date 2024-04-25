@@ -23,6 +23,7 @@ def calculate_mean_s21(measurement_id):
         network = Network(measurement.measurement_file.path)
         s21 = network.s21.s_db
         measurement.mean_s21 = s21.mean()
+        measurement.is_processed = True
         measurement.save()
         logger.info(
             "Successfully calculated mean S21 for measurement id %s.",
