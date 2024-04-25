@@ -2,10 +2,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from .models import Measurement
-from .tasks import calculate_mean_s21
+from .tasks import process_measurement_file
 
 
 @receiver(post_save, sender=Measurement)
-def trigger_s21_calculation(sender, instance, created, **kwargs):
-    if instance.processing_status and instance.measurement_file:
-        calculate_mean_s21.delay(instance.id)
+def trigger_file_processing(sender, instance, created, **kwargs):
+    # Trigger task only if the FileField is updated or on creation of a new instance
+    if created or "measurement_file" in kwargs.get("update_fields", []):
+        process_measurement_file.delay(instance.pk)
