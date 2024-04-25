@@ -74,10 +74,6 @@ class Measurement(TimeStampedModel):
         blank=True,
     )
     mean_s21 = models.FloatField(_("Mean S21 over frequency range"))
-    processing_status = models.BooleanField(
-        default=False,
-        verbose_name=_("Processing status"),
-    )
 
     def __str__(self):
         return f"{self.aero_material} on {self.measurement_date}"
