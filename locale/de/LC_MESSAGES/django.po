@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-24 15:09+0200\n"
+"POT-Creation-Date: 2024-04-25 12:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hendrik Tödter <hendrik.toedter@tu-dresden.de>\n"
 "Language-Team: Deutsch <LL@li.org>\n"
@@ -29,79 +29,79 @@ msgstr "Deutsch"
 msgid "Aero"
 msgstr "Aero"
 
-#: touchstone_manager/aero/models.py:15
+#: touchstone_manager/aero/models.py:12
 msgid "material"
 msgstr "Werkstoff"
 
-#: touchstone_manager/aero/models.py:16
+#: touchstone_manager/aero/models.py:13
 msgid "materials"
 msgstr "Werkstoffe"
 
-#: touchstone_manager/aero/models.py:18
+#: touchstone_manager/aero/models.py:15
 msgid "Name of Material"
 msgstr "Werkstoffbezeichnung"
 
-#: touchstone_manager/aero/models.py:20
+#: touchstone_manager/aero/models.py:17
 msgid "Abbreviated name of Material"
 msgstr "Abgekürzte Bezeichnung"
 
-#: touchstone_manager/aero/models.py:23
+#: touchstone_manager/aero/models.py:20
 #: touchstone_manager/templates/aero/material_list.html:16
 msgid "Description"
 msgstr "Beschreibung"
 
-#: touchstone_manager/aero/models.py:37
+#: touchstone_manager/aero/models.py:34
 msgid "material sample"
 msgstr "Probe"
 
-#: touchstone_manager/aero/models.py:38
+#: touchstone_manager/aero/models.py:35
 msgid "material samples"
 msgstr "Proben"
 
-#: touchstone_manager/aero/models.py:40
+#: touchstone_manager/aero/models.py:37
 msgid "Name of Sample"
 msgstr "Probenname"
 
-#: touchstone_manager/aero/models.py:41
+#: touchstone_manager/aero/models.py:38
 msgid "Number of Sample"
 msgstr "Probennummer"
 
-#: touchstone_manager/aero/models.py:45
+#: touchstone_manager/aero/models.py:42
 #: touchstone_manager/templates/aero/materialsample_detail.html:28
 #: touchstone_manager/templates/aero/materialsample_list.html:16
 #: touchstone_manager/templates/aero/measurement_detail.html:28
 msgid "Material"
 msgstr "Werkstoff"
 
-#: touchstone_manager/aero/models.py:47
+#: touchstone_manager/aero/models.py:44
 msgid "Thickness in mm"
 msgstr "Dicke in mm"
 
-#: touchstone_manager/aero/models.py:48
+#: touchstone_manager/aero/models.py:45
 msgid "Weight in mg"
 msgstr "Gewicht in mg"
 
-#: touchstone_manager/aero/models.py:50
+#: touchstone_manager/aero/models.py:47
 msgid "Number of infiltrations with Nanomaterial"
 msgstr "Anzahl der Infiltrationen mit Nanomaterial"
 
-#: touchstone_manager/aero/models.py:66
+#: touchstone_manager/aero/models.py:63
 msgid "measurement"
 msgstr "Messung"
 
-#: touchstone_manager/aero/models.py:67
+#: touchstone_manager/aero/models.py:64
 msgid "measurements"
 msgstr "Messungen"
 
-#: touchstone_manager/aero/models.py:72
+#: touchstone_manager/aero/models.py:69
 msgid "Device under Test"
 msgstr "Messobjekt"
 
-#: touchstone_manager/aero/models.py:74
+#: touchstone_manager/aero/models.py:71
 msgid "Measurement date"
 msgstr "Datum der Messung"
 
-#: touchstone_manager/aero/models.py:80
+#: touchstone_manager/aero/models.py:76
 msgid "Mean S21 over frequency range"
 msgstr "Durchschnittlicher S21 im Frequenzbereich"
 
@@ -111,6 +111,7 @@ msgstr "Materialdetails"
 
 #: touchstone_manager/templates/aero/material_list.html:6
 #: touchstone_manager/templates/aero/materialsample_list.html:6
+#: touchstone_manager/templates/pages/home.html:19
 msgid "Materials"
 msgstr "Werkstoffe"
 
@@ -166,6 +167,7 @@ msgstr "Anzahl der Infiltrationen"
 
 #: touchstone_manager/templates/aero/materialsample_list.html:20
 #: touchstone_manager/templates/aero/measurement_list.html:6
+#: touchstone_manager/templates/pages/home.html:33
 msgid "Measurements"
 msgstr "Messungen"
 
@@ -195,11 +197,12 @@ msgstr "Datei"
 
 #: touchstone_manager/templates/allauth/layouts/entrance.html:13
 #: touchstone_manager/templates/base.html:80
-#: touchstone_manager/templates/pages/home.html:17
+#: touchstone_manager/templates/pages/landing.html:15
 msgid "Sign In"
 msgstr "Anmelden"
 
 #: touchstone_manager/templates/base.html:56
+#: touchstone_manager/templates/pages/home.html:26
 msgid "Samples"
 msgstr "Proben"
 
@@ -216,10 +219,23 @@ msgid "Sign Out"
 msgstr "Abmelden"
 
 #: touchstone_manager/templates/base.html:75
+#: touchstone_manager/templates/pages/landing.html:13
 msgid "Sign Up"
 msgstr "Registrieren"
 
-#: touchstone_manager/templates/pages/home.html:16
+#: touchstone_manager/templates/pages/home.html:7
+msgid "Overview"
+msgstr "Überblick"
+
+#: touchstone_manager/templates/pages/home.html:11
+msgid "Model"
+msgstr "Modell"
+
+#: touchstone_manager/templates/pages/home.html:12
+msgid "Total"
+msgstr "Total"
+
+#: touchstone_manager/templates/pages/landing.html:11
 msgid "Organize your touchstone files"
 msgstr ""
 

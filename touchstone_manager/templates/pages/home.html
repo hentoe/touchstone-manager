@@ -4,25 +4,34 @@
 
 {% block content %}
   <div class="container">
-    <h1 class="fw-bolder">Summary</h1>
+    <h1 class="fw-bolder">{% trans "Overview" %}</h1>
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Model</th>
-          <th scope="col">Count</th>
+          <th scope="col">{% trans "Model" %}</th>
+          <th scope="col">{% trans "Total" %}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>{% trans "Materials" %}</td>
+          <td>
+            <a class="text-black link-underline link-underline-opacity-0"
+               href="{% url "aero:materials" %}">{% trans "Materials" %}</a>
+          </td>
           <td>{{ materials }}</td>
         </tr>
         <tr>
-          <td>{% trans "Samples" %}</td>
+          <td>
+            <a class="text-black link-underline link-underline-opacity-0"
+               href="{% url "aero:samples" %}">{% trans "Samples" %}</a>
+          </td>
           <td>{{ samples }}</td>
         </tr>
         <tr>
-          <td>{% trans "Measurements" %}</td>
+          <td>
+            <a class="text-black link-underline link-underline-opacity-0"
+               href="{% url "aero:measurements" %}">{% trans "Measurements" %}</a>
+          </td>
           <td>{{ measurements }}</td>
         </tr>
       </tbody>
