@@ -43,17 +43,29 @@
       </tbody>
     </table>
   </div>
-  <div>
-    <h2>Files</h2>
+  <div class="my-5">
+    <h2>{% trans "Measurements" %}</h2>
     {% if object.measurement_set %}
-      <ul>
-        {% for measurement in object.measurement_set.all %}
-          <li>
-            <a href={{ measurement.get_absolute_url }}>{{ measurement.measurement_date }}</a>
-            <a href="{{ measurement.get_absolute_url }}">{{ measurement.aero_material }}</a>
-          </li>
-        {% endfor %}
-      </ul>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{% trans "Day of measurement" %}</th>
+            <th>{% trans "Measurement" %}</th>
+            <th>{% trans "Mean S21" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for measurement in object.measurement_set.all %}
+            <tr>
+              <td>{{ measurement.measurement_date }}:</td>
+              <td>
+                <a href="{{ measurement.get_absolute_url }}">{{ measurement.aero_material }}</a>
+              </td>
+              <td>{{ measurement.mean_s21 }} dB</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     {% else %}
       <p>There are no measurement files.</p>
     {% endif %}

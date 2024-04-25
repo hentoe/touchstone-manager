@@ -23,7 +23,7 @@
             <th>{{ obj.id }}</th>
             <th>{{ obj.aero_material.sample_number }}</th>
             <td>{{ obj.measurement_date }}</td>
-            <td>{{ obj.measurement_file }}</td>
+            <td>{{ obj.measurement_file.name }}</td>
           </tr>
         {% endfor %}
       </tbody>
