@@ -1,6 +1,9 @@
 import pytest
+from django.urls import reverse
 from django.utils import timezone
 
+from touchstone_manager.aero.models import Material
+from touchstone_manager.aero.models import MaterialSample
 from touchstone_manager.aero.models import Measurement
 from touchstone_manager.aero.tests.factories import MaterialFactory
 from touchstone_manager.aero.tests.factories import MaterialSampleFactory
@@ -71,7 +74,7 @@ def test_create_material_sample_str():
 def test_create_measurement():
     """Test creation of Measurement object."""
     sample = MaterialSampleFactory.create()
-    measurement = Measurement.objects.create(
+    measurement = MeasurementFactory.create(
         aero_material=sample,
         measurement_date=timezone.now().date(),
         mean_s21=EXPECTED_MEAN_S21,
@@ -89,3 +92,18 @@ def test_measurement_str():
         aero_material=sample,
     )
     assert str(measurement) == f"{sample} on {measurement_date}"
+
+
+def test_material_get_absolute_url(material: Material):
+    base_url = reverse("aero:materials")
+    assert material.get_absolute_url() == f"{base_url}{material.pk}/"
+
+
+def test_material_sample_get_absolute_url(material_sample: MaterialSample):
+    base_url = reverse("aero:samples")
+    assert material_sample.get_absolute_url() == f"{base_url}{material_sample.pk}/"
+
+
+def test_measurement_get_absolute_url(measurement: Measurement):
+    base_url = reverse("aero:measurements")
+    assert measurement.get_absolute_url() == f"{base_url}{measurement.pk}/"
