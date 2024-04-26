@@ -28,5 +28,36 @@ class MeasurementAdmin(admin.ModelAdmin):
             obj.save()
 
 
-admin.site.register(Material)
-admin.site.register(MaterialSample)
+@admin.register(Material)
+class MaterialAdmin(admin.ModelAdmin):
+    list_display = ["name", "short_name"]
+    search_fields = ["name", "short_name"]
+    readonly_fields = ["created", "modified"]
+
+    fieldsets = (
+        (None, {"fields": ("name", "short_name", "description")}),
+        (_("Important dates"), {"fields": ("created", "modified")}),
+    )
+
+
+@admin.register(MaterialSample)
+class MaterialSampleAdmin(admin.ModelAdmin):
+    search_fields = ["name", "material__name"]
+    readonly_fields = ["created", "modified"]
+
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "name",
+                    "sample_number",
+                    "material",
+                    "thickness",
+                    "weight",
+                    "infiltrations",
+                ),
+            },
+        ),
+        (_("Important dates"), {"fields": ("created", "modified")}),
+    )
