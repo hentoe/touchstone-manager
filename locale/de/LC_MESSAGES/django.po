@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-25 13:32+0200\n"
+"POT-Creation-Date: 2024-04-26 13:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hendrik Tödter <hendrik.toedter@tu-dresden.de>\n"
 "Language-Team: Deutsch <LL@li.org>\n"
@@ -127,7 +127,7 @@ msgstr "Name"
 
 #: touchstone_manager/templates/aero/material_list.html:30
 #: touchstone_manager/templates/aero/materialsample_list.html:42
-#: touchstone_manager/templates/aero/measurement_list.html:32
+#: touchstone_manager/templates/aero/measurement_list.html:38
 msgid "No objects in list."
 msgstr "Keine Objekte in der Liste"
 
@@ -165,19 +165,18 @@ msgid "Measurements"
 msgstr "Messungen"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:52
-#: touchstone_manager/templates/aero/measurement_list.html:16
+#: touchstone_manager/templates/aero/measurement_list.html:18
 msgid "Day of measurement"
 msgstr "Tag der Messung"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:53
-#, fuzzy
-#| msgid "Measurements"
 msgid "Measurement"
-msgstr "Messungen"
+msgstr "Messung"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:54
+#: touchstone_manager/templates/aero/measurement_list.html:17
 msgid "Mean S21"
-msgstr ""
+msgstr "Mittlere Dämpfung"
 
 #: touchstone_manager/templates/aero/materialsample_list.html:9
 msgid "List of Material Samples"
@@ -203,7 +202,11 @@ msgstr "Liste der Messungen"
 msgid "Sample number"
 msgstr "Probennummer"
 
-#: touchstone_manager/templates/aero/measurement_list.html:17
+#: touchstone_manager/templates/aero/measurement_list.html:16
+msgid "Sample"
+msgstr "Proben"
+
+#: touchstone_manager/templates/aero/measurement_list.html:19
 msgid "File"
 msgstr "Datei"
 

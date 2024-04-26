@@ -13,12 +13,14 @@
         <tr>
           <th scope="col">Key</th>
           <th scope="col">Value</th>
+          <td></td>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>{% trans "Name of sample" %}</td>
           <td>{{ object.aero_material.name }}</td>
+          <td></td>
         </tr>
         <tr>
           <td>{% trans "Sample Number" %}</td>
@@ -39,6 +41,10 @@
         <tr>
           <td>{% trans "Weight" %}</td>
           <td>{{ object.aero_material.weight }} mg</td>
+        </tr>
+        <tr>
+          <th>{% trans "Mean S21" %}</th>
+          <th>{{ object.mean_s21 }} dB</th>
         </tr>
       </tbody>
     </table>
