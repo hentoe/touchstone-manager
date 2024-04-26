@@ -1,3 +1,4 @@
+import factory.django
 from factory import Faker
 from factory import SubFactory
 from factory.django import DjangoModelFactory
@@ -40,4 +41,5 @@ class MeasurementFactory(DjangoModelFactory):
 
     aero_material = SubFactory(MaterialSampleFactory)
     measurement_date = Faker("date")
+    measurement_file = factory.django.FileField()
     mean_s21 = Faker("pyfloat", min_value=-100, max_value=0)
