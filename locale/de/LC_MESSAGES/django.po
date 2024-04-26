@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 13:14+0200\n"
+"POT-Creation-Date: 2024-04-26 14:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hendrik Tödter <hendrik.toedter@tu-dresden.de>\n"
 "Language-Team: Deutsch <LL@li.org>\n"
@@ -24,6 +24,15 @@ msgstr "Englisch"
 #: config/settings/base.py:34
 msgid "German"
 msgstr "Deutsch"
+
+#: touchstone_manager/aero/admin.py:17
+#: touchstone_manager/templates/aero/measurement_list.html:19
+msgid "File"
+msgstr "Datei"
+
+#: touchstone_manager/aero/admin.py:18 touchstone_manager/users/admin.py:36
+msgid "Important dates"
+msgstr "Wichtige Daten"
 
 #: touchstone_manager/aero/apps.py:8
 msgid "Aero"
@@ -69,7 +78,7 @@ msgstr "Probennummer"
 #: touchstone_manager/aero/models.py:42
 #: touchstone_manager/templates/aero/materialsample_detail.html:28
 #: touchstone_manager/templates/aero/materialsample_list.html:16
-#: touchstone_manager/templates/aero/measurement_detail.html:28
+#: touchstone_manager/templates/aero/measurement_detail.html:30
 msgid "Material"
 msgstr "Werkstoff"
 
@@ -101,9 +110,19 @@ msgstr "Messobjekt"
 msgid "Measurement date"
 msgstr "Datum der Messung"
 
-#: touchstone_manager/aero/models.py:76
+#: touchstone_manager/aero/models.py:75
+msgid "Touchstone file"
+msgstr "Touchstone Datei"
+
+#: touchstone_manager/aero/models.py:77
 msgid "Mean S21 over frequency range"
 msgstr "Durchschnittlicher S21 im Frequenzbereich"
+
+#: touchstone_manager/aero/models.py:80
+#, fuzzy, python-format
+#| msgid "(aero_material) on (date)"
+msgid "%(aero_material)s on %(date)s"
+msgstr "%(aero_material)s am %(date)s"
 
 #: touchstone_manager/templates/aero/material_detail.html:9
 msgid "Material Details"
@@ -136,24 +155,24 @@ msgid "Material Sample Details"
 msgstr "Materialdetails"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:24
-#: touchstone_manager/templates/aero/measurement_detail.html:24
+#: touchstone_manager/templates/aero/measurement_detail.html:26
 msgid "Sample Number"
 msgstr "Probennummer"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:32
 #: touchstone_manager/templates/aero/materialsample_list.html:17
-#: touchstone_manager/templates/aero/measurement_detail.html:32
+#: touchstone_manager/templates/aero/measurement_detail.html:34
 msgid "Thickness"
 msgstr "Dicke"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:36
-#: touchstone_manager/templates/aero/measurement_detail.html:36
+#: touchstone_manager/templates/aero/measurement_detail.html:38
 msgid "Infiltrations"
 msgstr "Infiltrationen"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:40
 #: touchstone_manager/templates/aero/materialsample_list.html:19
-#: touchstone_manager/templates/aero/measurement_detail.html:40
+#: touchstone_manager/templates/aero/measurement_detail.html:42
 msgid "Weight"
 msgstr "Gewicht"
 
@@ -174,6 +193,7 @@ msgid "Measurement"
 msgstr "Messung"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:54
+#: touchstone_manager/templates/aero/measurement_detail.html:46
 #: touchstone_manager/templates/aero/measurement_list.html:17
 msgid "Mean S21"
 msgstr "Mittlere Dämpfung"
@@ -190,7 +210,7 @@ msgstr "Anzahl der Infiltrationen"
 msgid "Measurement Details"
 msgstr "Details der Messung"
 
-#: touchstone_manager/templates/aero/measurement_detail.html:20
+#: touchstone_manager/templates/aero/measurement_detail.html:21
 msgid "Name of sample"
 msgstr "Probenname"
 
@@ -205,10 +225,6 @@ msgstr "Probennummer"
 #: touchstone_manager/templates/aero/measurement_list.html:16
 msgid "Sample"
 msgstr "Proben"
-
-#: touchstone_manager/templates/aero/measurement_list.html:19
-msgid "File"
-msgstr "Datei"
 
 #: touchstone_manager/templates/allauth/layouts/entrance.html:13
 #: touchstone_manager/templates/base.html:80
@@ -262,10 +278,6 @@ msgstr "Persönliche Informationen"
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: touchstone_manager/users/admin.py:36
-msgid "Important dates"
-msgstr "Wichtige Daten"
-
 #: touchstone_manager/users/apps.py:9
 msgid "Users"
 msgstr "Benutzer"
@@ -287,3 +299,11 @@ msgstr "Email-Adresse"
 #: touchstone_manager/users/views.py:24
 msgid "Information successfully updated"
 msgstr "Information wurde erfolgreich geändert"
+
+#: touchstone_manager/utils/models.py:12
+msgid "Created"
+msgstr "Erstellt"
+
+#: touchstone_manager/utils/models.py:13
+msgid "Modified"
+msgstr "Geändert"

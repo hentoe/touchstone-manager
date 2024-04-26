@@ -72,11 +72,15 @@ class Measurement(TimeStampedModel):
     measurement_file = models.FileField(
         upload_to="uploads/measurements/",
         blank=True,
+        verbose_name=_("Touchstone file"),
     )
     mean_s21 = models.FloatField(_("Mean S21 over frequency range"))
 
     def __str__(self):
-        return f"{self.aero_material} on {self.measurement_date}"
+        return _("%(aero_material)s on %(date)s") % {
+            "aero_material": self.aero_material.name,
+            "date": self.measurement_date,
+        }
 
     def get_absolute_url(self):
         """Returns the URL to access a particular measurement instance."""
