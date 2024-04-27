@@ -37,5 +37,8 @@
   "scripts": {
     "dev": "webpack serve --config webpack/dev.config.js",
     "build": "webpack --config webpack/prod.config.js"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.2"
   }
 }
