@@ -1,5 +1,9 @@
+from datetime import datetime
+from pathlib import Path
+
 from django.db import models
 from django.urls import reverse
+from django.utils.timezone import get_default_timezone
 from django.utils.translation import gettext_lazy as _
 from skrf import Network
 
@@ -69,7 +73,7 @@ class Measurement(TimeStampedModel):
         on_delete=models.CASCADE,
         verbose_name=_("Device under Test"),
     )
-    measurement_date = models.DateField(_("Measurement date"))
+    measurement_date = models.DateTimeField(_("Measurement date"))
     measurement_file = models.FileField(
         upload_to="uploads/measurements/",
         blank=True,
@@ -89,12 +93,29 @@ class Measurement(TimeStampedModel):
 
     def process_file(self):
         if self.measurement_file:
-            network = Network(self.measurement_file.path)
-            frequencies = network.f
-            s21 = network.s21.s_db
-            self.mean_s21 = s21.mean()
-            self.measurement_data["frequency"] = frequencies.tolist()
-            self.measurement_data["s21"] = list(s21.flatten())
+            try:
+                network = Network(self.measurement_file.path)
+                frequencies = network.f
+                s21 = network.s21.s_db
+                self.mean_s21 = s21.mean()
+                self.measurement_data["frequency"] = frequencies.tolist()
+                self.measurement_data["s21"] = list(s21.flatten())
+                self.measurement_date = self.extract_date_from_file()
+            except ValueError:
+                self.measurement_file = ""
+
+    def extract_date_from_file(self):
+        if self.measurement_file:
+            file_path = Path(self.measurement_file.path)
+            with file_path.open() as file:
+                # Date is third line in file, remove first to chars
+                date_string = file.readlines()[2].strip()[2:]
+            date_time_obj = datetime.strptime(
+                date_string,
+                "%m/%d/%Y %I:%M:%S %p",
+            ).astimezone(get_default_timezone())
+
+        return date_time_obj
 
     def __str__(self):
         return _("%(aero_material)s on %(date)s") % {
