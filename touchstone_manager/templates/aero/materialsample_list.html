@@ -8,36 +8,38 @@
 {% block content %}
   <h1>{% trans "List of Material Samples" %}</h1>
   {% if object_list %}
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">{% trans "Name" %}</th>
-          <th scope="col">{% trans "Material" %}</th>
-          <th scope="col">{% trans "Thickness" %}</th>
-          <th scope="col">{% trans "Number of Infiltrations" %}</th>
-          <th scope="col">{% trans "Weight" %}</th>
-          <th scope="col"># {% trans "Measurements" %}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for obj in object_list %}
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
           <tr>
-            <th>{{ obj.id }}</th>
-            <td>
-              <a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
-            </td>
-            <td>
-              <a href="{{ obj.material.get_absolute_url }}">{{ obj.material.name }}</a>
-            </td>
-            <td>{{ obj.thickness }} mm</td>
-            <td>{{ obj.infiltrations }}</td>
-            <td>{{ obj.weight }} mg</td>
-            <td>{{ obj.measurement_set.all.count }}</td>
+            <th scope="col">#</th>
+            <th scope="col">{% trans "Name" %}</th>
+            <th scope="col">{% trans "Material" %}</th>
+            <th scope="col">{% trans "Thickness" %}</th>
+            <th scope="col">{% trans "Number of Infiltrations" %}</th>
+            <th scope="col">{% trans "Weight" %}</th>
+            <th scope="col"># {% trans "Measurements" %}</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {% for obj in object_list %}
+            <tr>
+              <th>{{ obj.id }}</th>
+              <td>
+                <a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
+              </td>
+              <td>
+                <a href="{{ obj.material.get_absolute_url }}">{{ obj.material.name }}</a>
+              </td>
+              <td>{{ obj.thickness }} mm</td>
+              <td>{{ obj.infiltrations }}</td>
+              <td>{{ obj.weight }} mg</td>
+              <td>{{ obj.measurement_set.all.count }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% else %}
     <p>{% trans "No objects in list." %}</p>
   {% endif %}

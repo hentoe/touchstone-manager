@@ -8,32 +8,34 @@
 {% block content %}
   <h1>{% trans "List of Measurements" %}</h1>
   {% if object_list %}
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">{% trans "Sample number" %}</th>
-          <th scope="col">{% trans "Sample" %}</th>
-          <th scope="col">{% trans "Mean S21" %}</th>
-          <th scope="col">{% trans "Day of measurement" %}</th>
-          <th scope="col">{% trans "File" %}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for obj in object_list %}
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
           <tr>
-            <th>{{ obj.id }}</th>
-            <th>{{ obj.aero_material.sample_number }}</th>
-            <th>
-              <a href="{{ obj.aero_material.get_absolute_url }}">{{ obj.aero_material.name }}</a>
-            </th>
-            <td>{{ obj.mean_s21|floatformat:2 }}</td>
-            <td>{{ obj.measurement_date }}</td>
-            <td>{{ obj.measurement_file.name }}</td>
+            <th scope="col">#</th>
+            <th scope="col">{% trans "Sample number" %}</th>
+            <th scope="col">{% trans "Sample" %}</th>
+            <th scope="col">{% trans "Mean S21" %}</th>
+            <th scope="col">{% trans "Day of measurement" %}</th>
+            <th scope="col">{% trans "File" %}</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {% for obj in object_list %}
+            <tr>
+              <th>{{ obj.id }}</th>
+              <th>{{ obj.aero_material.sample_number }}</th>
+              <th>
+                <a href="{{ obj.aero_material.get_absolute_url }}">{{ obj.aero_material.name }}</a>
+              </th>
+              <td>{{ obj.mean_s21|floatformat:2 }}</td>
+              <td>{{ obj.measurement_date }}</td>
+              <td>{{ obj.measurement_file.name }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% else %}
     <p>{% trans "No objects in list." %}</p>
   {% endif %}
