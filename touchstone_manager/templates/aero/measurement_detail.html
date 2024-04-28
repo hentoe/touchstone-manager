@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load i18n %}
+{% load static %}
 
 {% block title %}
   {{ object }}
@@ -49,4 +50,51 @@
       </tbody>
     </table>
   </div>
+  <div>
+    <canvas id="s21Chart" width="" height="vh-1ßß"></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var ctx = document.getElementById('s21Chart').getContext('2d');
+      var frequency = JSON.parse('{{ object.measurement_data.frequency|safe }}').map(function(f) {
+        return f / 1e9; // Convert Hz to GHz
+      });
+      var s21 = JSON.parse('{{ object.measurement_data.s21|safe }}');
+      var s21Chart = new Chart(ctx, {
+        type: 'line', // Define the type of chart you want, for example, 'line'
+        data: {
+          labels: frequency, // Frequency data
+          datasets: [{
+            label: '{{ object.aero_material.name }}',
+            data: s21, // S21 data
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'S21 Magnitude (dB)' // Y-axis label
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Frequency (GHz)' // X-axis label
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
 {% endblock content %}
