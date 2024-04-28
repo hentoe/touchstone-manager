@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from skrf import Network
 
 from touchstone_manager.utils.models import TimeStampedModel
 
@@ -74,7 +75,26 @@ class Measurement(TimeStampedModel):
         blank=True,
         verbose_name=_("Touchstone file"),
     )
-    mean_s21 = models.FloatField(_("Mean S21 over frequency range"))
+    mean_s21 = models.FloatField(
+        _("Mean S21 over frequency range"),
+        default=0,
+        editable=False,
+    )
+    measurement_data = models.JSONField(default=dict, editable=False)
+
+    def save(self, *args, **kwargs):
+        if self.measurement_file:
+            self.process_file()
+        super().save(*args, **kwargs)
+
+    def process_file(self):
+        if self.measurement_file:
+            network = Network(self.measurement_file.path)
+            frequencies = network.f
+            s21 = network.s21.s_db
+            self.mean_s21 = s21.mean()
+            self.measurement_data["frequency"] = frequencies.tolist()
+            self.measurement_data["s21"] = list(s21.flatten())
 
     def __str__(self):
         return _("%(aero_material)s on %(date)s") % {

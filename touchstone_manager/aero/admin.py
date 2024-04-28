@@ -10,22 +10,13 @@ from .models import Measurement
 class MeasurementAdmin(admin.ModelAdmin):
     list_display = ["aero_material", "measurement_date", "mean_s21"]
     search_fields = ["aero_material__name"]
-    readonly_fields = ["created", "modified"]
+    readonly_fields = ["created", "modified", "measurement_data", "mean_s21"]
 
     fieldsets = (
         (None, {"fields": ("aero_material",)}),
         (_("File"), {"fields": ("measurement_file", "measurement_date", "mean_s21")}),
         (_("Important dates"), {"fields": ("created", "modified")}),
     )
-
-    def save_model(self, request, obj, form, change) -> None:
-        if change:
-            if form.changed_data:
-                obj.save(update_fields=form.changed_data)
-            else:
-                obj.save()
-        else:
-            obj.save()
 
 
 @admin.register(Material)
