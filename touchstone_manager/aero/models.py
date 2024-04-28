@@ -88,7 +88,11 @@ class Measurement(TimeStampedModel):
 
     def save(self, *args, **kwargs):
         if self.measurement_file:
-            self.process_file()
+            try:
+                self.process_file()
+            except FileNotFoundError:
+                super().save(*args, **kwargs)
+                self.process_file()
         super().save(*args, **kwargs)
 
     def process_file(self):
