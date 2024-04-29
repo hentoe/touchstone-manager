@@ -33,7 +33,7 @@ class MaterialAdmin(admin.ModelAdmin):
 
 @admin.register(MaterialSample)
 class MaterialSampleAdmin(admin.ModelAdmin):
-    list_display = ["name", "material__short_name", "weight", "infiltrations"]
+    list_display = ["name", "material", "weight", "infiltrations"]
     search_fields = ["name", "material__name"]
     readonly_fields = ["created", "modified"]
 
