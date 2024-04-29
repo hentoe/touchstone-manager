@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from unittest.mock import patch
 
 import pytest
 from django.conf import settings
@@ -115,7 +116,11 @@ class TestMaterialSampleDetailView:
 
 
 class TestMeasurementListView:
-    def test_authenticated(self, user: User, rf: RequestFactory):
+    def test_authenticated(self, user: User, rf: RequestFactory, mocker):
+        mocker.patch(
+            "touchstone_manager.aero.models.Measurement.process_file",
+            return_value=None,
+        )
         total_object_num = 10
         MeasurementFactory.create_batch(total_object_num)
         url = reverse("aero:measurements")
@@ -139,7 +144,12 @@ class TestMeasurementListView:
 
 
 class TestMeasurementDetailView:
-    def test_authenticated(self, user: User, rf: RequestFactory):
+    @patch("touchstone_manager.aero.models.Measurement.process_file")
+    def test_authenticated(self, user: User, rf: RequestFactory, mocker):
+        mocker.patch(
+            "touchstone_manager.aero.models.Measurement.process_file",
+            return_value=None,
+        )
         measurement = MeasurementFactory.create()
         url = reverse("aero:measurement-detail", kwargs={"pk": measurement.pk})
         request = rf.get(url)
@@ -148,7 +158,11 @@ class TestMeasurementDetailView:
 
         assert response.status_code == HTTPStatus.OK
 
-    def test_not_authenticated(self, user: User, rf: RequestFactory):
+    def test_not_authenticated(self, user: User, rf: RequestFactory, mocker):
+        mocker.patch(
+            "touchstone_manager.aero.models.Measurement.process_file",
+            return_value=None,
+        )
         measurement = MeasurementFactory.create()
         url = reverse("aero:measurement-detail", kwargs={"pk": measurement.pk})
         request = rf.get(url)

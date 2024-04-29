@@ -2,10 +2,8 @@ import pytest
 
 from touchstone_manager.aero.models import Material
 from touchstone_manager.aero.models import MaterialSample
-from touchstone_manager.aero.models import Measurement
 from touchstone_manager.aero.tests.factories import MaterialFactory
 from touchstone_manager.aero.tests.factories import MaterialSampleFactory
-from touchstone_manager.aero.tests.factories import MeasurementFactory
 from touchstone_manager.users.models import User
 from touchstone_manager.users.tests.factories import UserFactory
 from touchstone_manager.utils.tests.models import TimeStampedTestModel
@@ -24,11 +22,6 @@ def user(db) -> User:
 @pytest.fixture()
 def material(db) -> Material:
     return MaterialFactory()
-
-
-@pytest.fixture()
-def measurement(db) -> Measurement:
-    return MeasurementFactory()
 
 
 @pytest.fixture()

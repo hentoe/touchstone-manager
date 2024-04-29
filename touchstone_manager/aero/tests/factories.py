@@ -1,4 +1,6 @@
 import factory.django
+from django.core.files.base import ContentFile
+from django.utils import timezone
 from factory import Faker
 from factory import SubFactory
 from factory.django import DjangoModelFactory
@@ -40,6 +42,8 @@ class MeasurementFactory(DjangoModelFactory):
         model = Measurement
 
     aero_material = SubFactory(MaterialSampleFactory)
-    measurement_date = Faker("date")
-    measurement_file = factory.django.FileField()
+    measurement_date = Faker("date_time", tzinfo=timezone.get_default_timezone())
+    measurement_file = factory.LazyAttribute(
+        lambda _: ContentFile(b"Fake content", name="example.s2p"),
+    )
     mean_s21 = Faker("pyfloat", min_value=-100, max_value=0)

@@ -1,10 +1,12 @@
+from unittest.mock import patch
+
 import pytest
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from touchstone_manager.aero.models import Material
 from touchstone_manager.aero.models import MaterialSample
-from touchstone_manager.aero.models import Measurement
 from touchstone_manager.aero.tests.factories import MaterialFactory
 from touchstone_manager.aero.tests.factories import MaterialSampleFactory
 from touchstone_manager.aero.tests.factories import MeasurementFactory
@@ -71,27 +73,34 @@ def test_create_material_sample_str():
 
 
 @pytest.mark.django_db()
-def test_create_measurement():
+@patch("touchstone_manager.aero.models.Measurement.process_file")
+def test_create_measurement(mock_process_file):
     """Test creation of Measurement object."""
+    mock_process_file.return_value = None
     sample = MaterialSampleFactory.create()
     measurement = MeasurementFactory.create(
         aero_material=sample,
-        measurement_date=timezone.now().date(),
-        mean_s21=EXPECTED_MEAN_S21,
+        measurement_date=timezone.now(),
     )
     assert measurement.aero_material == sample
-    assert measurement.mean_s21 == EXPECTED_MEAN_S21
 
 
 @pytest.mark.django_db()
-def test_measurement_str():
+@patch("touchstone_manager.aero.models.Measurement.process_file")
+def test_measurement_str(mock_process_file):
+    mock_process_file.return_value = None
     sample = MaterialSampleFactory()
-    measurement_date = timezone.now().date()
+    measurement_date = timezone.now()
     measurement = MeasurementFactory.create(
         measurement_date=measurement_date,
         aero_material=sample,
     )
-    assert str(measurement) == f"{sample} on {measurement_date}"
+    assert str(measurement) == _("%(aero_material)s on %(date)s") % {
+        "aero_material": measurement.aero_material.name,
+        "date": measurement.measurement_date,
+    }
+
+    mock_process_file.assert_called_once()
 
 
 def test_material_get_absolute_url(material: Material):
@@ -104,6 +113,10 @@ def test_material_sample_get_absolute_url(material_sample: MaterialSample):
     assert material_sample.get_absolute_url() == f"{base_url}{material_sample.pk}/"
 
 
-def test_measurement_get_absolute_url(measurement: Measurement):
+@pytest.mark.django_db()
+@patch("touchstone_manager.aero.models.Measurement.process_file")
+def test_measurement_get_absolute_url(mock_process_file):
+    mock_process_file.return_value = None
     base_url = reverse("aero:measurements")
+    measurement = MeasurementFactory.create()
     assert measurement.get_absolute_url() == f"{base_url}{measurement.pk}/"
