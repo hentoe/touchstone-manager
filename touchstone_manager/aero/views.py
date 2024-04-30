@@ -116,6 +116,48 @@ class MeasurementDetailView(LoginRequiredMixin, DetailView):
     model = Measurement
 
 
+class MeasurementCreateView(LoginRequiredMixin, CreateView):
+    """Create Measurement instance"""
+
+    model = Measurement
+    fields = [
+        "aero_material",
+        "measurement_file",
+        "measurement_date",
+    ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Create New Measurement")
+        return context
+
+
+class MeasurementUpdateView(LoginRequiredMixin, UpdateView):
+    """Update Measurement instance"""
+
+    model = Measurement
+    fields = [
+        "aero_material",
+        "measurement_file",
+    ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Update Measurement")
+        return context
+
+
+class MeasurementDeleteView(LoginRequiredMixin, DeleteView):
+    model = Measurement
+    success_url = reverse_lazy("aero:materials")
+    template_name = "aero/material_confirm_delete.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Confirm delete"
+        return context
+
+
 class MaterialCreateView(LoginRequiredMixin, CreateView):
     """Create Material Instance"""
 

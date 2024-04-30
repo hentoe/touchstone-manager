@@ -10,8 +10,11 @@ from .views import MaterialSampleDetailView
 from .views import MaterialSampleListView
 from .views import MaterialSampleUpdateView
 from .views import MaterialUpdateView
+from .views import MeasurementCreateView
+from .views import MeasurementDeleteView
 from .views import MeasurementDetailView
 from .views import MeasurementListView
+from .views import MeasurementUpdateView
 
 app_name = "aero"
 urlpatterns = [
@@ -59,8 +62,23 @@ urlpatterns = [
     ),
     path("measurements/", view=MeasurementListView.as_view(), name="measurements"),
     path(
+        "measurements/create/",
+        view=MeasurementCreateView.as_view(),
+        name="measurement-create",
+    ),
+    path(
         "measurements/<int:pk>/",
         view=MeasurementDetailView.as_view(),
         name="measurement-detail",
+    ),
+    path(
+        "measurements/<int:pk>/update",
+        view=MeasurementUpdateView.as_view(),
+        name="measurement-update",
+    ),
+    path(
+        "measurements/<int:pk>/delete",
+        view=MeasurementDeleteView.as_view(),
+        name="measurement-delete",
     ),
 ]

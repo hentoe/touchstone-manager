@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-30 16:02+0200\n"
+"POT-Creation-Date: 2024-04-30 21:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hendrik Tödter <hendrik.toedter@tu-dresden.de>\n"
 "Language-Team: Deutsch <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgid "German"
 msgstr "Deutsch"
 
 #: touchstone_manager/aero/admin.py:17
-#: touchstone_manager/templates/aero/measurement_list.html:20
+#: touchstone_manager/templates/aero/measurement_list.html:25
 msgid "File"
 msgstr "Datei"
 
@@ -126,21 +126,30 @@ msgstr "Durchschnittlicher S21 im Frequenzbereich"
 msgid "%(aero_material)s on %(date)s"
 msgstr "%(aero_material)s am %(date)s"
 
-#: touchstone_manager/aero/views.py:65
+#: touchstone_manager/aero/views.py:72
 #: touchstone_manager/templates/aero/materialsample_list.html:12
 msgid "Create New Sample"
 msgstr "Neue Probe hinzufügen"
 
-#: touchstone_manager/aero/views.py:78
+#: touchstone_manager/aero/views.py:92
 msgid "Update Sample"
 msgstr "Probe bearbeiten"
 
-#: touchstone_manager/aero/views.py:114
+#: touchstone_manager/aero/views.py:131
+#: touchstone_manager/templates/aero/measurement_list.html:12
+msgid "Create New Measurement"
+msgstr "Neue Messung hinzufügen"
+
+#: touchstone_manager/aero/views.py:146
+msgid "Update Measurement"
+msgstr "Messung bearbeiten"
+
+#: touchstone_manager/aero/views.py:170
 #: touchstone_manager/templates/aero/material_list.html:12
 msgid "Create New Material"
 msgstr "Neuen Werkstoff hinzufügen"
 
-#: touchstone_manager/aero/views.py:127
+#: touchstone_manager/aero/views.py:183
 msgid "Update Material"
 msgstr "Werkstoff bearbeiten"
 
@@ -159,6 +168,7 @@ msgstr "Abbrechen"
 #: touchstone_manager/templates/aero/material_confirm_delete.html:15
 #: touchstone_manager/templates/aero/material_detail.html:32
 #: touchstone_manager/templates/aero/materialsample_detail.html:83
+#: touchstone_manager/templates/aero/measurement_detail.html:65
 msgid "Delete"
 msgstr "Löschen"
 
@@ -172,10 +182,12 @@ msgstr "Keine Beschreibung vorhanden"
 
 #: touchstone_manager/templates/aero/material_detail.html:28
 #: touchstone_manager/templates/aero/materialsample_detail.html:79
+#: touchstone_manager/templates/aero/measurement_detail.html:61
 msgid "Update"
 msgstr "Bearbeiten"
 
 #: touchstone_manager/templates/aero/material_form.html:14
+#: touchstone_manager/templates/aero/measurement_form.html:14
 msgid "Save"
 msgstr "Speichern"
 
@@ -198,7 +210,7 @@ msgstr "Name"
 
 #: touchstone_manager/templates/aero/material_list.html:40
 #: touchstone_manager/templates/aero/materialsample_list.html:49
-#: touchstone_manager/templates/aero/measurement_list.html:40
+#: touchstone_manager/templates/aero/measurement_list.html:45
 msgid "No objects in list."
 msgstr "Keine Objekte in der Liste"
 
@@ -237,7 +249,7 @@ msgid "Measurements"
 msgstr "Messungen"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:55
-#: touchstone_manager/templates/aero/measurement_list.html:19
+#: touchstone_manager/templates/aero/measurement_list.html:24
 msgid "Day of measurement"
 msgstr "Tag der Messung"
 
@@ -247,7 +259,7 @@ msgstr "Messung"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:57
 #: touchstone_manager/templates/aero/measurement_detail.html:48
-#: touchstone_manager/templates/aero/measurement_list.html:18
+#: touchstone_manager/templates/aero/measurement_list.html:23
 msgid "Mean S21"
 msgstr "Mittlere Dämpfung"
 
@@ -271,11 +283,11 @@ msgstr "Probenname"
 msgid "List of Measurements"
 msgstr "Liste der Messungen"
 
-#: touchstone_manager/templates/aero/measurement_list.html:16
+#: touchstone_manager/templates/aero/measurement_list.html:21
 msgid "Sample number"
 msgstr "Probennummer"
 
-#: touchstone_manager/templates/aero/measurement_list.html:17
+#: touchstone_manager/templates/aero/measurement_list.html:22
 msgid "Sample"
 msgstr "Proben"
 
