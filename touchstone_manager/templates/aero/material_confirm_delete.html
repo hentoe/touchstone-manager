@@ -11,8 +11,7 @@
     <p>{% trans "Are you sure you want to delete " %}{{ object.name }}?</p>
     <form method="post">
       {% csrf_token %}
-      <a href="{% url 'aero:material-detail' pk=object.id %}"
-         class="btn btn-secondary">{% trans "Cancel" %}</a>
+      <a href="{{ object.get_absolute_url }}" class="btn btn-secondary">{% trans "Cancel" %}</a>
       <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
     </form>
   </div>

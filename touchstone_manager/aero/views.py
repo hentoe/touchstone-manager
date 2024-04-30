@@ -35,16 +35,10 @@ class MaterialDetailView(LoginRequiredMixin, DetailView):
     model = Material
 
 
-material_detail_view = MaterialDetailView.as_view()
-
-
 class MaterialListView(LoginRequiredMixin, ListView):
     """List all Materials"""
 
     model = Material
-
-
-material_list_view = MaterialListView.as_view()
 
 
 class MaterialSampleDetailView(LoginRequiredMixin, DetailView):
@@ -53,16 +47,61 @@ class MaterialSampleDetailView(LoginRequiredMixin, DetailView):
     model = MaterialSample
 
 
-material_sample_detail_view = MaterialSampleDetailView.as_view()
-
-
 class MaterialSampleListView(LoginRequiredMixin, ListView):
     """List all MaterialSample"""
 
     model = MaterialSample
 
 
-material_sample_list_view = MaterialSampleListView.as_view()
+class MaterialSampleCreateView(LoginRequiredMixin, CreateView):
+    """Create MaterialSample instance"""
+
+    model = MaterialSample
+    fields = [
+        "name",
+        "material",
+        "sample_number",
+        "thickness",
+        "weight",
+        "infiltrations",
+    ]
+    template_name = "aero/material_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Create New Sample")
+        return context
+
+
+class MaterialSampleUpdateView(LoginRequiredMixin, UpdateView):
+    """Update MaterialSample instance"""
+
+    model = MaterialSample
+    fields = [
+        "name",
+        "material",
+        "sample_number",
+        "thickness",
+        "weight",
+        "infiltrations",
+    ]
+    template_name = "aero/material_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Update Sample")
+        return context
+
+
+class MaterialSampleDeleteView(LoginRequiredMixin, DeleteView):
+    model = MaterialSample
+    success_url = reverse_lazy("aero:samples")
+    template_name = "aero/material_confirm_delete.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Confirm delete"
+        return context
 
 
 class MeasurementListView(LoginRequiredMixin, ListView):
@@ -71,16 +110,10 @@ class MeasurementListView(LoginRequiredMixin, ListView):
     model = Measurement
 
 
-measurement_list_view = MeasurementListView.as_view()
-
-
 class MeasurementDetailView(LoginRequiredMixin, DetailView):
     """Show Measurement Details"""
 
     model = Measurement
-
-
-measurement_detail_view = MeasurementDetailView.as_view()
 
 
 class MaterialCreateView(LoginRequiredMixin, CreateView):

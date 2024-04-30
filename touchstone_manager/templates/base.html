@@ -53,7 +53,13 @@
                   <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link" href="{% url 'aero:materials' %}">{% trans "Materials" %}</a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link" href="{% url 'aero:samples' %}">{% trans "Samples" %}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'aero:measurements' %}">{% trans "Measurements" %}</a>
                 </li>
                 {% if request.user.is_authenticated %}
                   <li class="nav-item">
