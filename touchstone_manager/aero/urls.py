@@ -1,84 +1,84 @@
 from django.urls import path
 
-from .views import MaterialCreateView
-from .views import MaterialDeleteView
-from .views import MaterialDetailView
-from .views import MaterialListView
-from .views import MaterialSampleCreateView
-from .views import MaterialSampleDeleteView
-from .views import MaterialSampleDetailView
-from .views import MaterialSampleListView
-from .views import MaterialSampleUpdateView
-from .views import MaterialUpdateView
-from .views import MeasurementCreateView
-from .views import MeasurementDeleteView
-from .views import MeasurementDetailView
-from .views import MeasurementListView
-from .views import MeasurementUpdateView
+from .views import material_create_view
+from .views import material_delete_view
+from .views import material_detail_view
+from .views import material_list_view
+from .views import material_sample_create_view
+from .views import material_sample_delete_view
+from .views import material_sample_detail_view
+from .views import material_sample_list_view
+from .views import material_sample_update_view
+from .views import material_update_view
+from .views import measurement_create_view
+from .views import measurement_delete_view
+from .views import measurement_detail_view
+from .views import measurement_list_view
+from .views import measurement_update_view
 
 app_name = "aero"
 urlpatterns = [
-    path("materials/", view=MaterialListView.as_view(), name="materials"),
+    path("materials/", view=material_list_view, name="materials"),
     path(
         "materials/create/",
-        view=MaterialCreateView.as_view(),
+        view=material_create_view,
         name="material-create",
     ),
     path(
         "materials/<int:pk>/",
-        view=MaterialDetailView.as_view(),
+        view=material_detail_view,
         name="material-detail",
     ),
     path(
         "materials/<int:pk>/update/",
-        view=MaterialUpdateView.as_view(),
+        view=material_update_view,
         name="material-update",
     ),
     path(
         "material/<int:pk>/delete/",
-        MaterialDeleteView.as_view(),
+        view=material_delete_view,
         name="material-delete",
     ),
-    path("samples/", view=MaterialSampleListView.as_view(), name="samples"),
+    path("samples/", view=material_sample_list_view, name="samples"),
     path(
         "samples/create/",
-        view=MaterialSampleCreateView.as_view(),
+        view=material_sample_create_view,
         name="sample-create",
     ),
     path(
         "samples/<int:pk>/",
-        view=MaterialSampleDetailView.as_view(),
+        view=material_sample_detail_view,
         name="sample-detail",
     ),
     path(
         "samples/<int:pk>/update",
-        view=MaterialSampleUpdateView.as_view(),
+        view=material_sample_update_view,
         name="sample-update",
     ),
     path(
         "samples/<int:pk>/delete",
-        view=MaterialSampleDeleteView.as_view(),
+        view=material_sample_delete_view,
         name="sample-delete",
     ),
-    path("measurements/", view=MeasurementListView.as_view(), name="measurements"),
+    path("measurements/", view=measurement_list_view, name="measurements"),
     path(
         "measurements/create/",
-        view=MeasurementCreateView.as_view(),
+        view=measurement_create_view,
         name="measurement-create",
     ),
     path(
         "measurements/<int:pk>/",
-        view=MeasurementDetailView.as_view(),
+        view=measurement_detail_view,
         name="measurement-detail",
     ),
     path(
         "measurements/<int:pk>/update",
-        view=MeasurementUpdateView.as_view(),
+        view=measurement_update_view,
         name="measurement-update",
     ),
     path(
         "measurements/<int:pk>/delete",
-        view=MeasurementDeleteView.as_view(),
+        view=measurement_delete_view,
         name="measurement-delete",
     ),
 ]

@@ -192,3 +192,20 @@ class MaterialDeleteView(LoginRequiredMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Confirm delete"
         return context
+
+
+material_create_view = MaterialCreateView.as_view()
+material_detail_view = MaterialDetailView.as_view()
+material_list_view = MaterialListView.as_view()
+material_update_view = MaterialUpdateView.as_view()
+material_delete_view = MaterialDeleteView.as_view()
+material_sample_create_view = MaterialSampleCreateView.as_view()
+material_sample_detail_view = MaterialSampleDetailView.as_view()
+material_sample_list_view = MaterialSampleListView.as_view()
+material_sample_update_view = MaterialSampleUpdateView.as_view()
+material_sample_delete_view = MaterialSampleDeleteView.as_view()
+measurement_create_view = MeasurementCreateView.as_view()
+measurement_detail_view = MeasurementDetailView.as_view()
+measurement_list_view = MeasurementListView.as_view()
+measurement_update_view = MeasurementUpdateView.as_view()
+measurement_delete_view = MeasurementDeleteView.as_view()
