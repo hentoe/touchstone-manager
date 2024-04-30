@@ -73,5 +73,15 @@
     {% else %}
       <p>There are no measurement files.</p>
     {% endif %}
+    <div class="d-flex justify-content-start gap-2 mt-4">
+      {% if perms.aero.add_materialsample %}
+        <a class="btn btn-primary"
+           href="{% url 'aero:sample-update' pk=object.id %}">{% trans "Update" %}</a>
+      {% endif %}
+      {% if perms.aero.delete_materialsample %}
+        <a class="btn btn-danger"
+           href="{% url 'aero:sample-delete' pk=object.id %}">{% trans "Delete" %}</a>
+      {% endif %}
+    </div>
   </div>
 {% endblock content %}

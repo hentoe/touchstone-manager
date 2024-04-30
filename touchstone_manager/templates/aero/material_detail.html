@@ -6,9 +6,33 @@
   {{ object }}
 {% endblock title %}
 {% block content %}
-  <h1>{% trans "Material Details" %}</h1>
-  <p>{{ object.name }}</p>
-  <p>{{ object.short_name }}</p>
-  <hr />
-  <p>{{ object.description }}</p>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h1 class="mb-4">{% trans "Material Details" %}</h1>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ object.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ object.short_name }}</h6>
+            <hr />
+            {% if object.description %}
+              <p class="card-text">{{ object.description }}</p>
+            {% else %}
+              <p class="card-text">{% trans "No description provided" %}</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="d-flex justify-content-start gap-2 mt-4">
+          {% if perms.aero.add_material %}
+            <a class="btn btn-primary"
+               href="{% url 'aero:material-update' pk=object.id %}">{% trans "Update" %}</a>
+          {% endif %}
+          {% if perms.aero.delete_material %}
+            <a class="btn btn-danger"
+               href="{% url 'aero:material-delete' pk=object.id %}">{% trans "Delete" %}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock content %}

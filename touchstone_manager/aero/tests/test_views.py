@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.http import HttpResponseRedirect
 from django.test import RequestFactory
+from django.test import TestCase
 from django.urls import reverse
 
 from touchstone_manager.aero.tests.factories import MaterialFactory
@@ -173,3 +174,20 @@ class TestMeasurementDetailView:
         assert isinstance(response, HttpResponseRedirect)
         assert response.status_code == HTTPStatus.FOUND
         assert response.url == f"{login_url}?next={url}"
+
+
+class TestHomeViewTemplates(TestCase):
+    """Test HomeView uses different templates for authenticated and anonymous users."""
+
+    def setUp(self):
+        self.user = UserFactory()
+        self.url = reverse("home")
+
+    def test_home_template_used(self):
+        self.client.force_login(self.user)
+        response = self.client.get(self.url)
+        self.assertTemplateUsed(response, "pages/home.html")
+
+    def test_landing_template_used(self):
+        response = self.client.get(self.url)
+        self.assertTemplateUsed(response, "pages/landing.html")
