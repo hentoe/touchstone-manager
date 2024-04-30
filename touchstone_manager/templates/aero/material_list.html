@@ -7,6 +7,11 @@
 {% endblock title %}
 {% block content %}
   <h1>{% trans "List of Materials" %}</h1>
+  {% if perms.aero.add_material %}
+    <div class="py-3">
+      <a class="btn btn-primary" href="{% url 'aero:material-create' %}">{% trans "Create New Material" %}</a>
+    </div>
+  {% endif %}
   {% if object_list %}
     <div class="table-responsive">
       <table class="table table-hover">

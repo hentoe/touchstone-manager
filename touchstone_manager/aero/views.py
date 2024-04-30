@@ -1,4 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
@@ -76,3 +78,11 @@ class MeasurementDetailView(LoginRequiredMixin, DetailView):
 
 
 measurement_detail_view = MeasurementDetailView.as_view()
+
+
+class MaterialCreateView(LoginRequiredMixin, CreateView):
+    """Create Material Instance"""
+
+    model = Material
+    fields = ["name", "short_name", "description"]
+    success_url = reverse_lazy("aero:materials")

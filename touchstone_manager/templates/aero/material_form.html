@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {% trans "New Material" %}
+{% endblock title %}
+{% block content %}
+  <h1>{% trans "Create New Material" %}</h1>
+  <form class="py-4" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">{% trans "Submit" %}</button>
+  </form>
+{% endblock content %}
