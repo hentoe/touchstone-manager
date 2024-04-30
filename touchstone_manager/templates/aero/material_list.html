@@ -26,7 +26,10 @@
           {% for obj in object_list %}
             <tr>
               <th>{{ obj.id }}</th>
-              <td>{{ obj.name }}</td>
+              <td>
+                <a class="text-black link-underline link-underline-opacity-0"
+                   href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
+              </td>
               <td>{{ obj.description }}</td>
             </tr>
           {% endfor %}

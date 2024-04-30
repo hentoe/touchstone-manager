@@ -1,9 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
+from django.views.generic import DeleteView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
+from django.views.generic import UpdateView
 
 from .models import Material
 from .models import MaterialSample
@@ -86,3 +89,31 @@ class MaterialCreateView(LoginRequiredMixin, CreateView):
     model = Material
     fields = ["name", "short_name", "description"]
     success_url = reverse_lazy("aero:materials")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Create New Material")
+        return context
+
+
+class MaterialUpdateView(LoginRequiredMixin, UpdateView):
+    """Update Material Instance"""
+
+    model = Material
+    fields = ["name", "short_name", "description"]
+    success_url = reverse_lazy("aero:materials")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Update Material")
+        return context
+
+
+class MaterialDeleteView(LoginRequiredMixin, DeleteView):
+    model = Material
+    success_url = reverse_lazy("aero:materials")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Confirm delete"
+        return context
