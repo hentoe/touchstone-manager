@@ -22,6 +22,35 @@
             {% endif %}
           </div>
         </div>
+        <div class="my-5">
+          <h2>{% trans "Samples" %}</h2>
+          {% if object.materialsample_set %}
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>{% trans "Sample Number" %}</th>
+                    <th>{% trans "Measurement" %}</th>
+                    <th>{% trans "Measurements" %}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for sample in object.materialsample_set.all %}
+                    <tr>
+                      <td>{{ sample.sample_number }}:</td>
+                      <td>
+                        <a href="{{ sample.get_absolute_url }}">{{ sample.name }}</a>
+                      </td>
+                      <td>{{ sample.measurement_set.count }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <p>There are no measurement files.</p>
+          {% endif %}
+        </div>
         <div class="d-flex justify-content-start gap-2 mt-4">
           {% if perms.aero.add_material %}
             <a class="btn btn-primary"

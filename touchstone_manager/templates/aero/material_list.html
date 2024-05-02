@@ -20,6 +20,7 @@
             <th scope="col">#</th>
             <th scope="col">{% trans "Name" %}</th>
             <th scope="col">{% trans "Description" %}</th>
+            <th scope="col">{% trans "Samples" %}</th>
           </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@
                    href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
               </td>
               <td>{{ obj.description }}</td>
+              <td>{{ obj.materialsample_set.count }}</td>
             </tr>
           {% endfor %}
         </tbody>
