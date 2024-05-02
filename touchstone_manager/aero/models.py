@@ -3,6 +3,7 @@ from pathlib import Path
 
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.timezone import get_default_timezone
 from django.utils.translation import gettext_lazy as _
 from skrf import Network
@@ -73,7 +74,14 @@ class Measurement(TimeStampedModel):
         on_delete=models.CASCADE,
         verbose_name=_("Device under Test"),
     )
-    measurement_date = models.DateTimeField(_("Measurement date"))
+    measurement_date = models.DateTimeField(
+        default=timezone.now,
+        verbose_name=_("Measurement date and time"),
+        help_text=_(
+            "Initially set to the current date and time. "
+            "Will be updated with the date and time from the imported file.",
+        ),
+    )
     measurement_file = models.FileField(
         upload_to="uploads/measurements/",
         blank=True,
