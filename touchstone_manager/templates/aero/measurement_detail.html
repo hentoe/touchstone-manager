@@ -46,7 +46,7 @@
           </tr>
           <tr>
             <th>{% trans "Mean S21" %}</th>
-            <th>{{ object.mean_s21 }} dB</th>
+            <th>{{ object.mean_s21|floatformat:2 }} dB</th>
           </tr>
         </tbody>
       </table>
