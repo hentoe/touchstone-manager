@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-02 10:09+0200\n"
+"POT-Creation-Date: 2024-05-02 12:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hendrik Tödter <hendrik.toedter@tu-dresden.de>\n"
 "Language-Team: Deutsch <LL@li.org>\n"
@@ -166,8 +166,8 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: touchstone_manager/templates/aero/material_confirm_delete.html:15
-#: touchstone_manager/templates/aero/material_detail.html:61
-#: touchstone_manager/templates/aero/materialsample_detail.html:83
+#: touchstone_manager/templates/aero/material_detail.html:32
+#: touchstone_manager/templates/aero/materialsample_detail.html:55
 #: touchstone_manager/templates/aero/measurement_detail.html:65
 msgid "Delete"
 msgstr "Löschen"
@@ -180,26 +180,32 @@ msgstr "Materialdetails"
 msgid "No description provided"
 msgstr "Keine Beschreibung vorhanden"
 
-#: touchstone_manager/templates/aero/material_detail.html:26
+#: touchstone_manager/templates/aero/material_detail.html:28
+#: touchstone_manager/templates/aero/materialsample_detail.html:51
+#: touchstone_manager/templates/aero/measurement_detail.html:61
+msgid "Update"
+msgstr "Bearbeiten"
+
+#: touchstone_manager/templates/aero/material_detail.html:36
 #: touchstone_manager/templates/aero/material_list.html:23
 #: touchstone_manager/templates/base.html:59
 #: touchstone_manager/templates/pages/home.html:26
 msgid "Samples"
 msgstr "Proben"
 
-#: touchstone_manager/templates/aero/material_detail.html:32
+#: touchstone_manager/templates/aero/material_detail.html:42
 #: touchstone_manager/templates/aero/materialsample_detail.html:25
 #: touchstone_manager/templates/aero/measurement_detail.html:28
 msgid "Sample Number"
 msgstr "Probennummer"
 
-#: touchstone_manager/templates/aero/material_detail.html:33
-#: touchstone_manager/templates/aero/materialsample_detail.html:56
+#: touchstone_manager/templates/aero/material_detail.html:43
+#: touchstone_manager/templates/aero/materialsample_detail.html:66
 msgid "Measurement"
 msgstr "Messung"
 
-#: touchstone_manager/templates/aero/material_detail.html:34
-#: touchstone_manager/templates/aero/materialsample_detail.html:49
+#: touchstone_manager/templates/aero/material_detail.html:44
+#: touchstone_manager/templates/aero/materialsample_detail.html:59
 #: touchstone_manager/templates/aero/materialsample_list.html:26
 #: touchstone_manager/templates/aero/measurement_list.html:6
 #: touchstone_manager/templates/base.html:62
@@ -207,11 +213,9 @@ msgstr "Messung"
 msgid "Measurements"
 msgstr "Messungen"
 
-#: touchstone_manager/templates/aero/material_detail.html:57
-#: touchstone_manager/templates/aero/materialsample_detail.html:79
-#: touchstone_manager/templates/aero/measurement_detail.html:61
-msgid "Update"
-msgstr "Bearbeiten"
+#: touchstone_manager/templates/aero/material_detail.html:67
+msgid "Add Sample"
+msgstr "Probe hinzufügen"
 
 #: touchstone_manager/templates/aero/material_form.html:14
 #: touchstone_manager/templates/aero/measurement_form.html:14
@@ -237,13 +241,14 @@ msgstr "Name"
 
 #: touchstone_manager/templates/aero/material_list.html:42
 #: touchstone_manager/templates/aero/materialsample_list.html:49
-#: touchstone_manager/templates/aero/measurement_list.html:45
+#: touchstone_manager/templates/aero/measurement_list.html:63
 msgid "No objects in list."
 msgstr "Keine Objekte in der Liste"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:10
-msgid "Material Sample Details"
-msgstr "Materialdetails"
+#| msgid "Material Sample Details"
+msgid "Sample Details"
+msgstr "Probendetails"
 
 #: touchstone_manager/templates/aero/materialsample_detail.html:33
 #: touchstone_manager/templates/aero/materialsample_list.html:23
@@ -262,16 +267,20 @@ msgstr "Infiltrationen"
 msgid "Weight"
 msgstr "Gewicht"
 
-#: touchstone_manager/templates/aero/materialsample_detail.html:55
+#: touchstone_manager/templates/aero/materialsample_detail.html:65
 #: touchstone_manager/templates/aero/measurement_list.html:24
 msgid "Day of measurement"
 msgstr "Tag der Messung"
 
-#: touchstone_manager/templates/aero/materialsample_detail.html:57
+#: touchstone_manager/templates/aero/materialsample_detail.html:67
 #: touchstone_manager/templates/aero/measurement_detail.html:48
 #: touchstone_manager/templates/aero/measurement_list.html:23
 msgid "Mean S21"
 msgstr "Mittlere Dämpfung"
+
+#: touchstone_manager/templates/aero/materialsample_detail.html:89
+msgid "Add Measurement"
+msgstr "Messung hinzufügen"
 
 #: touchstone_manager/templates/aero/materialsample_list.html:9
 msgid "List of Material Samples"
@@ -300,6 +309,10 @@ msgstr "Probennummer"
 #: touchstone_manager/templates/aero/measurement_list.html:22
 msgid "Sample"
 msgstr "Proben"
+
+#: touchstone_manager/templates/aero/measurement_list.html:54
+msgid "Add"
+msgstr "Hinzufügen"
 
 #: touchstone_manager/templates/allauth/layouts/entrance.html:13
 #: touchstone_manager/templates/base.html:86
