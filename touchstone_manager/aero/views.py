@@ -50,6 +50,9 @@ class MaterialListView(LoginRequiredMixin, ListView):
             if "materialsample" in fields:
                 fields.remove("materialsample")
                 fields.append("sample_count")
+            if "-materialsample" in fields:
+                fields.remove("-materialsample")
+                fields.append("-sample_count")
             queryset = queryset.order_by(*fields)
         return queryset
 
