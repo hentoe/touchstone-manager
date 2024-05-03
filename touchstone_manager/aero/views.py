@@ -44,16 +44,14 @@ class MaterialListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = queryset.annotate(sample_count=Count("materialsample"))
-        ordering = self.request.GET.get("ordering", "name")
-        if ordering == "materialsample":
-            queryset = queryset.order_by("-sample_count")
-        else:
-            queryset = queryset.order_by(ordering)
+        ordering = self.request.GET.get("ordering", "id")
+        if ordering:
+            fields = [field.strip() for field in ordering.split(",")]
+            if "materialsample" in fields:
+                fields.remove("materialsample")
+                fields.append("sample_count")
+            queryset = queryset.order_by(*fields)
         return queryset
-
-    def get_ordering(self):
-        ordering = self.request.GET.get("ordering", "name")
-        return [field.strip() for field in ordering.split(",")]
 
 
 class MaterialSampleDetailView(LoginRequiredMixin, DetailView):
