@@ -140,6 +140,14 @@ class MeasurementListView(LoginRequiredMixin, ListView):
 
     model = Measurement
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        ordering = self.request.GET.get("ordering", "id")
+        if ordering:
+            fields = [field.strip() for field in ordering.split(",")]
+            queryset = queryset.order_by(*fields)
+        return queryset
+
 
 class MeasurementDetailView(LoginRequiredMixin, DetailView):
     """Show Measurement Details"""
