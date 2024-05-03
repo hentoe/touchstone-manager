@@ -18,16 +18,16 @@
         <thead>
           <tr>
             <th scope="col">
-              <a href="?ordering=id">#</a>
+              <a href="?ordering={% if request.GET.ordering == 'id' %}-{% endif %}id">#</a>
             </th>
             <th scope="col">
-              <a href="?ordering=name">{% trans "Name" %}</a>
+              <a href="?ordering={% if request.GET.ordering == 'name' %}-{% endif %}name">{% trans "Name" %}</a>
             </th>
             <th scope="col">
-              <a href="?ordering=description">{% trans "Description" %}</a>
+              <a href="?ordering={% if request.GET.ordering == 'description' %}-{% endif %}description">{% trans "Description" %}</a>
             </th>
             <th scope="col">
-              <a href="?ordering=materialsample">{% trans "Samples" %}</a>
+              <a href="?ordering={% if request.GET.ordering == 'materialsample' %}-{% endif %}materialsample">{% trans "Samples" %}</a>
             </th>
           </tr>
         </thead>
