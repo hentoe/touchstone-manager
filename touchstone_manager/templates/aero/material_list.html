@@ -17,10 +17,18 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">{% trans "Name" %}</th>
-            <th scope="col">{% trans "Description" %}</th>
-            <th scope="col">{% trans "Samples" %}</th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'id' %}-{% endif %}id">#</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'name' %}-{% endif %}name">{% trans "Name" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'description' %}-{% endif %}description">{% trans "Description" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'materialsample' %}-{% endif %}materialsample">{% trans "Samples" %}</a>
+            </th>
           </tr>
         </thead>
         <tbody>
