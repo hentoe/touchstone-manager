@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
@@ -39,6 +40,20 @@ class MaterialListView(LoginRequiredMixin, ListView):
     """List all Materials"""
 
     model = Material
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.annotate(sample_count=Count("materialsample"))
+        ordering = self.request.GET.get("ordering", "name")
+        if ordering == "materialsample":
+            queryset = queryset.order_by("-sample_count")
+        else:
+            queryset = queryset.order_by(ordering)
+        return queryset
+
+    def get_ordering(self):
+        ordering = self.request.GET.get("ordering", "name")
+        return [field.strip() for field in ordering.split(",")]
 
 
 class MaterialSampleDetailView(LoginRequiredMixin, DetailView):

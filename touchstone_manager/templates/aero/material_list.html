@@ -17,10 +17,18 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">{% trans "Name" %}</th>
-            <th scope="col">{% trans "Description" %}</th>
-            <th scope="col">{% trans "Samples" %}</th>
+            <th scope="col">
+              <a href="?ordering=id">#</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering=name">{% trans "Name" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering=description">{% trans "Description" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering=materialsample">{% trans "Samples" %}</a>
+            </th>
           </tr>
         </thead>
         <tbody>
