@@ -17,13 +17,27 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">{% trans "Name" %}</th>
-            <th scope="col">{% trans "Material" %}</th>
-            <th scope="col">{% trans "Thickness" %}</th>
-            <th scope="col">{% trans "Number of Infiltrations" %}</th>
-            <th scope="col">{% trans "Weight" %}</th>
-            <th scope="col">{% trans "Measurements" %}</th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'id' %}-{% endif %}id">#</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'name' %}-{% endif %}name">{% trans "Name" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'material' %}-{% endif %}material">{% trans "Material" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'thickness' %}-{% endif %}thickness">{% trans "Thickness" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'infiltrations' %}-{% endif %}infiltrations">{% trans "Number of Infiltrations" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'weight' %}-{% endif %}weight">{% trans "Weight" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'measurement' %}-{% endif %}measurement">{% trans "Measurements" %}</a>
+            </th>
           </tr>
         </thead>
         <tbody>

@@ -17,11 +17,21 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">{% trans "Sample number" %}</th>
-            <th scope="col">{% trans "Sample" %}</th>
-            <th scope="col">{% trans "Mean S21" %}</th>
-            <th scope="col">{% trans "Day of measurement" %}</th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'id' %}-{% endif %}id">#</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'aero_material__sample_number' %}-{% endif %}aero_material__sample_number">{% trans "Sample number" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'aero_material__name' %}-{% endif %}aero_material__name">{% trans "Sample" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'mean_s21' %}-{% endif %}mean_s21">{% trans "Mean S21" %}</a>
+            </th>
+            <th scope="col">
+              <a href="?ordering={% if request.GET.ordering == 'measurement_date' %}-{% endif %}measurement_date">{% trans "Day of measurement" %}</a>
+            </th>
             <th scope="col">{% trans "File" %}</th>
           </tr>
         </thead>

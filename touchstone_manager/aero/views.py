@@ -50,6 +50,9 @@ class MaterialListView(LoginRequiredMixin, ListView):
             if "materialsample" in fields:
                 fields.remove("materialsample")
                 fields.append("sample_count")
+            if "-materialsample" in fields:
+                fields.remove("-materialsample")
+                fields.append("-sample_count")
             queryset = queryset.order_by(*fields)
         return queryset
 
@@ -64,6 +67,21 @@ class MaterialSampleListView(LoginRequiredMixin, ListView):
     """List all MaterialSample"""
 
     model = MaterialSample
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.annotate(measurement_count=Count("measurement"))
+        ordering = self.request.GET.get("ordering", "id")
+        if ordering:
+            fields = [field.strip() for field in ordering.split(",")]
+            if "measurement" in fields:
+                fields.remove("measurement")
+                fields.append("measurement_count")
+            if "-measurement" in fields:
+                fields.remove("-measurement")
+                fields.append("-measurement_count")
+            queryset = queryset.order_by(*fields)
+        return queryset
 
 
 class MaterialSampleCreateView(LoginRequiredMixin, CreateView):
@@ -121,6 +139,14 @@ class MeasurementListView(LoginRequiredMixin, ListView):
     """List all Measurements"""
 
     model = Measurement
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        ordering = self.request.GET.get("ordering", "id")
+        if ordering:
+            fields = [field.strip() for field in ordering.split(",")]
+            queryset = queryset.order_by(*fields)
+        return queryset
 
 
 class MeasurementDetailView(LoginRequiredMixin, DetailView):
