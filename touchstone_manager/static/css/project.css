@@ -1382,10 +1382,6 @@ select {
           justify-content: space-between;
 }
 
-.gap-2 {
-  gap: 0.5rem;
-}
-
 .gap-5 {
   gap: 1.25rem;
 }
@@ -2671,10 +2667,6 @@ select {
     -webkit-column-gap: 4rem;
        -moz-column-gap: 4rem;
             column-gap: 4rem;
-  }
-
-  .lg\:whitespace-nowrap {
-    white-space: nowrap;
   }
 
   .lg\:border-0 {

@@ -164,24 +164,19 @@
                     <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
                       {{ obj.sample_number }}
                     </td>
-                    <td class="relative lg:whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-sm font-medium sm:pr-8 lg:pr-8">
+                    <td class="relative border-b border-gray-200 py-4 pr-4 pl-3 text-sm font-medium sm:pr-8 lg:pr-8">
                       <a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
                     </td>
-                    <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                      {{ obj.material }}
-                    </td>
+                    <td class="border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ obj.material }}</td>
                     <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
                       {{ obj.thickness }} mm
                     </td>
                     <td class="border-b border-gray-200 px-3 py-4 text-sm text-gray-500 hidden lg:table-cell">{{ obj.infiltrations }}</td>
-                    <td class="border-b border-gray-200 px-3 py-4 text-sm text-gray-500">
-                      {{ obj.weight }}
-                      mg
-                    </td>
+                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">{{ obj.weight }} mg</td>
                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">
                       {{ obj.measurement_set.all.count }}
                     </td>
-                    <td class="relative whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8">
+                    <td class="relative border-b border-gray-200 py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8">
                       <a href="{% url 'aero:sample-detail' obj.id %}"
                          class="text-indigo-600 hover:text-indigo-900">{% trans "Details" %}<span class="sr-only">, {{ obj.name }}</span></a>
                     </td>
