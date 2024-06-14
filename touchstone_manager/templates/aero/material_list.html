@@ -8,7 +8,7 @@
 {% block heading %}
   {% trans "List of Materials" %}
 {% endblock heading %}
-{% block filtered_content %}
+{% block content %}
   {% if object_list %}
     <div class="px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
@@ -145,4 +145,4 @@
   {% else %}
     <p>{% trans "No objects in list." %}</p>
   {% endif %}
-{% endblock filtered_content %}
+{% endblock content %}
