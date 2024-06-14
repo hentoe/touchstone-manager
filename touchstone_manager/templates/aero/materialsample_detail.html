@@ -7,86 +7,124 @@
 {% endblock title %}
 {% block content %}
   <div>
-    <h1>{% trans "Sample Details" %}</h1>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Key</th>
-            <th scope="col">Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{% trans "Name" %}</td>
-            <td>{{ object.name }}</td>
-          </tr>
-          <tr>
-            <td>{% trans "Sample Number" %}</td>
-            <td>{{ object.sample_number }}</td>
-          </tr>
-          <tr>
-            <td>{% trans "Material" %}</td>
-            <td>{{ object.material.name }}</td>
-          </tr>
-          <tr>
-            <td>{% trans "Thickness" %}</td>
-            <td>{{ object.thickness }} mm</td>
-          </tr>
-          <tr>
-            <td>{% trans "Infiltrations" %}</td>
-            <td>{{ object.infiltrations }}</td>
-          </tr>
-          <tr>
-            <td>{% trans "Weight" %}</td>
-            <td>{{ object.weight }} mg</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="d-flex justify-content-start gap-2 mt-4">
-    {% if perms.aero.add_materialsample %}
-      <a class="btn btn-primary"
-         href="{% url 'aero:sample-update' pk=object.id %}">{% trans "Update" %}</a>
-    {% endif %}
-    {% if perms.aero.delete_materialsample %}
-      <a class="btn btn-danger"
-         href="{% url 'aero:sample-delete' pk=object.id %}">{% trans "Delete" %}</a>
-    {% endif %}
-  </div>
-  <div class="my-5">
-    <h2>{% trans "Measurements" %}</h2>
-    {% if object.measurement_set %}
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>{% trans "Day of measurement" %}</th>
-              <th>{% trans "Measurement" %}</th>
-              <th>{% trans "Mean S21" %}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for measurement in object.measurement_set.all %}
-              <tr>
-                <td>{{ measurement.measurement_date }}:</td>
-                <td>
-                  <a href="{{ measurement.get_absolute_url }}">{{ measurement.aero_material }}</a>
-                </td>
-                <td>{{ measurement.mean_s21 }} dB</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+    <div class="sm:flex sm:items-center">
+      <div class="px-4 md:px-0 sm:flex-auto">
+        <h1 class="text-base font-semibold leading-6 text-gray-900">{% trans "Sample Details" %}</h1>
+        <p class="mt-2 text-sm text-gray-700">{% trans "Sample details and related measurements." %}</p>
       </div>
-    {% else %}
-      <p>There are no measurement files.</p>
-    {% endif %}
-    <div class="d-flex justify-content-start gap-2 mt-4">
-      {% if perms.aero.add_measurement %}
-        <a class="btn btn-primary" href="{% url 'aero:measurement-create' %}">{% trans "Add Measurement" %}</a>
+      {% if perms.aero.update_materialsample %}
+        <div class="mt-4 sm:mt-0 px-4 sm:flex-none">
+          <a href="{% url 'aero:sample-update' pk=object.id %}"
+             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            {% trans "Edit" %}
+          </a>
+        </div>
       {% endif %}
+      {% if perms.aero.delete_materialsample %}
+        <div class="mt-4 px-4 md:pl-0 md:pl-4 sm:mt-0 sm:flex-none">
+          <a href="{% url 'aero:sample-delete' pk=object.id %}"
+             class="block rounded-md bg-red-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+            {% trans "Delete" %}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+    <div class="mt-6">
+      <dl class="grid grid-cols-1 sm:grid-cols-2">
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Name" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.name }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Sample number" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.sample_number }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Material" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.material }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Thickness" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.thickness }} mm
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Number of Infiltrations" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.infiltrations }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Weight" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.weight }} mg
+          </dd>
+        </div>
+        <!-- Table for the measurements -->
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900 flex justify-between">
+            <h2>{% trans "Measurements" %}</h2>
+            {% if perms.aero.add_measurement %}
+              <a href="{% url 'aero:measurement-create' %}"
+                 class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                {% trans "Add Measurement" %}
+              </a>
+            {% endif %}
+          </dt>
+          <dd class="mt-2 text-sm text-gray-900">
+            <div class="p-6 rounded-md border border-gray-200">
+              <table class="min-w-full border-separate border-spacing-0">
+                <thead>
+                  <tr>
+                    <th scope="col"
+                        class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">
+                      {% trans "Day of Measurement" %}
+                    </th>
+                    <th scope="col"
+                        class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">
+                      {% trans "Measurement" %}
+                    </th>
+                    <th scope="col"
+                        class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">
+                      {% trans "Mean S21" %}
+                    </th>
+                    <th scope="col"
+                        class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8">
+                      <span class="sr-only">{% trans "Details" %}</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for obj in object.measurement_set.all %}
+                    <tr>
+                      <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                        {{ obj.measurement_date }}
+                      </td>
+                      <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                        {{ obj.aero_material }}
+                      </td>
+                      <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                        {{ obj.mean_s21 }}
+                      </td>
+                      <td class="relative whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8">
+                        <a href="{{ obj.get_absolute_url }}"
+                           class="text-indigo-600 hover:text-indigo-900">{% trans "Details" %}<span class="sr-only">, {{ obj }}</span></a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </dd>
+        </div>
+      </dl>
     </div>
   </div>
 {% endblock content %}

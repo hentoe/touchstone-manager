@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
@@ -9,6 +10,7 @@ from django.views.generic import ListView
 from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 
+from .forms import MaterialSampleFilterForm
 from .models import Material
 from .models import MaterialSample
 from .models import Measurement
@@ -44,7 +46,16 @@ class MaterialListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = queryset.annotate(sample_count=Count("materialsample"))
-        ordering = self.request.GET.get("ordering", "id")
+        ordering = self.request.GET.get("ordering", "name")
+
+        query = self.request.GET.get("q")
+        if query:
+            queryset = queryset.filter(
+                Q(name__icontains=query)
+                | Q(short_name__icontains=query)
+                | Q(description__icontains=query),
+            )
+
         if ordering:
             fields = [field.strip() for field in ordering.split(",")]
             if "materialsample" in fields:
@@ -71,7 +82,24 @@ class MaterialSampleListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = queryset.annotate(measurement_count=Count("measurement"))
-        ordering = self.request.GET.get("ordering", "id")
+        ordering = self.request.GET.get("ordering", "sample_number")
+
+        form = self.get_form()
+        if not form.is_valid():
+            return MaterialSample.objects.all()
+
+        queryset = self.filter_by_form_fields(queryset, form)
+
+        query = self.request.GET.get("q")
+        if query:
+            queryset = queryset.filter(
+                Q(name__icontains=query)
+                | Q(material__name__icontains=query)
+                | Q(thickness__icontains=query)
+                | Q(infiltrations__icontains=query)
+                | Q(weight__icontains=query),
+            )
+
         if ordering:
             fields = [field.strip() for field in ordering.split(",")]
             if "measurement" in fields:
@@ -81,7 +109,48 @@ class MaterialSampleListView(LoginRequiredMixin, ListView):
                 fields.remove("-measurement")
                 fields.append("-measurement_count")
             queryset = queryset.order_by(*fields)
+
         return queryset
+
+    def get_form(self):
+        return MaterialSampleFilterForm(self.request.GET or None)
+
+    def filter_by_form_fields(self, queryset, form):
+        if form.cleaned_data.get("material"):
+            material_ids = form.cleaned_data["material"]
+            queryset = queryset.filter(material__id__in=material_ids)
+
+        if form.cleaned_data.get("thickness_from"):
+            queryset = queryset.filter(
+                thickness__gte=form.cleaned_data["thickness_from"],
+            )
+        if form.cleaned_data.get("thickness_to"):
+            queryset = queryset.filter(
+                thickness__lte=form.cleaned_data["thickness_to"],
+            )
+        if form.cleaned_data.get("weight_from"):
+            queryset = queryset.filter(
+                weight__gte=form.cleaned_data["weight_from"],
+            )
+        if form.cleaned_data.get("weight_to"):
+            queryset = queryset.filter(
+                weight__lte=form.cleaned_data["weight_to"],
+            )
+        if form.cleaned_data.get("infiltrations_from"):
+            queryset = queryset.filter(
+                infiltrations__gte=form.cleaned_data["infiltrations_from"],
+            )
+        if form.cleaned_data.get("infiltrations_to"):
+            queryset = queryset.filter(
+                infiltrations__lte=form.cleaned_data["infiltrations_to"],
+            )
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter_form"] = self.get_form()
+        return context
 
 
 class MaterialSampleCreateView(LoginRequiredMixin, CreateView):

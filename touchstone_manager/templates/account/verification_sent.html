@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account allauth %}
+
+{% block title %}
+  {% trans "Verify Your Email Address" %}
+{% endblock title %}
+{% block bodyclass %}
+  bg-gray-50
+{% endblock bodyclass %}
+{% block body %}
+  <div class="flex min-h-full justify-center px-4 py-12 sm:px-6 lg:px-8">
+    <div class="w-full max-w-2xl space-y-10">
+      <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h1 class="mt-5 text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            {% trans "Verify Your Email Address" %}
+          </h1>
+          <div class="mt-2 max-w-2xl text-sm text-gray-500">
+            <p class="py-4 text-sm text-gray-600">
+              {% blocktrans %}We have sent an email to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification email in your main inbox, check your spam folder. Please contact us if you do not receive the verification email within a few minutes.{% endblocktrans %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

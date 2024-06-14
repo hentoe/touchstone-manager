@@ -1,6 +1,6 @@
 {% load allauth %}
 
-<span class="badge {% if 'success' in attrs.tags %}bg-success{% endif %} {% if 'warning' in attrs.tags %}bg-warning{% endif %} {% if 'secondary' in attrs.tags %}bg-secondary{% endif %} {% if 'danger' in attrs.tags %}bg-danger{% endif %} {% if 'primary' in attrs.tags %}bg-primary{% endif %}">
+<span class="rounded-full text-white p-2 text-xs {% if 'success' in attrs.tags %}bg-green-500{% endif %} {% if 'warning' in attrs.tags %}bg-yellow-500{% endif %} {% if 'secondary' in attrs.tags %}bg-gray-500{% endif %} {% if 'danger' in attrs.tags %}bg-red-500{% endif %} {% if 'primary' in attrs.tags %}bg-indigo-500{% endif %}">
   {% slot %}
 {% endslot %}
 </span>

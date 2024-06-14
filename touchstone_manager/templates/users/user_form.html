@@ -1,21 +1,27 @@
-{% extends "base.html" %}
+{% extends "users/base_settings.html" %}
 
-{% load crispy_forms_tags %}
+{% load i18n %}
 
 {% block title %}
   {{ user.name }}
 {% endblock title %}
 {% block content %}
-  <h1>{{ user.name }}</h1>
-  <form class="form-horizontal"
-        method="post"
-        action="{% url 'users:update' %}">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <div class="control-group">
-      <div class="controls">
-        <button type="submit" class="btn btn-primary">Update</button>
+  <div class="max-w-auto space-y-8 sm:px-6 lg:px-0 lg:max-w-2xl lg:mx-auto">
+    <form method="post" action="{% url 'users:update' %}">
+      {% csrf_token %}
+      <div class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
+        <label for="id_name" class="block text-xs font-medium text-gray-900">{% trans "Full name" %}</label>
+        <input type="text"
+               name="name"
+               id="id_name"
+               class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+               placeholder="Jane Smith" />
       </div>
-    </div>
-  </form>
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
 {% endblock content %}

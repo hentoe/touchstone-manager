@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-{% load static %}
 
 {% block title %}
   {{ object }}
@@ -25,7 +24,7 @@
             <td></td>
           </tr>
           <tr>
-            <td>{% trans "Sample Number" %}</td>
+            <td>{% trans "Sample number" %}</td>
             <td>{{ object.aero_material.sample_number }}</td>
           </tr>
           <tr>
@@ -37,7 +36,7 @@
             <td>{{ object.aero_material.thickness }} mm</td>
           </tr>
           <tr>
-            <td>{% trans "Infiltrations" %}</td>
+            <td>{% trans "Number of Infiltrations" %}</td>
             <td>{{ object.aero_material.infiltrations }}</td>
           </tr>
           <tr>

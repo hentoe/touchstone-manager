@@ -5,48 +5,144 @@
 {% block title %}
   {% trans "Materials" %}
 {% endblock title %}
-{% block content %}
-  <h1>{% trans "List of Materials" %}</h1>
-  {% if perms.aero.add_material %}
-    <div class="py-3">
-      <a class="btn btn-primary" href="{% url 'aero:material-create' %}">{% trans "Create New Material" %}</a>
-    </div>
-  {% endif %}
+{% block heading %}
+  {% trans "List of Materials" %}
+{% endblock heading %}
+{% block filtered_content %}
   {% if object_list %}
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">
-              <a href="?ordering={% if request.GET.ordering == 'id' %}-{% endif %}id">#</a>
-            </th>
-            <th scope="col">
-              <a href="?ordering={% if request.GET.ordering == 'name' %}-{% endif %}name">{% trans "Name" %}</a>
-            </th>
-            <th scope="col">
-              <a href="?ordering={% if request.GET.ordering == 'description' %}-{% endif %}description">{% trans "Description" %}</a>
-            </th>
-            <th scope="col">
-              <a href="?ordering={% if request.GET.ordering == 'materialsample' %}-{% endif %}materialsample">{% trans "Samples" %}</a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for obj in object_list %}
-            <tr>
-              <th>{{ obj.id }}</th>
-              <td>
-                <a class="text-black link-underline link-underline-opacity-0"
-                   href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
-              </td>
-              <td>{{ obj.description }}</td>
-              <td>{{ obj.materialsample_set.count }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <div class="px-4 sm:px-6 lg:px-8">
+      <div class="sm:flex sm:items-center">
+        <div class="sm:flex-auto">
+          <h1 class="text-base font-semibold leading-6 text-gray-900"></h1>
+          <p class="mt-2 text-sm text-gray-700">{% trans "A list of all materials in the database." %}</p>
+        </div>
+        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+          {% if perms.aero.add_material %}
+            <a href="{% url 'aero:material-create' %}"
+               class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{% trans "Create New Material" %}</a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="mt-8 flow-root">
+        <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 align-middle">
+            <table class="min-w-full border-separate border-spacing-0">
+              <thead>
+                <tr x-data="{ ordering: '{{ request.GET.ordering }}' }">
+                  <th scope="col"
+                      class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">
+                    <a class="group inline-flex"
+                       href="?ordering={% if request.GET.ordering == 'id' %}-{% endif %}id">
+                      #
+                      <span :class="ordering === '-id' || ordering === 'id' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
+                            class="ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                        <svg class="h-5 w-5"
+                             :class="ordering === 'id' ? 'rotate-180' : ''"
+                             viewBox="0 0 20 20"
+                             fill="currentColor"
+                             aria-hidden="true">
+                          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                    </a>
+                  </th>
+                  <th scope="col"
+                      class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">
+                    <a class="group inline-flex"
+                       href="?ordering={% if request.GET.ordering == 'name' %}-{% endif %}name">
+                      {% trans "Name" %}
+                      <span :class="ordering === '-name' || ordering === 'name' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
+                            class="ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                        <svg :class="ordering === 'name' ? 'rotate-180' : ''"
+                             class="h-5 w-5"
+                             viewBox="0 0 20 20"
+                             fill="currentColor"
+                             aria-hidden="true">
+                          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                    </a>
+                  </th>
+                  <th scope="col"
+                      class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">
+                    <a class="group inline-flex"
+                       href="?ordering={% if request.GET.ordering == 'description' %}-{% endif %}description">
+                      {% trans "Description" %}
+                      <span :class="ordering === '-description' || ordering === 'description' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
+                            class="ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                        <svg :class="ordering === 'description' ? 'rotate-180' : ''"
+                             class="h-5 w-5"
+                             viewBox="0 0 20 20"
+                             fill="currentColor"
+                             aria-hidden="true">
+                          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                    </a>
+                  </th>
+                  <th scope="col"
+                      class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">
+                    <a class="group inline-flex"
+                       href="?ordering={% if request.GET.ordering == 'materialsample' %}-{% endif %}materialsample">
+                      {% trans "Samples" %}
+                      <span :class="ordering === '-materialsample' || ordering === 'materialsample' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
+                            class="ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                        <svg :class="ordering === 'materialsample' ? 'rotate-180' : ''"
+                             class="h-5 w-5"
+                             viewBox="0 0 20 20"
+                             fill="currentColor"
+                             aria-hidden="true">
+                          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                    </a>
+                  </th>
+                  <th scope="col"
+                      class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8">
+                    <span class="sr-only">{% trans "Details" %}</span>
+                  </th>
+                  {% if perms.aero.update_material %}
+                    <th scope="col"
+                        class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8">
+                      <span class="sr-only">{% trans "Edit" %}</span>
+                    </th>
+                  {% endif %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object_list %}
+                  <tr>
+                    <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                      {{ obj.id }}
+                    </td>
+                    <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                      <a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
+                    </td>
+                    <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                      {{ obj.description }}
+                    </td>
+                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">
+                      {{ obj.materialsample_set.count }}
+                    </td>
+                    <td class="relative whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8">
+                      <a href="{% url 'aero:material-detail' obj.id %}"
+                         class="text-indigo-600 hover:text-indigo-900">{% trans "Details" %}<span class="sr-only">, {{ obj.name }}</span></a>
+                    </td>
+                    {% if perms.aero.update_material %}
+                      <td class="relative whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8">
+                        <a href="{% url 'aero:material-update' obj.id %}"
+                           class="text-indigo-600 hover:text-indigo-900">{% trans "Edit" %}<span class="sr-only">, {{ obj.name }}</span></a>
+                      </td>
+                    {% endif %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   {% else %}
     <p>{% trans "No objects in list." %}</p>
   {% endif %}
-{% endblock content %}
+{% endblock filtered_content %}
