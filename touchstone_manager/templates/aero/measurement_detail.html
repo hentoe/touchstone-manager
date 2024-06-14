@@ -7,62 +7,80 @@
 {% endblock title %}
 {% block content %}
   <div>
-    <h1>{% trans "Measurement Details" %}</h1>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Key</th>
-            <th scope="col">Value</th>
-            <td></td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{% trans "Name of sample" %}</td>
-            <td>{{ object.aero_material.name }}</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>{% trans "Sample number" %}</td>
-            <td>{{ object.aero_material.sample_number }}</td>
-          </tr>
-          <tr>
-            <td>{% trans "Material" %}</td>
-            <td>{{ object.aero_material.material.name }}</td>
-          </tr>
-          <tr>
-            <td>{% trans "Thickness" %}</td>
-            <td>{{ object.aero_material.thickness }} mm</td>
-          </tr>
-          <tr>
-            <td>{% trans "Number of Infiltrations" %}</td>
-            <td>{{ object.aero_material.infiltrations }}</td>
-          </tr>
-          <tr>
-            <td>{% trans "Weight" %}</td>
-            <td>{{ object.aero_material.weight }} mg</td>
-          </tr>
-          <tr>
-            <th>{% trans "Mean S21" %}</th>
-            <th>{{ object.mean_s21|floatformat:2 }} dB</th>
-          </tr>
-        </tbody>
-      </table>
+    <div class="sm:flex sm:items-center">
+      <div class="px-4 md:px-0 sm:flex-auto">
+        <h1 class="text-base font-semibold leading-6 text-gray-900">{% trans "Measurement Details" %}</h1>
+        <p class="mt-2 text-sm text-gray-700">
+          {% blocktrans with object.aero_material.name as name and object.measurement_date.date as date %}
+            Measurement results of sample <strong>{{ name }}</strong> performed on <strong>{{ date }}</strong>.
+          {% endblocktrans %}
+        </p>
+        <p class="mt-2 text-sm text-gray-700">
+          {% blocktrans with object.mean_s21|floatformat:2 as mean_s21 %}
+            The mean S21 value is <strong>{{ mean_s21 }} dB</strong>.
+          {% endblocktrans %}
+        </p>
+      </div>
+      {% if perms.aero.update_measurement %}
+        <div class="mt-4 sm:mt-0 px-4 sm:flex-none">
+          <a href="{% url 'aero:measurement-update' pk=object.id %}"
+             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            {% trans "Edit" %}
+          </a>
+        </div>
+      {% endif %}
+      {% if perms.aero.delete_measurement %}
+        <div class="mt-4 px-4 md:pl-0 md:pl-4 sm:mt-0 sm:flex-none">
+          <a href="{% url 'aero:measurement-delete' pk=object.id %}"
+             class="block rounded-md bg-red-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+            {% trans "Delete" %}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+    <div class="mt-6">
+      <dl class="grid grid-cols-1 sm:grid-cols-3">
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Name of sample" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.aero_material.name }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Sample number" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.aero_material.sample_number }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Material" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.aero_material.material }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Thickness" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.aero_material.thickness }} mm
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Number of Infiltrations" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.aero_material.infiltrations }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Weight" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.aero_material.weight }} mg
+          </dd>
+        </div>
+      </dl>
     </div>
   </div>
   <div>
     <canvas id="s21Chart" width="" height="vh-1ßß"></canvas>
-  </div>
-  <div class="d-flex justify-content-start gap-2 mt-4">
-    {% if perms.aero.add_measurement %}
-      <a class="btn btn-primary"
-         href="{% url 'aero:measurement-update' pk=object.id %}">{% trans "Update" %}</a>
-    {% endif %}
-    {% if perms.aero.delete_measurement %}
-      <a class="btn btn-danger"
-         href="{% url 'aero:measurement-delete' pk=object.id %}">{% trans "Delete" %}</a>
-    {% endif %}
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
