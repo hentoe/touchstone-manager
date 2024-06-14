@@ -4,31 +4,40 @@
 {% load static %}
 
 {% block body %}
-  <div class="container">
-    <div class="d-flex justify-content-center align-items-center vh-100">
-      <div class="text-center">
-        <h1 class="text-white display-1 fw-bolder">Touchstone Manager</h1>
-        <p class="text-white-50 display-6 mb-0">{% trans "Organize your touchstone files" %}</p>
+  <div class="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat">
+    <div class="flex-grow bg-gray-500 bg-opacity-25 flex items-center justify-center">
+      <div class="text-center p-8">
+        <h1 class="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-6">Touchstone Manager</h1>
+        <p class="text-gray-50 text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-8">
+          {% trans "Organize your touchstone files" %}
+        </p>
         {% if ACCOUNT_ALLOW_REGISTRATION %}
-          <a class="btn btn-outline-light my-5" href="{% url "account_signup" %}">{% translate "Sign Up" %}</a>
+          <a class="border-2 rounded-lg text-white hover:text-black hover:bg-white transition duration-300 ease-in-out my-2 p-2"
+             href="{% url "account_signup" %}">{% translate "Sign up" %}</a>
         {% endif %}
-        <a class="btn btn-outline-light my-5" href="{% url "account_login" %}">{% translate "Sign In" %}</a>
+        <a class="border-2 rounded-lg text-white hover:text-black hover:bg-white transition duration-300 ease-in-out my-2 p-2"
+           href="{% url "account_login" %}">{% translate "Sign in" %}</a>
       </div>
     </div>
+    <footer class="mt-auto py-3 text-white text-center bg-gray-700">
+      <div class="mx-auto px-6 sm:px-12 md:px-16 lg:px-20 xl:px-24 2xl:px-28">
+        <div class="flex justify-between">
+          <a href="https://tu-dresden.de/impressum"
+             class="text-white hover:text-gray-300 transition duration-300 ease-in-out"
+             aria-label="Legal Notice">{% trans "Legal Notice" %}</a>
+          <a href="https://tu-dresden.de/impressum#ck_datenschutz"
+             class="text-white hover:text-gray-300 transition duration-300 ease-in-out"
+             aria-label="Privacy Policy">{% trans "Privacy Policy" %}</a>
+        </div>
+      </div>
+    </footer>
   </div>
-  <footer class="footer bg-tu-blue mt-auto py-3 text-white text-center">
-    <div class="container">
-      <div class="d-flex justify-content-between">
-        <a href="https://tu-dresden.de/impressum" class="text-white">{% trans "Legal Notice" %}</a>
-        <a href="https://tu-dresden.de/impressum#ck_datenschutz"
-           class="text-white">{% trans "Privacy Policy" %}</a>
-      </div>
-    </div>
-  </footer>
   <style>
     body {
       background-image: url('https://images.unsplash.com/photo-1581091878330-f5cf2a3b1564?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
       background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
     }
   </style>
 {% endblock body %}

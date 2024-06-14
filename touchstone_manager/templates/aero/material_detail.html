@@ -6,67 +6,98 @@
   {{ object }}
 {% endblock title %}
 {% block content %}
-  <div class="container py-5">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <h1 class="mb-4">{% trans "Material Details" %}</h1>
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{ object.name }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ object.short_name }}</h6>
-            <hr />
-            {% if object.description %}
-              <p class="card-text">{{ object.description }}</p>
-            {% else %}
-              <p class="card-text">{% trans "No description provided" %}</p>
-            {% endif %}
-          </div>
+  <div>
+    <div class="sm:flex sm:items-center">
+      <div class="sm:flex-auto">
+        <h1 class="text-base font-semibold leading-6 text-gray-900">{% trans "Material Details" %}</h1>
+        <p class="mt-2 text-sm text-gray-700">{% trans "Material details and related samples." %}</p>
+      </div>
+      {% if perms.aero.update_materialsample %}
+        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+          <a href="{% url 'aero:material-update' pk=object.id %}"
+             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            {% trans "Edit" %}
+          </a>
         </div>
-        <div class="d-flex justify-content-start gap-2 mt-4">
-          {% if perms.aero.add_material %}
-            <a class="btn btn-primary"
-               href="{% url 'aero:material-update' pk=object.id %}">{% trans "Update" %}</a>
-          {% endif %}
-          {% if perms.aero.delete_material %}
-            <a class="btn btn-danger"
-               href="{% url 'aero:material-delete' pk=object.id %}">{% trans "Delete" %}</a>
-          {% endif %}
+      {% endif %}
+      {% if perms.aero.delete_materialsample %}
+        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+          <a href="{% url 'aero:material-delete' pk=object.id %}"
+             class="block rounded-md bg-red-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            {% trans "Delete" %}
+          </a>
         </div>
-        <div class="my-5">
-          <h2>{% trans "Samples" %}</h2>
-          {% if object.materialsample_set %}
-            <div class="table-responsive">
-              <table class="table">
+      {% endif %}
+    </div>
+    <div class="mt-6">
+      <dl class="grid grid-cols-1 sm:grid-cols-2">
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Name" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.name }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Short name" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.short_name }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Description" %}</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            {{ object.description }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">{% trans "Samples" %}</dt>
+          <dd class="mt-2 text-sm text-gray-900">
+            <div class="p-6 rounded-md border border-gray-200">
+              <table class="min-w-full border-separate border-spacing-0">
                 <thead>
                   <tr>
-                    <th>{% trans "Sample Number" %}</th>
-                    <th>{% trans "Measurement" %}</th>
-                    <th>{% trans "Measurements" %}</th>
+                    <th scope="col"
+                        class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">
+                      {% trans "Sample number" %}
+                    </th>
+                    <th scope="col"
+                        class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">
+                      {% trans "Measurement" %}
+                    </th>
+                    <th scope="col"
+                        class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">
+                      {% trans "Measurements" %}
+                    </th>
+                    <th scope="col"
+                        class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8">
+                      <span class="sr-only">{% trans "Details" %}</span>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for sample in object.materialsample_set.all %}
                     <tr>
-                      <td>{{ sample.sample_number }}:</td>
-                      <td>
-                        <a href="{{ sample.get_absolute_url }}">{{ sample.name }}</a>
+                      <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                        {{ sample.sample_number }}
                       </td>
-                      <td>{{ sample.measurement_set.count }}</td>
+                      <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                        {{ sample.name }}
+                      </td>
+                      <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                        {{ sample.measurement_set.count }}
+                      </td>
+                      <td class="relative whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8">
+                        <a href="{{ sample.get_absolute_url }}"
+                           class="text-indigo-600 hover:text-indigo-900">{% trans "Details" %}<span class="sr-only">, {{ sample.name }}</span></a>
+                      </td>
                     </tr>
                   {% endfor %}
                 </tbody>
               </table>
             </div>
-          {% else %}
-            <p>There are no measurement files.</p>
-          {% endif %}
+          </dd>
         </div>
-        <div class="d-flex justify-content-start gap-2 mt-4">
-          {% if perms.aero.add_materialsample %}
-            <a class="btn btn-primary" href="{% url 'aero:sample-create' %}">{% trans "Add Sample" %}</a>
-          {% endif %}
-        </div>
-      </div>
+      </dl>
     </div>
   </div>
 {% endblock content %}

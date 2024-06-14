@@ -1,31 +1,52 @@
-{% extends "base.html" %}
+{% extends "users/base_settings.html" %}
 
-{% load static %}
+{% load static i18n %}
 
 {% block title %}
-  User:
-  {{ object.name }}
+  {% trans "Settings" %}
 {% endblock title %}
 {% block content %}
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h2>{{ object.name }}</h2>
+  <h1 class="sr-only">{% trans "Settings" %}</h1>
+  <main class="px-4 py-16 sm:px-6 lg:flex-auto lg:px-0 lg:py-20">
+    <div class="mx-auto max-w-2xl space-y-16 sm:space-y-20 lg:mx-0 lg:max-w-none">
+      <div>
+        <h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
+        <p class="mt-1 text-sm leading-6 text-gray-500">{% trans "This information will not be displayed publicly." %}</p>
+        <dl class="mt-6 space-y-6 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
+          <div class="pt-6 sm:flex" x-data="{ showForm: false }">
+            <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">{% trans "Full name" %}</dt>
+            <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
+              <div x-show="!showForm" class="text-gray-900">{{ user.name }}</div>
+              <button x-show="!showForm"
+                      @click="showForm = true"
+                      type="button"
+                      class="font-semibold text-indigo-600 hover:text-indigo-500">{% trans "Update" %}</button>
+              <form x-show="showForm" method="post" action="{% url 'users:update' %}">
+                {% csrf_token %}
+                <label for="id_name" class="sr-only">Name</label>
+                <input type="text"
+                       name="name"
+                       id="id_name"
+                       class="rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                       placeholder="{{ user.name }}" />
+                <button x-show="showForm"
+                        @click="showForm = false"
+                        type="submit"
+                        class="font-semibold text-indigo-600 hover:text-indigo-500">{% trans "Save" %}</button>
+              </form>
+            </dd>
+          </div>
+          <div class="pt-6 sm:flex" x-data="{ showForm: false }">
+            <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">{% trans "Email address" %}</dt>
+            <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
+              <div class="text-gray-900">{{ user.email }}</div>
+              <a href="{% url 'account_email' %}"
+                 role="button"
+                 class="font-semibold text-indigo-600 hover:text-indigo-500">{% trans "Update" %}</a>
+            </dd>
+          </div>
+        </dl>
       </div>
     </div>
-    {% if object == request.user %}
-      <!-- Action buttons -->
-      <div class="row">
-        <div class="col-sm-12">
-          <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-          <a class="btn btn-primary"
-             href="{% url 'account_email' %}"
-             role="button">E-Mail</a>
-          <a class="btn btn-primary" href="{% url 'mfa_index' %}" role="button">MFA</a>
-          <!-- Your Stuff: Custom user template urls -->
-        </div>
-      </div>
-      <!-- End Action buttons -->
-    {% endif %}
-  </div>
+  </main>
 {% endblock content %}

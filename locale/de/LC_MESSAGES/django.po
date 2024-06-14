@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 13:05+0200\n"
+"POT-Creation-Date: 2024-06-14 13:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hendrik Tödter <hendrik.toedter@tu-dresden.de>\n"
 "Language-Team: Deutsch <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgid "German"
 msgstr "Deutsch"
 
 #: touchstone_manager/aero/admin.py:17
-#: touchstone_manager/templates/aero/measurement_list.html:35
+#: touchstone_manager/templates/aero/measurement_list.html:118
 msgid "File"
 msgstr "Datei"
 
@@ -38,6 +38,50 @@ msgstr "Wichtige Daten"
 #: touchstone_manager/aero/apps.py:8
 msgid "Aero"
 msgstr "Aero"
+
+#: touchstone_manager/aero/forms.py:13 touchstone_manager/aero/models.py:48
+#: touchstone_manager/templates/aero/filters/sample_filters.html:47
+#: touchstone_manager/templates/aero/materialsample_detail.html:47
+#: touchstone_manager/templates/aero/materialsample_list.html:67
+#: touchstone_manager/templates/aero/measurement_detail.html:31
+msgid "Material"
+msgstr "Werkstoff"
+
+#: touchstone_manager/aero/forms.py:19
+msgid "Thickness From"
+msgstr "Max. Dicke"
+
+#: touchstone_manager/aero/forms.py:24
+msgid "Thickness To"
+msgstr "Max. Dicke"
+
+#: touchstone_manager/aero/forms.py:30
+msgid "Weight From"
+msgstr "Min. Gewicht"
+
+#: touchstone_manager/aero/forms.py:35
+msgid "Weight To"
+msgstr "Max. Gewicht"
+
+#: touchstone_manager/aero/forms.py:41
+msgid "Infiltrations From"
+msgstr "Min. Infiltrationen"
+
+#: touchstone_manager/aero/forms.py:46
+msgid "Infiltrations To"
+msgstr "Max. Infiltrationen"
+
+#: touchstone_manager/aero/forms.py:57
+msgid "Thickness From must be less than Thickness To"
+msgstr "Mindesdicke muss kleiner als Höchstdicke sein"
+
+#: touchstone_manager/aero/forms.py:63
+msgid "Weight From must be less than Weight To"
+msgstr "Mindesgewicht muss kleiner als Höchstgewicht sein"
+
+#: touchstone_manager/aero/forms.py:73
+msgid "Infiltrations From must be less than Infiltrations To"
+msgstr "Mindestanzahl der Infiltrationen muss kleiner als Höchstanzahl sein"
 
 #: touchstone_manager/aero/models.py:18
 msgid "material"
@@ -56,7 +100,8 @@ msgid "Abbreviated name of Material"
 msgstr "Abgekürzte Bezeichnung"
 
 #: touchstone_manager/aero/models.py:26
-#: touchstone_manager/templates/aero/material_list.html:27
+#: touchstone_manager/templates/aero/material_detail.html:47
+#: touchstone_manager/templates/aero/material_list.html:70
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -75,13 +120,6 @@ msgstr "Probenname"
 #: touchstone_manager/aero/models.py:44
 msgid "Number of Sample"
 msgstr "Probennummer"
-
-#: touchstone_manager/aero/models.py:48
-#: touchstone_manager/templates/aero/materialsample_detail.html:29
-#: touchstone_manager/templates/aero/materialsample_list.html:27
-#: touchstone_manager/templates/aero/measurement_detail.html:32
-msgid "Material"
-msgstr "Werkstoff"
 
 #: touchstone_manager/aero/models.py:50
 msgid "Thickness in mm"
@@ -129,54 +167,311 @@ msgstr "Durchschnittlicher S21 im Frequenzbereich"
 
 #: touchstone_manager/aero/models.py:133
 #: touchstone_manager/aero/tests/test_models.py:98
-#, fuzzy, python-format
-#| msgid "(aero_material) on (date)"
+#, python-format
 msgid "%(aero_material)s on %(date)s"
 msgstr "%(aero_material)s am %(date)s"
 
-#: touchstone_manager/aero/views.py:103
-#: touchstone_manager/templates/aero/materialsample_list.html:12
+#: touchstone_manager/aero/views.py:172
+#: touchstone_manager/templates/aero/materialsample_list.html:18
 msgid "Create New Sample"
 msgstr "Neue Probe hinzufügen"
 
-#: touchstone_manager/aero/views.py:123
+#: touchstone_manager/aero/views.py:192
 msgid "Update Sample"
 msgstr "Probe bearbeiten"
 
-#: touchstone_manager/aero/views.py:170
-#: touchstone_manager/templates/aero/measurement_list.html:12
+#: touchstone_manager/aero/views.py:239
 msgid "Create New Measurement"
 msgstr "Neue Messung hinzufügen"
 
-#: touchstone_manager/aero/views.py:185
+#: touchstone_manager/aero/views.py:254
 msgid "Update Measurement"
 msgstr "Messung bearbeiten"
 
-#: touchstone_manager/aero/views.py:209
-#: touchstone_manager/templates/aero/material_list.html:12
+#: touchstone_manager/aero/views.py:278
+#: touchstone_manager/templates/aero/material_list.html:22
+#: touchstone_manager/templates/aero/measurement_list.html:19
 msgid "Create New Material"
 msgstr "Neuen Werkstoff hinzufügen"
 
-#: touchstone_manager/aero/views.py:222
+#: touchstone_manager/aero/views.py:291
 msgid "Update Material"
 msgstr "Werkstoff bearbeiten"
 
-#: touchstone_manager/templates/aero/material_confirm_delete.html:10
+#: touchstone_manager/templates/account/email.html:6
+#: touchstone_manager/templates/account/email.html:10
+msgid "Email Addresses"
+msgstr "Email-Adressen"
+
+#: touchstone_manager/templates/account/email.html:13
+msgid "The following email addresses are associated with your account:"
+msgstr ""
+
+#: touchstone_manager/templates/account/email.html:25
+msgid "Verified"
+msgstr "Verifiziert"
+
+#: touchstone_manager/templates/account/email.html:29
+msgid "Unverified"
+msgstr "Nicht-verifiziert"
+
+#: touchstone_manager/templates/account/email.html:34
+msgid "Primary"
+msgstr "Primär"
+
+#: touchstone_manager/templates/account/email.html:44
+msgid "Make Primary"
+msgstr "Als primär festlegen"
+
+#: touchstone_manager/templates/account/email.html:47
+msgid "Re-send Verification"
+msgstr "Verifizierungsmail erneut senden"
+
+#: touchstone_manager/templates/account/email.html:50
+msgid "Remove"
+msgstr "Entfernen"
+
+#: touchstone_manager/templates/account/email.html:59
+msgid "Add Email Address"
+msgstr "Email-Adresse hinzufügen"
+
+#: touchstone_manager/templates/account/email.html:70
+msgid "Add Email"
+msgstr "E-Mail-Adresse hinzufügen"
+
+#: touchstone_manager/templates/account/email.html:79
+msgid "Do you really want to remove the selected email address?"
+msgstr "Möchtest du die ausgewählte E-Mail-Adresse wirklich entfernen?"
+
+#: touchstone_manager/templates/account/email_confirm.html:7
+#: touchstone_manager/templates/account/email_confirm.html:18
+msgid "Confirm Email Address"
+msgstr "Bestägige deine Email-Adresse"
+
+#: touchstone_manager/templates/account/email_confirm.html:24
+#, python-format
+msgid ""
+"Please confirm that\n"
+"                    <a href=\"mailto:%(email)s\">%(email)s</a> is an email "
+"address for user %(user_display)s.\n"
+"                  "
+msgstr ""
+"Bitte bestätige, dass <a href=\"mailto:%(email)s\">%(email)s</a> eine E-Mail-"
+"Adresse von %(user_display)s ist."
+
+#: touchstone_manager/templates/account/email_confirm.html:33
+msgid "Confirm"
+msgstr "Bestätigen"
+
+#: touchstone_manager/templates/account/email_confirm.html:38
+#, python-format
+msgid ""
+"Unable to confirm %(email)s because it is already confirmed by a different "
+"account.\n"
+"                  "
+msgstr ""
+"Kann %(email)s nicht bestätigen, da sie bereits von einem anderen Konto "
+"bestätigt wurde."
+
+#: touchstone_manager/templates/account/email_confirm.html:45
+#, python-format
+msgid ""
+"This email confirmation link expired or is invalid. Please\n"
+"                  <a href=\"%(email_url)s\">issue a new email confirmation "
+"request</a>."
+msgstr ""
+"Dieser Bestätigungslink ist leider abgelaufen. Lass Dir bitte eine neue <a "
+"href=\"%(email_url)s\">Bestätigungs-Mail</a> schicken."
+
+#: touchstone_manager/templates/account/login.html:15
+msgid "Sign in to your account"
+msgstr "Anmelden"
+
+#: touchstone_manager/templates/account/login.html:23
+#: touchstone_manager/templates/account/login.html:30
+#: touchstone_manager/templates/account/password_reset.html:26
+#: touchstone_manager/templates/account/password_reset.html:33
+#: touchstone_manager/templates/account/signup.html:23
+#: touchstone_manager/templates/account/signup.html:30
+#: touchstone_manager/templates/users/user_detail.html:40
+msgid "Email address"
+msgstr "Email-Adresse"
+
+#: touchstone_manager/templates/account/login.html:33
+#: touchstone_manager/templates/account/login.html:40
+#: touchstone_manager/templates/account/signup.html:33
+#: touchstone_manager/templates/account/signup.html:40
+#: touchstone_manager/templates/account/signup.html:50
+msgid "Password"
+msgstr "Passwort"
+
+#: touchstone_manager/templates/account/login.html:67
+msgid "Remember me"
+msgstr "Angemeldet bleiben"
+
+#: touchstone_manager/templates/account/login.html:71
+msgid "Forgot password?"
+msgstr "Passwort vergessen?"
+
+#: touchstone_manager/templates/account/login.html:82
+#: touchstone_manager/templates/allauth/layouts/entrance.html:13
+#: touchstone_manager/templates/pages/landing.html:19
+msgid "Sign in"
+msgstr "Anmelden"
+
+#: touchstone_manager/templates/account/login.html:88
+msgid "Not a member?"
+msgstr "Hast du noch keinen Account?"
+
+#: touchstone_manager/templates/account/login.html:90
+msgid "Register here."
+msgstr "Neues Konto erstellen."
+
+#: touchstone_manager/templates/account/password_reset.html:14
+#: touchstone_manager/templates/account/password_reset.html:39
+#: touchstone_manager/templates/account/password_reset_done.html:6
+#: touchstone_manager/templates/account/password_reset_done.html:16
+msgid "Password Reset"
+msgstr "Passwort zurücksetzen"
+
+#: touchstone_manager/templates/account/password_reset.html:16
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll send you "
+"an email allowing you to reset it."
+msgstr ""
+
+#: touchstone_manager/templates/account/password_reset_done.html:19
+msgid ""
+"We have sent you an email. If you have not received it please check your "
+"spam folder.\n"
+"                Otherwise contact us if you do not receive it in a few "
+"minutes."
+msgstr ""
+"Wir haben Dir eine E-Mail geschickt.Wenn du die E-Mail nicht in deinem "
+"Posteingang siehst, überprüfe bitte deinen Spam-Ordner.Wenn die E-Mail "
+"ansonsten nicht in ein paar Minuten angekommen ist, gib uns bitte Bescheid. "
+
+#: touchstone_manager/templates/account/signup.html:15
+msgid "Create a new account"
+msgstr "Erstelle einen neuen Account"
+
+#: touchstone_manager/templates/account/signup.html:43
+msgid "Password (again)"
+msgstr "Passwort (wiederholen)"
+
+#: touchstone_manager/templates/account/signup.html:79
+#: touchstone_manager/templates/pages/landing.html:16
+msgid "Sign up"
+msgstr "Registrieren"
+
+#: touchstone_manager/templates/account/signup.html:84
+msgid "Already have an account?"
+msgstr "Du hast schon einen Account?"
+
+#: touchstone_manager/templates/account/signup.html:86
+msgid "Sign in here."
+msgstr "Melde dich hier an."
+
+#: touchstone_manager/templates/account/verification_sent.html:7
+#: touchstone_manager/templates/account/verification_sent.html:18
+#: touchstone_manager/templates/account/verified_email_required.html:7
+#: touchstone_manager/templates/account/verified_email_required.html:18
+msgid "Verify Your Email Address"
+msgstr "Bestätige deine E-Mail-Adresse"
+
+#: touchstone_manager/templates/account/verification_sent.html:22
+msgid ""
+"We have sent an email to you for verification. Follow the link provided to "
+"finalize the signup process. If you do not see the verification email in "
+"your main inbox, check your spam folder. Please contact us if you do not "
+"receive the verification email within a few minutes."
+msgstr ""
+"Wir haben dir eine E-Mail geschickt, um deine Adresse zu verifizieren. Bitte "
+"folge dem Link in der E-Mail um den Anmeldeprozess abzuschließen. Wenn du "
+"die E-Mail nicht in deinem Posteingang siehst, überprüfe bitte deinen Spam-"
+"Ordner. Wenn die E-Mail nicht in ein paar Minuten angekommen ist, gib uns "
+"bitte Bescheid."
+
+#: touchstone_manager/templates/account/verified_email_required.html:22
+msgid ""
+"We have sent an email to you for\n"
+"                verification. Please click on the link inside that email. If "
+"you do not see the verification email in\n"
+"                your main\n"
+"                inbox, check your spam folder. Otherwise\n"
+"                contact us if you do not receive it within a few minutes."
+msgstr ""
+"Wir haben Dir eine E-Mail geschickt.Wenn du die E-Mail nicht in deinem "
+"Posteingang siehst, überprüfe bitte deinen Spam-Ordner.Wenn die E-Mail "
+"ansonsten nicht in ein paar Minuten angekommen ist, gib uns bitte Bescheid. "
+
+#: touchstone_manager/templates/account/verified_email_required.html:29
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still\n"
+"                <a href=\"%(email_url)s\">change your email address</a>\n"
+"                ."
+msgstr ""
+"<strong>Anmerkung:</strong> Du kannst <a href=\"%(email_url)s\">Deine E-Mail-"
+"Adresse ändern</a>."
+
+#: touchstone_manager/templates/aero/filters/sample_filters.html:7
+msgid "Filters"
+msgstr "Filter"
+
+#: touchstone_manager/templates/aero/filters/sample_filters.html:65
+#: touchstone_manager/templates/aero/materialsample_detail.html:53
+#: touchstone_manager/templates/aero/materialsample_list.html:84
+#: touchstone_manager/templates/aero/measurement_detail.html:35
+msgid "Thickness"
+msgstr "Dicke"
+
+#: touchstone_manager/templates/aero/filters/sample_filters.html:90
+#: touchstone_manager/templates/aero/materialsample_detail.html:59
+#: touchstone_manager/templates/aero/materialsample_list.html:101
+#: touchstone_manager/templates/aero/measurement_detail.html:39
+msgid "Number of Infiltrations"
+msgstr "Anzahl der Infiltrationen"
+
+#: touchstone_manager/templates/aero/filters/sample_filters.html:115
+#: touchstone_manager/templates/aero/materialsample_detail.html:65
+#: touchstone_manager/templates/aero/materialsample_list.html:118
+#: touchstone_manager/templates/aero/measurement_detail.html:43
+msgid "Weight"
+msgstr "Gewicht"
+
+#: touchstone_manager/templates/aero/filters/sample_filters.html:138
+msgid "Apply Filter"
+msgstr "Filter anwenden"
+
+#: touchstone_manager/templates/aero/filters/sample_filters.html:146
+#: touchstone_manager/templates/aero/filters/sample_filters.html:151
+msgid "Search"
+msgstr "Suchen"
+
+#: touchstone_manager/templates/aero/material_confirm_delete.html:16
 msgid "Confirm Delete"
 msgstr "Löschen bestätigen"
 
-#: touchstone_manager/templates/aero/material_confirm_delete.html:11
-msgid "Are you sure you want to delete "
-msgstr "Lösche "
+#: touchstone_manager/templates/aero/material_confirm_delete.html:20
+#, python-format
+msgid ""
+"Are you sure you want to delete \"%(object_name)s\n"
+"                  \"?"
+msgstr "Bist du sicher, dass du \"%(object_name)s\" löschen möchtest?"
 
-#: touchstone_manager/templates/aero/material_confirm_delete.html:14
+#: touchstone_manager/templates/aero/material_confirm_delete.html:23
+msgid "Are you sure you want to delete this measurement?"
+msgstr "Bist du sicher, dass du diese Messung löschen möchtest?"
+
+#: touchstone_manager/templates/aero/material_confirm_delete.html:29
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: touchstone_manager/templates/aero/material_confirm_delete.html:15
-#: touchstone_manager/templates/aero/material_detail.html:32
-#: touchstone_manager/templates/aero/materialsample_detail.html:55
-#: touchstone_manager/templates/aero/measurement_detail.html:65
+#: touchstone_manager/templates/aero/material_confirm_delete.html:32
+#: touchstone_manager/templates/aero/material_detail.html:27
+#: touchstone_manager/templates/aero/materialsample_detail.html:27
+#: touchstone_manager/templates/aero/measurement_detail.html:64
 msgid "Delete"
 msgstr "Löschen"
 
@@ -184,189 +479,245 @@ msgstr "Löschen"
 msgid "Material Details"
 msgstr "Materialdetails"
 
-#: touchstone_manager/templates/aero/material_detail.html:21
-msgid "No description provided"
-msgstr "Keine Beschreibung vorhanden"
+#: touchstone_manager/templates/aero/material_detail.html:13
+msgid "Material details and related samples."
+msgstr "Werkstoffdetails und zugehörige Proben."
 
-#: touchstone_manager/templates/aero/material_detail.html:28
-#: touchstone_manager/templates/aero/materialsample_detail.html:51
-#: touchstone_manager/templates/aero/measurement_detail.html:61
-msgid "Update"
+#: touchstone_manager/templates/aero/material_detail.html:19
+#: touchstone_manager/templates/aero/material_list.html:107
+#: touchstone_manager/templates/aero/material_list.html:134
+#: touchstone_manager/templates/aero/materialsample_detail.html:19
+#: touchstone_manager/templates/aero/materialsample_list.html:155
+#: touchstone_manager/templates/aero/materialsample_list.html:191
+#: touchstone_manager/templates/aero/measurement_list.html:138
+#: touchstone_manager/templates/aero/measurement_list.html:191
+msgid "Edit"
 msgstr "Bearbeiten"
 
-#: touchstone_manager/templates/aero/material_detail.html:36
-#: touchstone_manager/templates/aero/material_list.html:30
-#: touchstone_manager/templates/base.html:59
-#: touchstone_manager/templates/pages/home.html:26
+#: touchstone_manager/templates/aero/material_detail.html:35
+#: touchstone_manager/templates/aero/material_list.html:53
+#: touchstone_manager/templates/aero/materialsample_detail.html:35
+#: touchstone_manager/templates/aero/materialsample_list.html:50
+msgid "Name"
+msgstr "Name"
+
+#: touchstone_manager/templates/aero/material_detail.html:41
+msgid "Short name"
+msgstr "Kurzname"
+
+#: touchstone_manager/templates/aero/material_detail.html:53
+#: touchstone_manager/templates/aero/material_list.html:87
+#: touchstone_manager/templates/aero/materialsample_list.html:6
+#: touchstone_manager/templates/base.html:65
+#: touchstone_manager/templates/base.html:188
+#: touchstone_manager/templates/pages/home.html:45
 msgid "Samples"
 msgstr "Proben"
 
-#: touchstone_manager/templates/aero/material_detail.html:42
-#: touchstone_manager/templates/aero/materialsample_detail.html:25
-#: touchstone_manager/templates/aero/measurement_detail.html:28
-msgid "Sample Number"
+#: touchstone_manager/templates/aero/material_detail.html:61
+#: touchstone_manager/templates/aero/materialsample_detail.html:41
+#: touchstone_manager/templates/aero/measurement_detail.html:27
+#: touchstone_manager/templates/aero/measurement_list.html:50
+msgid "Sample number"
 msgstr "Probennummer"
 
-#: touchstone_manager/templates/aero/material_detail.html:43
-#: touchstone_manager/templates/aero/materialsample_detail.html:66
+#: touchstone_manager/templates/aero/material_detail.html:65
+#: touchstone_manager/templates/aero/materialsample_detail.html:92
 msgid "Measurement"
 msgstr "Messung"
 
-#: touchstone_manager/templates/aero/material_detail.html:44
-#: touchstone_manager/templates/aero/materialsample_detail.html:59
-#: touchstone_manager/templates/aero/materialsample_list.html:39
+#: touchstone_manager/templates/aero/material_detail.html:69
+#: touchstone_manager/templates/aero/materialsample_detail.html:73
 #: touchstone_manager/templates/aero/measurement_list.html:6
-#: touchstone_manager/templates/base.html:62
-#: touchstone_manager/templates/pages/home.html:33
+#: touchstone_manager/templates/base.html:68
+#: touchstone_manager/templates/base.html:191
+#: touchstone_manager/templates/pages/home.html:69
 msgid "Measurements"
 msgstr "Messungen"
 
-#: touchstone_manager/templates/aero/material_detail.html:66
-msgid "Add Sample"
-msgstr "Probe hinzufügen"
+#: touchstone_manager/templates/aero/material_detail.html:73
+#: touchstone_manager/templates/aero/material_detail.html:91
+#: touchstone_manager/templates/aero/material_list.html:102
+#: touchstone_manager/templates/aero/material_list.html:129
+#: touchstone_manager/templates/aero/materialsample_detail.html:100
+#: touchstone_manager/templates/aero/materialsample_detail.html:118
+#: touchstone_manager/templates/aero/materialsample_list.html:150
+#: touchstone_manager/templates/aero/materialsample_list.html:186
+#: touchstone_manager/templates/aero/measurement_list.html:133
+#: touchstone_manager/templates/aero/measurement_list.html:186
+msgid "Details"
+msgstr "Details"
 
-#: touchstone_manager/templates/aero/material_form.html:14
+#: touchstone_manager/templates/aero/material_form.html:16
 #: touchstone_manager/templates/aero/measurement_form.html:14
+#: touchstone_manager/templates/users/user_detail.html:35
 msgid "Save"
 msgstr "Speichern"
 
 #: touchstone_manager/templates/aero/material_list.html:6
-#: touchstone_manager/templates/aero/materialsample_list.html:6
-#: touchstone_manager/templates/base.html:56
-#: touchstone_manager/templates/pages/home.html:19
+#: touchstone_manager/templates/base.html:62
+#: touchstone_manager/templates/base.html:185
+#: touchstone_manager/templates/pages/home.html:21
 msgid "Materials"
 msgstr "Werkstoffe"
 
 #: touchstone_manager/templates/aero/material_list.html:9
+#: touchstone_manager/templates/pages/home.html:28
 msgid "List of Materials"
 msgstr "Liste der Werkstoffe"
 
-#: touchstone_manager/templates/aero/material_list.html:24
-#: touchstone_manager/templates/aero/materialsample_detail.html:21
-#: touchstone_manager/templates/aero/materialsample_list.html:24
-msgid "Name"
-msgstr "Name"
+#: touchstone_manager/templates/aero/material_list.html:17
+msgid "A list of all materials in the database."
+msgstr "Liste aller Werkstoffe in der Datenbank"
 
-#: touchstone_manager/templates/aero/material_list.html:50
-#: touchstone_manager/templates/aero/materialsample_list.html:63
-#: touchstone_manager/templates/aero/measurement_list.html:73
+#: touchstone_manager/templates/aero/material_list.html:146
+#: touchstone_manager/templates/aero/measurement_list.html:203
 msgid "No objects in list."
 msgstr "Keine Objekte in der Liste"
 
-#: touchstone_manager/templates/aero/materialsample_detail.html:10
+#: touchstone_manager/templates/aero/materialsample_detail.html:12
 msgid "Sample Details"
 msgstr "Probendetails"
 
-#: touchstone_manager/templates/aero/materialsample_detail.html:33
-#: touchstone_manager/templates/aero/materialsample_list.html:30
-#: touchstone_manager/templates/aero/measurement_detail.html:36
-msgid "Thickness"
-msgstr "Dicke"
+#: touchstone_manager/templates/aero/materialsample_detail.html:13
+msgid "Sample details and related measurements."
+msgstr "Probendetails und zugehörige Messungen."
 
-#: touchstone_manager/templates/aero/materialsample_detail.html:37
-#: touchstone_manager/templates/aero/measurement_detail.html:40
-msgid "Infiltrations"
-msgstr "Infiltrationen"
-
-#: touchstone_manager/templates/aero/materialsample_detail.html:41
-#: touchstone_manager/templates/aero/materialsample_list.html:36
-#: touchstone_manager/templates/aero/measurement_detail.html:44
-msgid "Weight"
-msgstr "Gewicht"
-
-#: touchstone_manager/templates/aero/materialsample_detail.html:65
-#: touchstone_manager/templates/aero/measurement_list.html:33
-msgid "Day of measurement"
-msgstr "Tag der Messung"
-
-#: touchstone_manager/templates/aero/materialsample_detail.html:67
-#: touchstone_manager/templates/aero/measurement_detail.html:48
-#: touchstone_manager/templates/aero/measurement_list.html:30
-msgid "Mean S21"
-msgstr "Mittlere Dämpfung"
-
-#: touchstone_manager/templates/aero/materialsample_detail.html:88
+#: touchstone_manager/templates/aero/materialsample_detail.html:77
 msgid "Add Measurement"
 msgstr "Messung hinzufügen"
 
-#: touchstone_manager/templates/aero/materialsample_list.html:9
-msgid "List of Material Samples"
-msgstr "Liste der Werkstoff-Proben"
+#: touchstone_manager/templates/aero/materialsample_detail.html:88
+#: touchstone_manager/templates/aero/measurement_list.html:101
+msgid "Day of Measurement"
+msgstr "Tag der Messung"
 
-#: touchstone_manager/templates/aero/materialsample_list.html:33
-msgid "Number of Infiltrations"
-msgstr "Anzahl der Infiltrationen"
+#: touchstone_manager/templates/aero/materialsample_detail.html:96
+#: touchstone_manager/templates/aero/measurement_detail.html:47
+#: touchstone_manager/templates/aero/measurement_list.html:84
+msgid "Mean S21"
+msgstr "Mittlere Dämpfung"
 
-#: touchstone_manager/templates/aero/measurement_detail.html:11
+#: touchstone_manager/templates/aero/materialsample_list.html:12
+#: touchstone_manager/templates/pages/home.html:52
+msgid "List of Samples"
+msgstr "Liste der Materialproben"
+
+#: touchstone_manager/templates/aero/materialsample_list.html:13
+msgid "A list of all samples in the database."
+msgstr "Liste aller Materialproben in der Datenbank"
+
+#: touchstone_manager/templates/aero/materialsample_list.html:135
+msgid "Number of Measurements"
+msgstr "Anzahl der Messungen"
+
+#: touchstone_manager/templates/aero/materialsample_list.html:200
+msgid "No objects found"
+msgstr "Keine Objekte gefunden"
+
+#: touchstone_manager/templates/aero/measurement_detail.html:10
 msgid "Measurement Details"
 msgstr "Details der Messung"
 
-#: touchstone_manager/templates/aero/measurement_detail.html:23
+#: touchstone_manager/templates/aero/measurement_detail.html:22
 msgid "Name of sample"
 msgstr "Probenname"
 
-#: touchstone_manager/templates/aero/measurement_list.html:9
+#: touchstone_manager/templates/aero/measurement_detail.html:60
+#: touchstone_manager/templates/users/user_detail.html:23
+#: touchstone_manager/templates/users/user_detail.html:45
+msgid "Update"
+msgstr "Bearbeiten"
+
+#: touchstone_manager/templates/aero/measurement_list.html:13
+#: touchstone_manager/templates/pages/home.html:76
 msgid "List of Measurements"
 msgstr "Liste der Messungen"
 
-#: touchstone_manager/templates/aero/measurement_list.html:24
-msgid "Sample number"
-msgstr "Probennummer"
+#: touchstone_manager/templates/aero/measurement_list.html:14
+msgid "A list of all measurements in the database."
+msgstr "Liste aller Messungen in der Datenbank"
 
-#: touchstone_manager/templates/aero/measurement_list.html:27
+#: touchstone_manager/templates/aero/measurement_list.html:67
 msgid "Sample"
-msgstr "Proben"
+msgstr "Probe"
 
-#: touchstone_manager/templates/aero/measurement_list.html:64
-msgid "Add"
-msgstr "Hinzufügen"
+#: touchstone_manager/templates/aero/measurement_list.html:174
+msgid "has file"
+msgstr "hat Datei"
 
-#: touchstone_manager/templates/allauth/layouts/entrance.html:13
+#: touchstone_manager/templates/aero/measurement_list.html:179
+msgid "Add file"
+msgstr "Datei hinzufügen"
+
+#: touchstone_manager/templates/aero/measurement_list.html:182
+msgid "No file"
+msgstr "Keine Datei"
+
 #: touchstone_manager/templates/base.html:86
-#: touchstone_manager/templates/pages/landing.html:15
-msgid "Sign In"
-msgstr "Anmelden"
+msgid "Open user menu"
+msgstr "Öffne Benutzermenü"
 
-#: touchstone_manager/templates/base.html:66
-msgid "My Profile"
-msgstr "Mein Profil"
+#: touchstone_manager/templates/base.html:126
+#: touchstone_manager/templates/users/base_settings.html:6
+#: touchstone_manager/templates/users/base_settings.html:10
+#: touchstone_manager/templates/users/user_detail.html:6
+#: touchstone_manager/templates/users/user_detail.html:9
+msgid "Settings"
+msgstr "Einstellungen"
 
-#: touchstone_manager/templates/base.html:70
+#: touchstone_manager/templates/base.html:132
+#: touchstone_manager/templates/base.html:218
 msgid "Admin"
 msgstr "Admin"
 
-#: touchstone_manager/templates/base.html:75
+#: touchstone_manager/templates/base.html:139
+#: touchstone_manager/templates/base.html:221
 msgid "Sign Out"
 msgstr "Abmelden"
 
-#: touchstone_manager/templates/base.html:81
-#: touchstone_manager/templates/pages/landing.html:13
-msgid "Sign Up"
-msgstr "Registrieren"
+#: touchstone_manager/templates/base.html:216
+msgid "My Profile"
+msgstr "Mein Profil"
 
 #: touchstone_manager/templates/pages/home.html:7
 msgid "Overview"
 msgstr "Überblick"
 
-#: touchstone_manager/templates/pages/home.html:11
-msgid "Model"
-msgstr "Modell"
+#: touchstone_manager/templates/pages/home.html:28
+#: touchstone_manager/templates/pages/home.html:52
+#: touchstone_manager/templates/pages/home.html:76
+msgid "View all"
+msgstr "Alle ansehen"
 
-#: touchstone_manager/templates/pages/home.html:12
-msgid "Total"
-msgstr "Total"
-
-#: touchstone_manager/templates/pages/landing.html:11
+#: touchstone_manager/templates/pages/landing.html:12
 msgid "Organize your touchstone files"
 msgstr ""
 
-#: touchstone_manager/templates/pages/landing.html:22
+#: touchstone_manager/templates/pages/landing.html:27
 msgid "Legal Notice"
 msgstr "Impressum"
 
-#: touchstone_manager/templates/pages/landing.html:24
+#: touchstone_manager/templates/pages/landing.html:30
 msgid "Privacy Policy"
 msgstr "Datenschutzerklärung"
+
+#: touchstone_manager/templates/users/base_settings.html:43
+msgid "Email"
+msgstr "E-Mail"
+
+#: touchstone_manager/templates/users/base_settings.html:58
+msgid "Security"
+msgstr "Sicherheit"
+
+#: touchstone_manager/templates/users/user_detail.html:14
+msgid "This information will not be displayed publicly."
+msgstr "Diese Informationen werden nicht öffentlich angezeigt."
+
+#: touchstone_manager/templates/users/user_detail.html:17
+#: touchstone_manager/templates/users/user_form.html:13
+msgid "Full name"
+msgstr "Vollständiger Name"
 
 #: touchstone_manager/users/admin.py:23
 msgid "Personal info"

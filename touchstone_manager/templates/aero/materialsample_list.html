@@ -3,63 +3,208 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Materials" %}
+  {% trans "Samples" %}
 {% endblock title %}
 {% block content %}
-  <h1>{% trans "List of Material Samples" %}</h1>
-  {% if perms.aero.add_materialsample %}
-    <div class="py-3">
-      <a class="btn btn-primary" href="{% url 'aero:sample-create' %}">{% trans "Create New Sample" %}</a>
+  <div class="px-4 sm:px-6 lg:px-8">
+    <div class="sm:flex sm:items-center">
+      <div class="sm:flex-auto">
+        <h1 class="text-base font-semibold leading-6 text-gray-900">{% trans "List of Samples" %}</h1>
+        <p class="mt-2 text-sm text-gray-700">{% trans "A list of all samples in the database." %}</p>
+      </div>
+      <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+        {% if perms.aero.add_materialsample %}
+          <a href="{% url 'aero:sample-create' %}"
+             class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{% trans "Create New Sample" %}</a>
+        {% endif %}
+      </div>
     </div>
-  {% endif %}
-  {% if object_list %}
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">
-              <a href="?ordering={% if request.GET.ordering == 'id' %}-{% endif %}id">#</a>
-            </th>
-            <th scope="col">
-              <a href="?ordering={% if request.GET.ordering == 'name' %}-{% endif %}name">{% trans "Name" %}</a>
-            </th>
-            <th scope="col">
-              <a href="?ordering={% if request.GET.ordering == 'material' %}-{% endif %}material">{% trans "Material" %}</a>
-            </th>
-            <th scope="col">
-              <a href="?ordering={% if request.GET.ordering == 'thickness' %}-{% endif %}thickness">{% trans "Thickness" %}</a>
-            </th>
-            <th scope="col">
-              <a href="?ordering={% if request.GET.ordering == 'infiltrations' %}-{% endif %}infiltrations">{% trans "Number of Infiltrations" %}</a>
-            </th>
-            <th scope="col">
-              <a href="?ordering={% if request.GET.ordering == 'weight' %}-{% endif %}weight">{% trans "Weight" %}</a>
-            </th>
-            <th scope="col">
-              <a href="?ordering={% if request.GET.ordering == 'measurement' %}-{% endif %}measurement">{% trans "Measurements" %}</a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for obj in object_list %}
-            <tr>
-              <th>{{ obj.id }}</th>
-              <td>
-                <a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
-              </td>
-              <td>
-                <a href="{{ obj.material.get_absolute_url }}">{{ obj.material.name }}</a>
-              </td>
-              <td>{{ obj.thickness }} mm</td>
-              <td>{{ obj.infiltrations }}</td>
-              <td>{{ obj.weight }} mg</td>
-              <td>{{ obj.measurement_set.all.count }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    {% include 'aero/filters/sample_filters.html' %}
+    <div class="mt-8 flow-root">
+      <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle">
+          <table class="table-auto min-w-full border-separate border-spacing-0">
+            <thead>
+              <tr x-data="{ ordering: '{{ request.GET.ordering }}' }">
+                <th scope="col"
+                    class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">
+                  <a class="group inline-flex"
+                     href="?ordering={% if request.GET.ordering == 'sample_number' %}-{% endif %}sample_number{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    #
+                    <span :class="ordering === '-sample_number' || ordering === 'sample_number' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
+                          class="ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                      <svg class="h-5 w-5"
+                           :class="ordering === 'sample_number' ? 'rotate-180' : ''"
+                           viewBox="0 0 20 20"
+                           fill="currentColor"
+                           aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </a>
+                </th>
+                <th scope="col"
+                    class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">
+                  <a class="group inline-flex"
+                     href="?ordering={% if request.GET.ordering == 'name' %}-{% endif %}name{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    {% trans "Name" %}
+                    <span :class="ordering === '-name' || ordering === 'name' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
+                          class="ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                      <svg :class="ordering === 'name' ? 'rotate-180' : ''"
+                           class="h-5 w-5"
+                           viewBox="0 0 20 20"
+                           fill="currentColor"
+                           aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </a>
+                </th>
+                <th scope="col"
+                    class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">
+                  <a class="group inline-flex"
+                     href="?ordering={% if request.GET.ordering == 'material__name' %}-{% endif %}material__name{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    {% trans "Material" %}
+                    <span :class="ordering === '-material__name' || ordering === 'material__name' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
+                          class="ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                      <svg :class="ordering === 'material__name' ? 'rotate-180' : ''"
+                           class="h-5 w-5"
+                           viewBox="0 0 20 20"
+                           fill="currentColor"
+                           aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </a>
+                </th>
+                <th scope="col"
+                    class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">
+                  <a class="group inline-flex"
+                     href="?ordering={% if request.GET.ordering == 'thickness' %}-{% endif %}thickness{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    {% trans "Thickness" %}
+                    <span :class="ordering === '-thickness' || ordering === 'thickness' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
+                          class="ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                      <svg :class="ordering === 'thickness' ? 'rotate-180' : ''"
+                           class="h-5 w-5"
+                           viewBox="0 0 20 20"
+                           fill="currentColor"
+                           aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </a>
+                </th>
+                <th scope="col"
+                    class="sticky top-0 z-10 border-b border-gray-300 hidden bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">
+                  <a class="group inline-flex"
+                     href="?ordering={% if request.GET.ordering == 'infiltrations' %}-{% endif %}infiltrations{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    {% trans "Number of Infiltrations" %}
+                    <span :class="ordering === '-infiltrations' || ordering === 'infiltrations' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
+                          class="ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                      <svg :class="ordering === 'infiltrations' ? 'rotate-180' : ''"
+                           class="h-5 w-5"
+                           viewBox="0 0 20 20"
+                           fill="currentColor"
+                           aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </a>
+                </th>
+                <th scope="col"
+                    class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">
+                  <a class="group inline-flex"
+                     href="?ordering={% if request.GET.ordering == 'weight' %}-{% endif %}weight{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    {% trans "Weight" %}
+                    <span :class="ordering === '-weight' || ordering === 'weight' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
+                          class="ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                      <svg :class="ordering === 'weight' ? 'rotate-180' : ''"
+                           class="h-5 w-5"
+                           viewBox="0 0 20 20"
+                           fill="currentColor"
+                           aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </a>
+                </th>
+                <th scope="col"
+                    class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">
+                  <a class="group inline-flex"
+                     href="?ordering={% if request.GET.ordering == 'measurement' %}-{% endif %}measurement{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    {% trans "Number of Measurements" %}
+                    <span :class="ordering === '-measurement' || ordering === 'measurement' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
+                          class="ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                      <svg :class="ordering === 'measurement' ? 'rotate-180' : ''"
+                           class="h-5 w-5"
+                           viewBox="0 0 20 20"
+                           fill="currentColor"
+                           aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </a>
+                </th>
+                <th scope="col"
+                    class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8">
+                  <span class="sr-only">{% trans "Details" %}</span>
+                </th>
+                {% if perms.aero.update_materialsample %}
+                  <th scope="col"
+                      class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter lg:table-cell lg:pr-8">
+                    <span class="sr-only">{% trans "Edit" %}</span>
+                  </th>
+                {% endif %}
+              </tr>
+            </thead>
+            <tbody>
+              {% if object_list %}
+                {% for obj in object_list %}
+                  <tr>
+                    <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                      {{ obj.sample_number }}
+                    </td>
+                    <td class="relative lg:whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-sm font-medium sm:pr-8 lg:pr-8">
+                      <a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
+                    </td>
+                    <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                      {{ obj.material }}
+                    </td>
+                    <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                      {{ obj.thickness }} mm
+                    </td>
+                    <td class="border-b border-gray-200 px-3 py-4 text-sm text-gray-500 hidden lg:table-cell">{{ obj.infiltrations }}</td>
+                    <td class="border-b border-gray-200 px-3 py-4 text-sm text-gray-500">
+                      {{ obj.weight }}
+                      mg
+                    </td>
+                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">
+                      {{ obj.measurement_set.all.count }}
+                    </td>
+                    <td class="relative whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8">
+                      <a href="{% url 'aero:sample-detail' obj.id %}"
+                         class="text-indigo-600 hover:text-indigo-900">{% trans "Details" %}<span class="sr-only">, {{ obj.name }}</span></a>
+                    </td>
+                    {% if perms.aero.update_materialsample %}
+                      <td class="border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                        <a href="{% url 'aero:sample-update' obj.id %}"
+                           class="text-indigo-600 hover:text-indigo-900">{% trans "Edit" %}<span class="sr-only">, {{ obj.name }}</span></a>
+                      </td>
+                    {% endif %}
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="100%"
+                      class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                    {% trans "No objects found" %}
+                  </td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  {% else %}
-    <p>{% trans "No objects in list." %}</p>
-  {% endif %}
+  </div>
 {% endblock content %}
