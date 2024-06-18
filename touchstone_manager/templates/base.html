@@ -214,8 +214,10 @@
                   <a href="{% url 'users:detail' request.user.pk %}"
                      :class="currentPath === '{% url "users:detail" request.user.pk %}' ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800'"
                      class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">{% translate "My Profile" %}</a>
-                  <a href="{% url 'admin:index' %}"
-                     class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">{% translate "Admin" %}</a>
+                  {% if request.user.is_staff %}
+                    <a href="{% url 'admin:index' %}"
+                       class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">{% translate "Admin" %}</a>
+                  {% endif %}
                   <a href="{% url 'account_logout' %}"
                      :class="currentPath === '{% url "account_logout" %}' ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800'"
                      class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">{% translate "Sign Out" %}</a>
