@@ -2,104 +2,94 @@
 
 {% load i18n %}
 
-{% block filter_form %}
-  <!-- Filter Form -->
-  <form method="get" action="">
-    <div class="mx-auto grid max-w-7xl grid-cols-2 gap-x-4 px-4 text-sm sm:px-6 md:gap-x-6 lg:px-8">
-      <div class="grid auto-rows-min grid-cols-1 gap-y-10 md:grid-cols-2 md:gap-x-6">
-        <!-- Materials -->
-        <fieldset>
-          <legend class="block font-medium">{% trans "Material" %}</legend>
-          <div class="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
-            {% for checkbox in filter_form.material %}
-              <div class="flex items-center text-base sm:text-sm">
-                <input class="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                       type="checkbox"
-                       name="{{ checkbox.data.name }}"
-                       id="material-{{ forloop.counter0 }}"
-                       value="{{ checkbox.data.value }}"
-                       {% if checkbox.choice_label in filter_form.material.value %}checked{% endif %} />
-                <label class="ml-3 min-w-0 flex-1 text-gray-600"
-                       for="material-{{ forloop.counter0 }}">{{ checkbox.choice_label }}</label>
-              </div>
-            {% endfor %}
+{% block form_content %}
+  <div class="grid auto-rows-min grid-cols-1 gap-y-10 md:grid-cols-2 md:gap-x-6">
+    <!-- Materials -->
+    <fieldset>
+      <legend class="block font-medium">{% trans "Material" %}</legend>
+      <div class="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
+        {% for checkbox in filter_form.material %}
+          <div class="flex items-center text-base sm:text-sm">
+            <input class="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                   type="checkbox"
+                   name="{{ checkbox.data.name }}"
+                   id="material-{{ forloop.counter0 }}"
+                   value="{{ checkbox.data.value }}"
+                   {% if checkbox.choice_label in filter_form.material.value %}checked{% endif %} />
+            <label class="ml-3 min-w-0 flex-1 text-gray-600"
+                   for="material-{{ forloop.counter0 }}">{{ checkbox.choice_label }}</label>
           </div>
-        </fieldset>
-        <!-- Thickness -->
-        <fieldset>
-          <legend class="block font-medium">{% trans "Thickness" %}</legend>
-          <div class="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
-            <div class="flex items-center text-base sm:text-sm">
-              <label for="thickness_from" class="text-gray-600">{{ filter_form.thickness_from.label }}</label>
-              <input id="thickness_from"
-                     name="{{ filter_form.thickness_from.name }}"
-                     value="{{ filter_form.thickness_from.data }}"
-                     type="number"
-                     class="flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-            </div>
-            <div class="flex items-center text-base sm:text-sm">
-              <label for="thickness_to" class="text-gray-600">{{ filter_form.thickness_to.label }}</label>
-              <input id="thickness_to"
-                     name="{{ filter_form.thickness_to.name }}"
-                     value="{{ filter_form.thickness_to.data }}"
-                     type="number"
-                     class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-            </div>
-          </div>
-        </fieldset>
+        {% endfor %}
       </div>
-      <!-- Second Fieldset Group -->
-      <div class="grid auto-rows-min grid-cols-1 gap-y-10 md:grid-cols-2 md:gap-x-6">
-        <!-- Infiltrations -->
-        <fieldset>
-          <legend class="block font-medium">{% trans "Number of Infiltrations" %}</legend>
-          <div class="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
-            <div class="flex items-center text-base sm:text-sm">
-              <label for="infiltrations_from" class="text-gray-600">{{ filter_form.infiltrations_from.label }}</label>
-              <input id="infiltrations_from"
-                     name="{{ filter_form.infiltrations_from.name }}"
-                     value="{{ filter_form.infiltrations_from.data }}"
-                     type="number"
-                     class="flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-            </div>
-            <div class="flex-column items-center text-base sm:text-sm">
-              <label for="infiltrations_to" class="ml-3 min-w-0 flex-1 text-gray-600">
-                {{ filter_form.infiltrations_to.label }}
-              </label>
-              <input id="infiltrations_to"
-                     name="{{ filter_form.infiltrations_to.name }}"
-                     value="{{ filter_form.infiltrations_to.data }}"
-                     type="number"
-                     class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                     checked />
-            </div>
-          </div>
-        </fieldset>
-        <!-- Weight -->
-        <fieldset>
-          <legend class="block font-medium">{% trans "Weight" %}</legend>
-          <div class="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
-            <div class="flex items-center text-base sm:text-sm">
-              <label for="weight_from" class="ml-3 min-w-0 flex-1 text-gray-600">{{ filter_form.weight_from.label }}</label>
-              <input id="weight_from"
-                     name="{{ filter_form.weight_from.name }}"
-                     value="{{ filter_form.weight_from.data.value }}"
-                     type="number"
-                     class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-            </div>
-            <div class="flex items-center text-base sm:text-sm">
-              <label for="weight_to" class="ml-3 min-w-0 flex-1 text-gray-600">{{ filter_form.weight_to.label }}</label>
-              <input id="weight_to"
-                     name="{{ filter_form.weight_to.name }}"
-                     value="{{ filter_form.weight_to.data.value }}"
-                     type="number"
-                     class="flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-            </div>
-          </div>
-        </fieldset>
+    </fieldset>
+    <!-- Thickness -->
+    <fieldset>
+      <legend class="block font-medium">{% trans "Thickness" %}</legend>
+      <div class="flex flex-col space-y-6 pt-6 sm:space-y-4 sm:pt-4">
+        <div>
+          <label for="thickness_from" class="text-gray-600">{{ filter_form.thickness_from.label }}</label>
+          <input id="thickness_from"
+                 name="{{ filter_form.thickness_from.name }}"
+                 value="{{ filter_form.thickness_from.data }}"
+                 type="number"
+                 class="flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label for="thickness_to" class="text-gray-600">{{ filter_form.thickness_to.label }}</label>
+          <input id="thickness_to"
+                 name="{{ filter_form.thickness_to.name }}"
+                 value="{{ filter_form.thickness_to.data }}"
+                 type="number"
+                 class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+        </div>
       </div>
-    </div>
-    <button class="mt-6 w-full md:block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            type="submit">{% trans "Apply Filter" %}</button>
-  </form>
-{% endblock filter_form %}
+    </fieldset>
+  </div>
+  <div class="grid auto-rows-min grid-cols-1 gap-y-10 md:grid-cols-2 md:gap-x-6">
+    <!-- Infiltrations -->
+    <fieldset>
+      <legend class="block font-medium">{% trans "Number of Infiltrations" %}</legend>
+      <div class="flex flex-col space-y-6 pt-6 sm:space-y-4 sm:pt-4">
+        <div>
+          <label for="infiltrations_from" class="text-gray-600">{{ filter_form.infiltrations_from.label }}</label>
+          <input id="infiltrations_from"
+                 name="{{ filter_form.infiltrations_from.name }}"
+                 value="{{ filter_form.infiltrations_from.data }}"
+                 type="number"
+                 class="flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label for="infiltrations_to" class="text-gray-600">{{ filter_form.infiltrations_to.label }}</label>
+          <input id="infiltrations_to"
+                 name="{{ filter_form.infiltrations_to.name }}"
+                 value="{{ filter_form.infiltrations_to.data }}"
+                 type="number"
+                 class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                 checked />
+        </div>
+      </div>
+    </fieldset>
+    <!-- Weight -->
+    <fieldset>
+      <legend class="block font-medium">{% trans "Weight" %}</legend>
+      <div class="flex flex-col space-y-6 pt-6 sm:space-y-4 sm:pt-4">
+        <div>
+          <label for="weight_from" class="text-gray-600">{{ filter_form.weight_from.label }}</label>
+          <input id="weight_from"
+                 name="{{ filter_form.weight_from.name }}"
+                 value="{{ filter_form.weight_from.data.value }}"
+                 type="number"
+                 class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label for="weight_to" class="text-gray-600">{{ filter_form.weight_to.label }}</label>
+          <input id="weight_to"
+                 name="{{ filter_form.weight_to.name }}"
+                 value="{{ filter_form.weight_to.data.value }}"
+                 type="number"
+                 class="flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+        </div>
+      </div>
+    </fieldset>
+  </div>
+{% endblock form_content %}

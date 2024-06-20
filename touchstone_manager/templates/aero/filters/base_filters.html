@@ -38,6 +38,17 @@
        id="disclosure-1">
     <!-- Filter Form -->
     {% block filter_form %}
+      <!-- Filter Form -->
+      <form method="get" action="">
+        {% block form_body %}
+          <div class="mx-auto grid max-w-7xl grid-cols-1 md:grid-cols-2 gap-x-4 px-4 gap-y-10 md:gap-y-0 text-sm sm:px-6 md:gap-x-6 lg:px-8">
+            {% block form_content %}
+            {% endblock form_content %}
+          </div>
+          <button class="mt-6 w-full md:block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  type="submit">{% trans "Apply Filter" %}</button>
+        {% endblock form_body %}
+      </form>
     {% endblock filter_form %}
   </div>
   <!-- Search -->

@@ -213,6 +213,21 @@ class MeasurementListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         ordering = self.request.GET.get("ordering", "id")
+
+        form = self.get_form()
+        if not form.is_valid():
+            return Measurement.objects.all()
+
+        queryset = self.filter_by_form_fields(queryset, form)
+
+        query = self.request.GET.get("q")
+        if query:
+            queryset = queryset.filter(
+                Q(aero_material__name__icontains=query)
+                | Q(mean_s21__icontains=query)
+                | Q(measurement_date__icontains=query),
+            )
+
         if ordering:
             fields = [field.strip() for field in ordering.split(",")]
             queryset = queryset.order_by(*fields)
@@ -236,6 +251,11 @@ class MeasurementListView(LoginRequiredMixin, ListView):
             )
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter_form"] = self.get_form()
+        return context
 
 
 class MeasurementDetailView(LoginRequiredMixin, DetailView):
