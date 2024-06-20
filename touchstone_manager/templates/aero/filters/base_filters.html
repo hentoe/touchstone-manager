@@ -1,0 +1,62 @@
+{% load i18n %}
+
+<!-- Filters -->
+<section x-data="{ open: false }"
+         aria-labelledby="filter-heading"
+         class="mt-4 grid items-center border-b border-t border-gray-200">
+  <h2 id="filter-heading" class="sr-only">{% trans "Filters" %}</h2>
+  <div class="relative col-start-1 row-start-1 py-4">
+    <div class="mx-auto flex max-w-7xl space-x-6 divide-x divide-gray-200 px-4 text-sm sm:px-6 lg:px-8">
+      <div>
+        <button @click="open = !open"
+                type="button"
+                class="group flex items-center font-medium text-gray-700"
+                aria-controls="disclosure-1"
+                aria-expanded="false">
+          <svg class="mr-2 h-5 w-5 flex-none text-gray-400 group-hover:text-gray-500"
+               aria-hidden="true"
+               viewBox="0 0 20 20"
+               fill="currentColor">
+            <path fill-rule="evenodd" d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 01.628.74v2.288a2.25 2.25 0 01-.659 1.59l-4.682 4.683a2.25 2.25 0 00-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 018 18.25v-5.757a2.25 2.25 0 00-.659-1.591L2.659 6.22A2.25 2.25 0 012 4.629V2.34a.75.75 0 01.628-.74z" clip-rule="evenodd" />
+          </svg>
+          Filter
+        </button>
+      </div>
+      <div class="pl-6">
+        {% if request.GET.q %}<a href="{{ request.path }}" role="button" class="text-gray-500">Clear all</a>{% endif %}
+      </div>
+    </div>
+  </div>
+  <div x-show="open"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="transform opacity-0 -translate-y-6"
+       x-transition:enter-end="transform opacity-200 translate-y-0"
+       x-transition:leave="transition ease-in duration-150"
+       x-transition:leave-start="transform opacity-200 translate-y-0"
+       x-transition:leave-end="transform opacity-0 -translate-y-6"
+       class="border-t border-gray-200 py-10"
+       id="disclosure-1">
+    <!-- Filter Form -->
+    {% block filter_form %}
+    {% endblock filter_form %}
+  </div>
+  <!-- Search -->
+  <div class="col-start-1 row-start-1 py-4">
+    <div class="mx-auto flex max-w-7xl justify-end px-4 sm:px-6">
+      <div class="relative inline-block">
+        <form method="get" action="">
+          <label for="search" class="sr-only">{% trans "Search" %}</label>
+          {% if request.GET.ordering %}<input type="hidden" name="ordering" value="{{ request.GET.ordering }}" />{% endif %}
+          <input type="search"
+                 name="q"
+                 class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                 placeholder="{% trans 'Search' %}"
+                 value="{{ request.GET.q }}"
+                 aria-label="Search"
+                 aria-placeholder="Search"
+                 aria-describedby="search-description" />
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
