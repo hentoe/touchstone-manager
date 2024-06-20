@@ -53,6 +53,9 @@ coverage.xml
 # Django stuff:
 staticfiles/
 
+# Tailwind CSS
+touchstone_manager/static/css/output.css
+
 # Sphinx documentation
 docs/_build/
 
