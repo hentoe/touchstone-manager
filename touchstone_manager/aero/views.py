@@ -11,6 +11,7 @@ from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 
 from .forms import MaterialSampleFilterForm
+from .forms import MeasurementFilterForm
 from .models import Material
 from .models import MaterialSample
 from .models import Measurement
@@ -215,6 +216,25 @@ class MeasurementListView(LoginRequiredMixin, ListView):
         if ordering:
             fields = [field.strip() for field in ordering.split(",")]
             queryset = queryset.order_by(*fields)
+        return queryset
+
+    def get_form(self):
+        return MeasurementFilterForm(self.request.GET or None)
+
+    def filter_by_form_fields(self, queryset, form):
+        if form.cleaned_data.get("material"):
+            material_ids = form.cleaned_data["material"]
+            queryset = queryset.filter(aero_material__material__id__in=material_ids)
+
+        if form.cleaned_data.get("mean_s21_from"):
+            queryset = queryset.filter(
+                mean_s21__gte=form.cleaned_data["mean_s21_from"],
+            )
+        if form.cleaned_data.get("mean_s21_to"):
+            queryset = queryset.filter(
+                mean_s21__lte=form.cleaned_data["mean_s21_to"],
+            )
+
         return queryset
 
 

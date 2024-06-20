@@ -74,3 +74,37 @@ class MaterialSampleFilterForm(forms.Form):
             )
 
         return cleaned_data
+
+
+class MeasurementFilterForm(forms.Form):
+    """Measurement Filter Form"""
+
+    material = forms.ModelMultipleChoiceField(
+        queryset=Material.objects.all().order_by("name"),
+        required=False,
+        label=_("Material"),
+        widget=forms.CheckboxSelectMultiple,
+    )
+
+    mean_s21_from = forms.FloatField(
+        required=False,
+        label=_("Mean S21 From"),
+        widget=forms.NumberInput(attrs={"type": "number"}),
+    )
+    mean_s21_to = forms.FloatField(
+        required=False,
+        label=_("Mean S21 To"),
+        widget=forms.NumberInput(attrs={"type": "number"}),
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        mean_s21_from = cleaned_data.get("mean_s21_from")
+        mean_s21_to = cleaned_data.get("mean_s21_to")
+        if mean_s21_from and mean_s21_to and mean_s21_from >= mean_s21_to:
+            raise forms.ValidationError(
+                _("Mean S21 From must be less than Mean S21 To"),
+            )
+
+        return cleaned_data
