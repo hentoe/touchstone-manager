@@ -13,12 +13,13 @@
         <div class="sm:flex-auto">
           <h1 class="text-base font-semibold leading-6 text-gray-900">{% trans "List of Measurements" %}</h1>
           <p class="mt-2 text-sm text-gray-700">{% trans "A list of all measurements in the database." %}</p>
+          <p class="mt-2 text-sm text-gray-700" x-text="compareList">}</p>
         </div>
         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           <button type="button"
                   class="border p-1 border-2 border-black rounded-full"
                   @click="compare = !compare">
-            <div x-show="compare">
+            <div x-show="!compare">
               <span class="sr-only">{% trans "Compare" %}</span>
               <svg data-slot="icon"
                    aria-hidden="true"
@@ -30,7 +31,7 @@
                 <path d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
-            <div x-show="!compare">
+            <div x-show="compare">
               <span class="sr-only">{% trans "Compare" %}</span>
               <svg data-slot="icon"
                    aria-hidden="true"
@@ -60,7 +61,8 @@
                 <tr x-data="{ ordering: '{{ request.GET.ordering }}' }">
                   <th scope="col"
                       class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">
-                    <a class="group inline-flex"
+                    <a x-show="!compare"
+                       class="group inline-flex"
                        href="?ordering={% if request.GET.ordering == 'id' %}-{% endif %}id">
                       #
                       <span :class="ordering === '-id' || ordering === 'id' ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible text-gray-400 group-hover:visible group-focus:visible'"
@@ -74,6 +76,10 @@
                         </svg>
                       </span>
                     </a>
+                    <input type="checkbox"
+                           x-show="compare"
+                           value="id"
+                           class="flex-none rounded text-gray-400 group-hover:visible group-focus:visible" />
                   </th>
                   <th scope="col"
                       class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">
@@ -176,7 +182,12 @@
                 {% for obj in object_list %}
                   <tr class="hover:bg-gray-50">
                     <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                      {{ obj.id }}
+                      <div x-show="!compare">{{ obj.id }}</div>
+                      <input type="checkbox"
+                             x-show="compare"
+                             x-model="compareList"
+                             value="{{ obj.id }}"
+                             class="flex-none rounded text-indigo-600 group-hover:visible group-focus:visible focus:ring-indigo-600" />
                     </td>
                     <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
                       {{ obj.aero_material.sample_number }}
@@ -229,6 +240,9 @@
             </table>
           </div>
         </div>
+      </div>
+      <div>
+        <canvas id="s21Chart" width="w-full"></canvas>
       </div>
     </div>
   {% else %}
