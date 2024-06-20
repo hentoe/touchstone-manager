@@ -16,8 +16,7 @@
           content="Manage and view Touchstone Files and Corresponding Test Objects." />
     <meta name="author" content="Hendrik Tödter" />
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
-    <script defer
-            src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.0/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.0/dist/cdn.min.js"></script>
     {% block css %}
       <!-- Your stuff: Third-party CSS libraries go here -->
       <!-- This file stores project-specific CSS -->
@@ -96,15 +95,15 @@
                       </button>
                     </div>
                     <!--
-                Dropdown menu, show/hide based on menu state.
+            Dropdown menu, show/hide based on menu state.
 
-                Entering: "transition ease-out duration-200"
-                  From: "transform opacity-0 scale-95"
-                  To: "transform opacity-100 scale-100"
-                Leaving: "transition ease-in duration-75"
-                  From: "transform opacity-100 scale-100"
-                  To: "transform opacity-0 scale-95"
-              -->
+            Entering: "transition ease-out duration-200"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+          -->
                     <div x-show="userMenuOpen"
                          x-transition:enter="transition ease-out duration-200"
                          x-transition:enter-start="transform opacity-0 scale-95"
