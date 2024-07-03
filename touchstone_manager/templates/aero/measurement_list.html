@@ -253,11 +253,9 @@
   <script type="text/javascript">
     const objectList = JSON.parse('{{ object_list|to_json|safe|escapejs }}');
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="text/javascript">
-    let s21Chart;
-    const ctx = document.getElementById('s21Chart').getContext('2d');
-
-    const updateChart = (value) => {
+    function updateChart(value) {
       /*
         Get all IDs from compareList (x-data attribute)
         Convert to array and strings to integers
@@ -265,10 +263,70 @@
        */
       const compareList = Array.from(value).map(Number)
       const matchingObjects = getObjectsByIds(compareList)
+      console.log(matchingObjects)
+      destroyChart()
+      plotChart(matchingObjects)
+    }
+
+    function destroyChart() {
+      const chart = Chart.getChart('s21Chart');
+      if (chart) {
+        chart.destroy();
+      }
     }
 
     function getObjectsByIds(ids) {
       return objectList.filter(object => ids.includes(object.id));
+    }
+
+    function plotChart(data) {
+      const ctx = document.getElementById('s21Chart').getContext('2d');
+      const datasets = data.map(object => {
+        return {
+          label: `Object ${object.id}`,
+          data: object.measurement_data.s21.map((s21, index) => {
+            return {
+              x: object.measurement_data.frequency[index] / 1e9,
+              y: s21
+            };
+          }),
+          borderColor: getRandomColor(),
+          fill: false
+        };
+      });
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          datasets: datasets
+        },
+        options: {
+          scales: {
+            x: {
+              type: 'linear',
+              title: {
+                display: true,
+                text: 'Frequency (GHz)'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'S21 Magnitude (dB)'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
     }
   </script>
 {% endblock content %}
