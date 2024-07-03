@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load i18n %}
+{% load aero_extras %}
 
 {% block title %}
   {% trans "Measurements" %}
@@ -8,12 +9,13 @@
 {% block content %}
   {% if object_list %}
     <div class="px-4 sm:px-6 lg:px-8"
-         x-data="{ compare: false, compareList: [] }">
+         id="site-content"
+         x-data="{ compare: false, compareList: [] }"
+         x-init="$watch('compareList', value => updateChart(value))">
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
           <h1 class="text-base font-semibold leading-6 text-gray-900">{% trans "List of Measurements" %}</h1>
           <p class="mt-2 text-sm text-gray-700">{% trans "A list of all measurements in the database." %}</p>
-          <p class="mt-2 text-sm text-gray-700" x-text="compareList">}</p>
         </div>
         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           <button type="button"
@@ -248,4 +250,25 @@
   {% else %}
     <p>{% trans "No objects in list." %}</p>
   {% endif %}
+  <script type="text/javascript">
+    const objectList = JSON.parse('{{ object_list|to_json|safe|escapejs }}');
+  </script>
+  <script type="text/javascript">
+    let s21Chart;
+    const ctx = document.getElementById('s21Chart').getContext('2d');
+
+    const updateChart = (value) => {
+      /*
+        Get all IDs from compareList (x-data attribute)
+        Convert to array and strings to integers
+        Get matching objects from objectList
+       */
+      const compareList = Array.from(value).map(Number)
+      const matchingObjects = getObjectsByIds(compareList)
+    }
+
+    function getObjectsByIds(ids) {
+      return objectList.filter(object => ids.includes(object.id));
+    }
+  </script>
 {% endblock content %}
