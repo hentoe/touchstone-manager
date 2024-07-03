@@ -44,9 +44,17 @@ To run the tests, check your test coverage, and generate an HTML coverage report
 
     $ pytest
 
-### Live reloading and Sass CSS compilation
+### CSS compilation
 
-Moved to [Live reloading and SASS compilation](https://cookiecutter-django.readthedocs.io/en/latest/developing-locally.html#sass-compilation-live-reloading).
+This app uses tailwindcss for styling. To compile the css during development, run:
+
+    $ npm run dev
+
+To compile the minified css, run:
+
+    $ npm run build
+
+The latter will be run automatically while building the production docker image.
 
 ### Celery
 

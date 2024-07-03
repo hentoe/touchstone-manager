@@ -19,8 +19,8 @@
     ]
   },
   "scripts": {
-    "dev": "tailwindcss -i ./touchstone_manager/static/css/tailwind.css -o ./touchstone_manager/static/css/project.css --watch",
-    "build": "tailwindcss -i ./touchstone_manager/static/css/tailwind.css -o ./touchstone_manager/static/css/project.css --minify"
+    "dev": "tailwindcss -i ./touchstone_manager/static/css/tailwind.css -o ./touchstone_manager/static/css/output.css --watch",
+    "build": "tailwindcss -i ./touchstone_manager/static/css/tailwind.css -o ./touchstone_manager/static/css/output.css --minify"
   },
   "dependencies": {
     "chart.js": "^4.4.2"

@@ -1,0 +1,46 @@
+{% extends "aero/filters/base_filters.html" %}
+
+{% load i18n %}
+
+{% block form_content %}
+  <div class="grid auto-rows-min grid-cols-1 gap-y-10 md:grid-cols-2 md:gap-x-6">
+    <fieldset>
+      <legend class="block font-medium">{% trans "Material" %}</legend>
+      <div class="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
+        {% for checkbox in filter_form.material %}
+          <div class="flex items-center text-base sm:text-sm">
+            <input class="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                   type="checkbox"
+                   name="{{ checkbox.data.name }}"
+                   id="material-{{ forloop.counter0 }}"
+                   value="{{ checkbox.data.value }}"
+                   {% if checkbox.choice_label in filter_form.material.value %}checked{% endif %} />
+            <label class="ml-3 min-w-0 flex-1 text-gray-600"
+                   for="material-{{ forloop.counter0 }}">{{ checkbox.choice_label }}</label>
+          </div>
+        {% endfor %}
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend class="block font-medium">{% trans "Mean S21" %}</legend>
+      <div class="flex flex-col space-y-6 pt-6 sm:space-y-4 sm:pt-4">
+        <div>
+          <label for="mean_s21_from" class="text-gray-600">{{ filter_form.mean_s21_from.label }}</label>
+          <input id="mean_s21_from"
+                 name="{{ filter_form.mean_s21_from.name }}"
+                 value="{{ filter_form.mean_s21_from.data }}"
+                 type="number"
+                 class="flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label for="mean_s21_to" class="text-gray-600">{{ filter_form.mean_s21_to.label }}</label>
+          <input id="mean_s21_to"
+                 name="{{ filter_form.mean_s21_to.name }}"
+                 value="{{ filter_form.mean_s21_to.data }}"
+                 type="number"
+                 class="flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+        </div>
+      </div>
+    </fieldset>
+  </div>
+{% endblock form_content %}

@@ -11,6 +11,7 @@ from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 
 from .forms import MaterialSampleFilterForm
+from .forms import MeasurementFilterForm
 from .models import Material
 from .models import MaterialSample
 from .models import Measurement
@@ -212,10 +213,49 @@ class MeasurementListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         ordering = self.request.GET.get("ordering", "id")
+
+        form = self.get_form()
+        if not form.is_valid():
+            return Measurement.objects.all()
+
+        queryset = self.filter_by_form_fields(queryset, form)
+
+        query = self.request.GET.get("q")
+        if query:
+            queryset = queryset.filter(
+                Q(aero_material__name__icontains=query)
+                | Q(mean_s21__icontains=query)
+                | Q(measurement_date__icontains=query),
+            )
+
         if ordering:
             fields = [field.strip() for field in ordering.split(",")]
             queryset = queryset.order_by(*fields)
         return queryset
+
+    def get_form(self):
+        return MeasurementFilterForm(self.request.GET or None)
+
+    def filter_by_form_fields(self, queryset, form):
+        if form.cleaned_data.get("material"):
+            material_ids = form.cleaned_data["material"]
+            queryset = queryset.filter(aero_material__material__id__in=material_ids)
+
+        if form.cleaned_data.get("mean_s21_from"):
+            queryset = queryset.filter(
+                mean_s21__gte=form.cleaned_data["mean_s21_from"],
+            )
+        if form.cleaned_data.get("mean_s21_to"):
+            queryset = queryset.filter(
+                mean_s21__lte=form.cleaned_data["mean_s21_to"],
+            )
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter_form"] = self.get_form()
+        return context
 
 
 class MeasurementDetailView(LoginRequiredMixin, DetailView):
