@@ -283,7 +283,7 @@
       const ctx = document.getElementById('s21Chart').getContext('2d');
       const datasets = data.map(object => {
         return {
-          label: `Object ${object.id}`,
+          label: `${object.aero_material.name} - ${object.id}`,
           data: object.measurement_data.s21.map((s21, index) => {
             return {
               x: object.measurement_data.frequency[index] / 1e9,
