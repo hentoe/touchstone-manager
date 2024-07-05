@@ -56,6 +56,16 @@ To compile the minified css, run:
 
 The latter will be run automatically while building the production docker image.
 
+### Documentation
+
+This project uses Sphinx documentation generator.
+
+After you have set up to [develop locally with docker](https://cookiecutter-django.readthedocs.io/en/3.1.13/developing-locally-docker.html), run the follwing command:
+
+    $ docker compose -f docs.yml up
+
+Navigate to port 9000 on your host to see the documentation. This will be opened automatically at [localhost](http://localhost:9000) for local, non-docker development.
+
 ### Celery
 
 This app comes with Celery.

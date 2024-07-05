@@ -13,6 +13,7 @@ Welcome to Touchstone Manager's documentation!
    howto
    pycharm/configuration
    users
+   aero
 
 
 

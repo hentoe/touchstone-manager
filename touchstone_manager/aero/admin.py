@@ -8,6 +8,10 @@ from .models import Measurement
 
 @admin.register(Measurement)
 class MeasurementAdmin(admin.ModelAdmin):
+    """
+    Admin view for Measurement model.
+    """
+
     list_display = ["aero_material", "measurement_date", "mean_s21"]
     search_fields = ["aero_material__name"]
     readonly_fields = ["created", "modified", "measurement_data", "mean_s21"]
@@ -21,6 +25,10 @@ class MeasurementAdmin(admin.ModelAdmin):
 
 @admin.register(Material)
 class MaterialAdmin(admin.ModelAdmin):
+    """
+    Admin view for Material model.
+    """
+
     list_display = ["name", "short_name"]
     search_fields = ["name", "short_name"]
     readonly_fields = ["created", "modified"]
@@ -33,6 +41,10 @@ class MaterialAdmin(admin.ModelAdmin):
 
 @admin.register(MaterialSample)
 class MaterialSampleAdmin(admin.ModelAdmin):
+    """
+    Admin view for MaterialSample model.
+    """
+
     list_display = ["name", "material", "weight", "infiltrations"]
     search_fields = ["name", "material__name"]
     readonly_fields = ["created", "modified"]
