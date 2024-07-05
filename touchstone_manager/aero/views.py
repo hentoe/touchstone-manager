@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
 from django.db.models import Q
 from django.urls import reverse_lazy
@@ -154,7 +155,7 @@ class MaterialSampleListView(LoginRequiredMixin, ListView):
         return context
 
 
-class MaterialSampleCreateView(LoginRequiredMixin, CreateView):
+class MaterialSampleCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """Create MaterialSample instance"""
 
     model = MaterialSample
@@ -167,6 +168,7 @@ class MaterialSampleCreateView(LoginRequiredMixin, CreateView):
         "infiltrations",
     ]
     template_name = "aero/material_form.html"
+    success_message = _("Sample created successfully")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -174,7 +176,7 @@ class MaterialSampleCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class MaterialSampleUpdateView(LoginRequiredMixin, UpdateView):
+class MaterialSampleUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """Update MaterialSample instance"""
 
     model = MaterialSample
@@ -187,6 +189,7 @@ class MaterialSampleUpdateView(LoginRequiredMixin, UpdateView):
         "infiltrations",
     ]
     template_name = "aero/material_form.html"
+    success_message = _("Sample updated successfully")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -194,10 +197,11 @@ class MaterialSampleUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-class MaterialSampleDeleteView(LoginRequiredMixin, DeleteView):
+class MaterialSampleDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = MaterialSample
     success_url = reverse_lazy("aero:samples")
     template_name = "aero/material_confirm_delete.html"
+    success_message = _("Sample deleted successfully")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -264,7 +268,7 @@ class MeasurementDetailView(LoginRequiredMixin, DetailView):
     model = Measurement
 
 
-class MeasurementCreateView(LoginRequiredMixin, CreateView):
+class MeasurementCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """Create Measurement instance"""
 
     model = Measurement
@@ -273,6 +277,7 @@ class MeasurementCreateView(LoginRequiredMixin, CreateView):
         "measurement_file",
         "measurement_date",
     ]
+    success_message = _("Measurement created successfully")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -280,7 +285,7 @@ class MeasurementCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class MeasurementUpdateView(LoginRequiredMixin, UpdateView):
+class MeasurementUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """Update Measurement instance"""
 
     model = Measurement
@@ -288,6 +293,7 @@ class MeasurementUpdateView(LoginRequiredMixin, UpdateView):
         "aero_material",
         "measurement_file",
     ]
+    success_message = _("Measurement updated successfully")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -295,10 +301,11 @@ class MeasurementUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-class MeasurementDeleteView(LoginRequiredMixin, DeleteView):
+class MeasurementDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Measurement
     success_url = reverse_lazy("aero:materials")
     template_name = "aero/material_confirm_delete.html"
+    success_message = _("Measurement deleted successfully")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -306,12 +313,13 @@ class MeasurementDeleteView(LoginRequiredMixin, DeleteView):
         return context
 
 
-class MaterialCreateView(LoginRequiredMixin, CreateView):
+class MaterialCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """Create Material Instance"""
 
     model = Material
     fields = ["name", "short_name", "description"]
     success_url = reverse_lazy("aero:materials")
+    success_message = _("Material created successfully")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -319,12 +327,13 @@ class MaterialCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class MaterialUpdateView(LoginRequiredMixin, UpdateView):
+class MaterialUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """Update Material Instance"""
 
     model = Material
     fields = ["name", "short_name", "description"]
     success_url = reverse_lazy("aero:materials")
+    success_message = _("Material updated successfully")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -332,9 +341,10 @@ class MaterialUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-class MaterialDeleteView(LoginRequiredMixin, DeleteView):
+class MaterialDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Material
     success_url = reverse_lazy("aero:materials")
+    success_message = _("Material deleted successfully")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
