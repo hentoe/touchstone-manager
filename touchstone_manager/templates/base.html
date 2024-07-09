@@ -1,4 +1,5 @@
 {% load static i18n %}
+{% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
@@ -16,8 +17,6 @@
           content="Manage and view Touchstone Files and Corresponding Test Objects." />
     <meta name="author" content="Hendrik Tödter" />
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.0/dist/cdn.min.js"
-            defer></script>
     {% block css %}
       <!-- Your stuff: Third-party CSS libraries go here -->
       <!-- This file stores project-specific CSS -->
@@ -27,6 +26,10 @@
 ================================================== -->
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
+      <!-- Vendor dependencies bundled as one file -->
+      {% render_bundle 'vendors' 'js' attrs='defer' %}
+      <!-- place project specific Javascript in this file -->
+      {% render_bundle 'project' 'js' attrs='defer' %}
     {% endblock javascript %}
   </head>
   <body class="h-full {% block bodyclass %}{% endblock bodyclass %}{% if request.user.is_authenticated %}overflow-y-scroll{% endif %}">

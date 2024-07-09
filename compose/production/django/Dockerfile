@@ -6,7 +6,7 @@ WORKDIR ${APP_HOME}
 COPY ./package.json ${APP_HOME}
 RUN npm install && npm cache clean --force
 COPY . ${APP_HOME}
-RUN npm run build
+RUN npm run tailwind-build && npm run build
 # define an alias for the specific python version used in this file.
 FROM docker.io/python:3.12.3-slim-bookworm as python
 
