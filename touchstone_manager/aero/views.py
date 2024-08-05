@@ -1,7 +1,11 @@
+import zipfile
+from pathlib import Path
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
 from django.db.models import Q
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
@@ -10,9 +14,11 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
 from django.views.generic import UpdateView
+from django.views.generic.edit import FormView
 
 from .forms import MaterialSampleFilterForm
 from .forms import MeasurementFilterForm
+from .forms import MeasurementSelectionForm
 from .models import Material
 from .models import MaterialSample
 from .models import Measurement
@@ -352,6 +358,24 @@ class MaterialDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         return context
 
 
+class MeasurementSelectionView(LoginRequiredMixin, FormView):
+    template_name = "aero/measurement_download.html"
+    form_class = MeasurementSelectionForm
+    success_url = reverse_lazy("aero:measurements")
+
+    def form_valid(self, form):
+        selected_measurements = form.cleaned_data["measurement_ids"]
+        response = HttpResponse(content_type="application/zip")
+        response["Content-Disposition"] = 'attachment; filename="measurements.zip"'
+
+        with zipfile.ZipFile(response, "w") as zip_file:
+            for measurement in selected_measurements:
+                file_path = measurement.measurement_file.path
+                zip_file.write(file_path, Path(file_path).name)
+
+        return response
+
+
 material_create_view = MaterialCreateView.as_view()
 material_detail_view = MaterialDetailView.as_view()
 material_list_view = MaterialListView.as_view()
@@ -367,3 +391,4 @@ measurement_detail_view = MeasurementDetailView.as_view()
 measurement_list_view = MeasurementListView.as_view()
 measurement_update_view = MeasurementUpdateView.as_view()
 measurement_delete_view = MeasurementDeleteView.as_view()
+measurement_selection_view = MeasurementSelectionView.as_view()

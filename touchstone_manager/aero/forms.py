@@ -2,6 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from touchstone_manager.aero.models import Material
+from touchstone_manager.aero.models import Measurement
 
 
 class MaterialSampleFilterForm(forms.Form):
@@ -108,3 +109,14 @@ class MeasurementFilterForm(forms.Form):
             )
 
         return cleaned_data
+
+
+class MeasurementSelectionForm(forms.Form):
+    """Measurement Selection Form"""
+
+    measurement_ids = forms.ModelMultipleChoiceField(
+        queryset=Measurement.objects.all().order_by("aero_material__name"),
+        required=False,
+        label=_("Measurements"),
+        widget=forms.CheckboxSelectMultiple,
+    )
