@@ -10,10 +10,13 @@
 {% block content %}
   <div class="max-w-7xl mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
     <h1 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Select Measurements to Download" %}</h1>
-    <form method="post">
+    <form id="measurement-form" method="post">
       {% csrf_token %}
-      <div class="space-y-4">
-        <!-- Iterate over form fields and style them individually -->
+      <div class="space-y-4" x-data="selectAllHandler()">
+        <div>
+          <input type="checkbox" id="select-all" x-model="selectAll" class="mr-2" />
+          <label for="select-all" class="text-sm font-medium text-gray-700">{% trans "Select All" %}</label>
+        </div>
         {% for field in form %}
           <div>
             <label for="{{ field.id_for_label }}"
@@ -28,4 +31,17 @@
               type="submit">{% trans "Download Selected" %}</button>
     </form>
   </div>
+  <script>
+    function selectAllHandler() {
+      return {
+        selectAll: false, // Binding for the "Select All" checkbox
+        init() {
+          this.$watch('selectAll', value => {
+            const checkboxes = document.querySelectorAll('#measurement-form input[type="checkbox"]:not(#select-all)');
+            checkboxes.forEach(checkbox => checkbox.checked = value);
+          });
+        }
+      }
+    }
+  </script>
 {% endblock content %}
