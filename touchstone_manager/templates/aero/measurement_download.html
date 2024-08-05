@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load aero_extras %}
+
+{% block title %}
+  {% trans "Download Measurements" %}
+{% endblock title %}
+{% block content %}
+  <h1>{% trans "Select Measurements to Download" %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Download Selected</button>
+  </form>
+{% endblock content %}

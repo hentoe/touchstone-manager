@@ -14,6 +14,7 @@ from .views import measurement_create_view
 from .views import measurement_delete_view
 from .views import measurement_detail_view
 from .views import measurement_list_view
+from .views import measurement_selection_view
 from .views import measurement_update_view
 
 app_name = "aero"
@@ -80,5 +81,10 @@ urlpatterns = [
         "measurements/<int:pk>/delete",
         view=measurement_delete_view,
         name="measurement-delete",
+    ),
+    path(
+        "measurements/selection/",
+        view=measurement_selection_view,
+        name="measurement-selection",
     ),
 ]
