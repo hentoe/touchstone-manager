@@ -19,7 +19,7 @@ EXPECTED_INFILTRATIONS = 5
 EXPECTED_MEAN_S21 = -3.4
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_create_material():
     """Test creation of Material object."""
     material = MaterialFactory.create(
@@ -32,7 +32,7 @@ def test_create_material():
     assert material.description == "exfoliated Graphene"
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_material_str():
     """Test Material object str representation."""
     material = MaterialFactory.create(
@@ -43,7 +43,7 @@ def test_material_str():
     assert str(material) == "Graphene"
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_create_material_sample():
     """Test creation of MaterialSample object."""
     material = MaterialFactory.create()
@@ -63,7 +63,7 @@ def test_create_material_sample():
     assert sample.infiltrations == EXPECTED_INFILTRATIONS
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_create_material_sample_str():
     """Test MaterialSample object str representation."""
     sample = MaterialSampleFactory.create(
@@ -72,7 +72,7 @@ def test_create_material_sample_str():
     assert str(sample) == "030_FE_aero_4i_5mm_43k4mg"
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 @patch("touchstone_manager.aero.models.Measurement.process_file")
 def test_create_measurement(mock_process_file):
     """Test creation of Measurement object."""
@@ -85,7 +85,7 @@ def test_create_measurement(mock_process_file):
     assert measurement.aero_material == sample
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 @patch("touchstone_manager.aero.models.Measurement.process_file")
 def test_measurement_str(mock_process_file):
     mock_process_file.return_value = None
@@ -113,7 +113,7 @@ def test_material_sample_get_absolute_url(material_sample: MaterialSample):
     assert material_sample.get_absolute_url() == f"{base_url}{material_sample.pk}/"
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 @patch("touchstone_manager.aero.models.Measurement.process_file")
 def test_measurement_get_absolute_url(mock_process_file):
     mock_process_file.return_value = None

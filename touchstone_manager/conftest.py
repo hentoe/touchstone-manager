@@ -14,22 +14,22 @@ def _media_storage(settings, tmpdir) -> None:
     settings.MEDIA_ROOT = tmpdir.strpath
 
 
-@pytest.fixture()
+@pytest.fixture
 def user(db) -> User:
     return UserFactory()
 
 
-@pytest.fixture()
+@pytest.fixture
 def material(db) -> Material:
     return MaterialFactory()
 
 
-@pytest.fixture()
+@pytest.fixture
 def material_sample(db) -> MaterialSample:
     return MaterialSampleFactory()
 
 
-@pytest.fixture()
+@pytest.fixture
 def create_test_model(db):
     """Fixture to create a test model instance."""
     return TimeStampedTestModel.objects.create(name="Test")

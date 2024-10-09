@@ -2,7 +2,7 @@ import pytest
 from django.utils import timezone
 
 
-@pytest.mark.django_db()
+@pytest.mark.django_db
 def test_timestamped_model_creation(create_test_model):
     """Test the automatic setting of created and modified fields upon creation."""
     model_instance = create_test_model
