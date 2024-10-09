@@ -1,4 +1,4 @@
-FROM docker.io/node:20-bookworm-slim AS client-builder
+FROM docker.io/node:22-bookworm-slim AS client-builder
 
 ARG APP_HOME=/app
 WORKDIR ${APP_HOME}
@@ -8,7 +8,7 @@ RUN npm install && npm cache clean --force
 COPY . ${APP_HOME}
 RUN npm run tailwind-build && npm run build
 # define an alias for the specific python version used in this file.
-FROM docker.io/python:3.12.3-slim-bookworm AS python
+FROM docker.io/python:3.12.7-slim-bookworm AS python
 
 # Python build stage
 FROM python AS python-build-stage
