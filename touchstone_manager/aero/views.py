@@ -221,14 +221,16 @@ class MeasurementListView(LoginRequiredMixin, ListView):
     model = Measurement
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = (
+            super()
+            .get_queryset()
+            .select_related("aero_material", "aero_material__material")
+        )
         ordering = self.request.GET.get("ordering", "id")
 
         form = self.get_form()
-        if not form.is_valid():
-            return Measurement.objects.all()
-
-        queryset = self.filter_by_form_fields(queryset, form)
+        if form.is_valid():
+            queryset = self.filter_by_form_fields(queryset, form)
 
         query = self.request.GET.get("q")
         if query:
@@ -241,6 +243,7 @@ class MeasurementListView(LoginRequiredMixin, ListView):
         if ordering:
             fields = [field.strip() for field in ordering.split(",")]
             queryset = queryset.order_by(*fields)
+
         return queryset
 
     def get_form(self):
@@ -252,13 +255,10 @@ class MeasurementListView(LoginRequiredMixin, ListView):
             queryset = queryset.filter(aero_material__material__id__in=material_ids)
 
         if form.cleaned_data.get("mean_s21_from"):
-            queryset = queryset.filter(
-                mean_s21__gte=form.cleaned_data["mean_s21_from"],
-            )
+            queryset = queryset.filter(mean_s21__gte=form.cleaned_data["mean_s21_from"])
+
         if form.cleaned_data.get("mean_s21_to"):
-            queryset = queryset.filter(
-                mean_s21__lte=form.cleaned_data["mean_s21_to"],
-            )
+            queryset = queryset.filter(mean_s21__lte=form.cleaned_data["mean_s21_to"])
 
         return queryset
 
