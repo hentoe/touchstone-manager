@@ -5,7 +5,7 @@ FROM docker.io/python:3.12.7-slim-bookworm AS python
 # Python build stage
 FROM python AS python-build-stage
 
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONDONTWRITEBYTECODE=1
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
   # dependencies for building Python packages
@@ -21,7 +21,7 @@ COPY ./requirements /requirements
 
 # create python dependency wheels
 RUN pip wheel --no-cache-dir --wheel-dir /usr/src/app/wheels  \
-  -r /requirements/local.txt -r /requirements/docs.txt \
+  -r /requirements/local.txt -r /requirements/production.txt \
   && rm -rf /requirements
 
 
@@ -29,8 +29,8 @@ RUN pip wheel --no-cache-dir --wheel-dir /usr/src/app/wheels  \
 FROM python AS python-run-stage
 
 ARG BUILD_ENVIRONMENT
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
   # To run the Makefile
