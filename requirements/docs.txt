@@ -1,3 +1,0 @@
--r production.txt
-
-sphinx-rtd-theme==3.0.1
