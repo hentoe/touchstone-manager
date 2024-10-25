@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n %}
+{% load i18n tz %}
 
 {% block title %}
   {{ object }}
@@ -11,10 +11,12 @@
       <div class="px-4 md:px-0 sm:flex-auto">
         <h1 class="text-base font-semibold leading-6 text-gray-900">{% trans "Measurement Details" %}</h1>
         <p class="mt-2 text-sm text-gray-700">
-          {% blocktrans with object.aero_material.name as name and object.measurement_date.date as date and object.measurement_date.time as time %}
-            Measurement results of sample <strong>{{ name }}</strong> performed on
-            <strong>{{ date }} at {{ time }}</strong> at <strong>{{ time }}</strong>.
-          {% endblocktrans %}
+          {% with object.measurement_date|timezone:"Europe/Berlin" as berlin_datetime %}
+            {% blocktrans with object.aero_material.name as name and berlin_datetime.date as date and berlin_datetime.time as time %}
+              Measurement results of sample <strong>{{ name }}</strong> performed on
+              <strong>{{ date }}</strong> at <strong>{{ time }}</strong>.
+            {% endblocktrans %}
+          {% endwith %}
         </p>
         <p class="mt-2 text-sm text-gray-700">
           {% blocktrans with object.mean_s21|floatformat:2 as mean_s21 %}
