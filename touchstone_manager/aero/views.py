@@ -226,7 +226,7 @@ class MeasurementListView(LoginRequiredMixin, ListView):
             .get_queryset()
             .select_related("aero_material", "aero_material__material")
         )
-        ordering = self.request.GET.get("ordering", "id")
+        ordering = self.request.GET.get("ordering", "aero_material__sample_number")
 
         form = self.get_form()
         if form.is_valid():
