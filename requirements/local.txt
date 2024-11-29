@@ -23,7 +23,7 @@ sphinx-rtd-theme==3.0.2
 # ------------------------------------------------------------------------------
 ruff==0.8.0  # https://github.com/astral-sh/ruff
 coverage==7.6.8  # https://github.com/nedbat/coveragepy
-djlint==1.36.1  # https://github.com/Riverside-Healthcare/djLint
+djlint==1.36.2  # https://github.com/Riverside-Healthcare/djLint
 pre-commit==4.0.1
 
 # Django
