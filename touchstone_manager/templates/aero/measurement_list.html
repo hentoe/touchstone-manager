@@ -175,6 +175,11 @@
                 {% for obj in object_list %}
                   <tr class="hover:bg-gray-50">
                     <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                      <input type="checkbox"
+                             x-show="compare"
+                             x-model="compareList"
+                             value="{{ obj.id }}"
+                             class="flex-none rounded text-indigo-600 group-hover:visible group-focus:visible focus:ring-indigo-600" />
                       {{ obj.aero_material.sample_number }}
                     </td>
                     <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
